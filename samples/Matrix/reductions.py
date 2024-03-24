@@ -5,12 +5,14 @@ import pysycl
 
 device = pysycl.device.get_device(0, 0)
 
+M = 5
 N = 3
 
-A = pysycl.array(N, device= device, dtype = pysycl.float)
+A = pysycl.matrix((M, N), device= device, dtype= pysycl.double)
 
-for i in range(N):
-  A[i] = i
+for i in range(M):
+  for j in range(N):
+    A[i, j] = i*j
 
 A.mem_to_gpu()
 
