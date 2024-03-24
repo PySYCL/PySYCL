@@ -6,17 +6,17 @@ PySYCL is an open-source Python interface for SYCL that enables Python applicati
 # Official Website
 The official PySYCL website serves as the central hub for all things PySYCL. Get the latest PySYCL news, updates, and community resources, documentation, tutorials, and examples.
 
-Access the official website here: https://osmanaeg.github.io/PySYCL/
+Access the official website here: https://pysycl.github.io/PySYCL/
 
 # User Guide
 The PySYCL User Guide is intended for python users aiming to leverage PySYCL in their projects. It covers basic concepts and practical examples to get started.
 
-Find the user-guide here: https://osmanaeg.github.io/PySYCL/user-guide.html
+Find the user-guide here: https://pysycl.github.io/PySYCL/user-guide.html
 
 # Developer Guide
 The PySYCL Developer Guide is intended for developers aiming to contribute to the PySYCL backend. It provided developers with a complete set of documentation for the projects backend.
 
-Find the dev-guide here: https://osmanaeg.github.io/PySYCL/dev-guide.html
+Find the dev-guide here: https://pysycl.github.io/PySYCL/dev-guide.html
 
 # Installation
 Installation guides for various development enviornments will be made available here.
