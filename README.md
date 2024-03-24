@@ -108,8 +108,10 @@ sudo apt-get install cmake git python3-pybind11 python3-dev -y
 # Inquiries
 For any questions or further information, feel free to reach out to us via the following email addresses:
 
-- **Founding Contributor:** For queries specific to the founding contributor and organization owner, please contact Osman Elghotmi at osman.elghotmi@gmail.com.
+- **Founding Contributor:** For any questions specific to the founding contributor and organization owner, please contact Osman El-Ghotmi the following address.
+email: osman.elghotmi@gmail.com.
 
-- **General Inquiries:** For general inquiries about the PySYCL project, please email us at pysycl.official@gmail.com.
+- **General Inquiries:** For general inquiries about the PySYCL project, please email us at the following address
+email: pysycl.official@gmail.com.
 
 We welcome your feedback, questions, and contributions to the PySYCL community!
