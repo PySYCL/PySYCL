@@ -112,7 +112,7 @@ For any questions or further information, feel free to reach out to us via the f
 
 email: osman.elghotmi@gmail.com.
 
-- **General Inquiries:** For general inquiries about the PySYCL project, please email us at the following address
+- **General Inquiries:** For general inquiries about the PySYCL project, please email us at the following address.
 
 email: pysycl.official@gmail.com.
 
