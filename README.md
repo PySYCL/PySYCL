@@ -90,7 +90,7 @@ sudo apt-get install cmake git python3-pybind11 python3-dev -y
 
 1. To build PySYCL from source, first clone the repo and setup the build directory
    ```bash
-    git clone https://github.com/OsmanAEG/PySYCL
+    git clone https://github.com/PySYCL/PySYCL.git
     cd PySYCL
     mkdir build
     cd build
