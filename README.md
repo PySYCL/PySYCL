@@ -4,17 +4,17 @@ PySYCL is an open-source Python interface for SYCL that enables Python applicati
 ![pysycl_equals](https://github.com/OsmanAEG/PySYCL/assets/79581083/ba5a297e-0941-4034-bb34-1bf97b4c7e91)
 
 # Official Website
-The official PySYCL website serves as the central hub for all things PySYCL. Get the latest PySYCL news, updates, and community resources, documentation, tutorials, and examples.
+The official PySYCL website serves as the central hub for all things PySYCL. Get the latest PySYCL news, updates, community resources, documentation, tutorials, and examples.
 
 Access the official website here: https://pysycl.github.io/PySYCL/
 
 # User Guide
-The PySYCL User Guide is intended for python users aiming to leverage PySYCL in their projects. It covers basic concepts and practical examples to get started.
+The PySYCL User Guide is intended for python users aiming to leverage PySYCL in their projects. It covers basic concepts and practical examples to get help you get started.
 
 Find the user-guide here: https://pysycl.github.io/PySYCL/user-guide.html
 
 # Developer Guide
-The PySYCL Developer Guide is intended for developers aiming to contribute to the PySYCL backend. It provided developers with a complete set of documentation for the projects backend.
+The PySYCL Developer Guide is intended for developers aiming to contribute to the PySYCL backend. It provided developers with a complete set of helpful documentation.
 
 Find the dev-guide here: https://pysycl.github.io/PySYCL/dev-guide.html
 
@@ -24,7 +24,7 @@ Installation guides for various development enviornments will be made available 
 ## Installing PySYCL on Ubuntu WSL2 with CUDA
 ![ubuntu_wsl_cuda](https://github.com/PySYCL/PySYCL/assets/79581083/1d016d08-e415-4e75-9291-5e6fefd09f6f)
 
-This guide provides instructions for setting up PySYCL on Windows 11 with an Ubuntu WSL2 enviornment with CUDA. 
+This guide provides instructions for setting up PySYCL on Windows 11 with an Ubuntu WSL2 and CUDA enviornment. 
 
 ### Step 1: Installing WSL 2 on Windows 11
 
@@ -39,7 +39,7 @@ This guide provides instructions for setting up PySYCL on Windows 11 with an Ubu
 
 ### Step 2: Installing CUDA for WSL 2
 
-1. Update your NVIDIA drivers on Windows. Enter the following command to check your CUDA version compatibility.
+1. Update your NVIDIA drivers on Windows. Enter the following command in Ubuntu WSL2 to check your CUDA version compatibility.
    ```bash
    nvidia-smi
    ```
@@ -92,8 +92,7 @@ sudo apt-get install cmake git python3-pybind11 python3-dev -y
    ```bash
     git clone https://github.com/PySYCL/PySYCL.git
     cd PySYCL
-    mkdir build
-    cd build
+    mkdir build && cd build
     cmake ../src
    ```
 2. Edit the CMAKE_CXX_COMPILER to be the location of your SYCL compatible clang++ compiler. If you installed it locally, set the following
@@ -106,13 +105,13 @@ sudo apt-get install cmake git python3-pybind11 python3-dev -y
    ```
 
 # Inquiries
-For any questions or further information, feel free to reach out to us via the following email addresses:
+For any questions or inquiries, feel free to reach out to us with the following email addresses:
 
-- **Founding Contributor:** For any questions specific to the founding contributor and organization owner, please contact Osman El-Ghotmi at the following address.
+- **Founding Contributor:** For any questions specific to the founding contributor and organization owner, please contact Osman El-Ghotmi.
 
 email: osman.elghotmi@gmail.com.
 
-- **General Inquiries:** For general inquiries about the PySYCL project, please email us at the following address.
+- **General Inquiries:** For general inquiries about the PySYCL project, please contact us.
 
 email: pysycl.official@gmail.com.
 
