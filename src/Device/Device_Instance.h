@@ -54,28 +54,46 @@ public:
   Device_Instance &operator=(Device_Instance &&) = default;
 
   /////////////////////////////////////////////////////////////////////
+  /// \brief The platform index.
+  int platform_idx;
+
+  /////////////////////////////////////////////////////////////////////
+  /// \brief The device index based on the platform index.
+  int device_idx;
+
+  /////////////////////////////////////////////////////////////////////
   /// \brief Output device name.
-  auto name();
+  auto name() {
+    static const std::string name =
+        Q.get_device().get_info<sycl::info::device::name>();
+    return name;
+  }
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Output device vendor.
-  auto vendor();
+  auto vendor() {
+    static const std::string vendor =
+        Q.get_device().get_info<sycl::info::device::vendor>();
+    return vendor;
+  }
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Returns the device queue.
-  auto &get_queue();
+  auto &get_queue() { return Q; }
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Returns the platform index.
-  auto get_platform_index() const;
+  auto get_platform_index() const { return platform_idx; }
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Returns the device index.
-  auto get_device_index() const;
+  auto get_device_index() const { return device_idx; }
 
   /////////////////////////////////////////////////////////////////////
-  /// \brief Returns the maximum work group size of the device.
-  auto get_max_workgroup_size() const;
+  /// \brief Returns the maximum workgroup size of the device.
+  auto get_max_workgroup_size() const {
+    return Q.get_device().get_info<sycl::info::device::max_work_group_size>();
+  }
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Constructor that selects a SYCL device.
@@ -110,42 +128,47 @@ private:
   /////////////////////////////////////////////////////////////////////
   /// \brief The selected device queue.
   sycl::queue Q;
-
-  /////////////////////////////////////////////////////////////////////
-  /// \brief The platform index.
-  int platform_idx;
-
-  /////////////////////////////////////////////////////////////////////
-  /// \brief The device index based on the platform index.
-  int device_idx;
 };
 
-/////////////////////////////////////////////////////////////////////////
-auto Device_Instance::name() {
-  static const std::string name =
-      Q.get_device().get_info<sycl::info::device::name>();
-  return name;
+///////////////////////////////////////////////////////////////////////////
+// Overload operators.
+
+///////////////////////////////////////////////////////////////////////////
+// Equality operator.
+inline bool operator==(const Device_Instance& di1, const Device_Instance& di2){
+  return (di1.platform_idx == di2.platform_idx)  &&
+         (di1.device_idx == di2.device_idx);
 }
 
-/////////////////////////////////////////////////////////////////////////
-auto Device_Instance::vendor() {
-  static const std::string vendor =
-      Q.get_device().get_info<sycl::info::device::vendor>();
-  return vendor;
+///////////////////////////////////////////////////////////////////////////
+// Inequality operator.
+inline bool operator!=(const Device_Instance& di1, const Device_Instance& di2){
+  return !(di1 == di2);
 }
 
-/////////////////////////////////////////////////////////////////////////
-auto &Device_Instance::get_queue() { return Q; }
+///////////////////////////////////////////////////////////////////////////
+// Less than operator.
+inline bool operator<(const Device_Instance& di1, const Device_Instance& di2){
+  if(di1.platform_idx != di2.platform_idx) return di1.platform_idx < di2.platform_idx;
+  else return di1.device_idx < di2.device_idx;
+}
 
-/////////////////////////////////////////////////////////////////////////
-auto Device_Instance::get_platform_index() const { return platform_idx; }
+///////////////////////////////////////////////////////////////////////////
+// Greater than operator.
+inline bool operator>(const Device_Instance& di1, const Device_Instance& di2){
+  return !(di1 < di2 || di1 == di2);
+}
 
-/////////////////////////////////////////////////////////////////////////
-auto Device_Instance::get_device_index() const { return device_idx; }
+///////////////////////////////////////////////////////////////////////////
+// Less than or equal to operator.
+inline bool operator<=(const Device_Instance& di1, const Device_Instance& di2){
+  return (di1 < di2) || (di1 == di2);
+}
 
-/////////////////////////////////////////////////////////////////////////
-auto Device_Instance::get_max_workgroup_size() const {
-  return Q.get_device().get_info<sycl::info::device::max_work_group_size>();
+///////////////////////////////////////////////////////////////////////////
+// Greater than or equal to operator.
+inline bool operator>=(const Device_Instance& di1, const Device_Instance& di2){
+  return (di1 > di2) || (di1 == di2);
 }
 
 } // namespace pysycl

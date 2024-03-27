@@ -9,24 +9,24 @@ import pysycl
 device = pysycl.device.get_device(0, 0)
 
 # Matrix dimensions
-N = 3200
-P = 3200
-M = 3200
+N = 6400
+P = 6400
+M = 6400
 
 # numpy
-A_np = np.full((M, N), 2.0, dtype=np.float64)
-B_np = np.full((N, P), 4.0, dtype=np.float64)
-C_np = np.full((M, P), 0.0, dtype=np.float64)
+A_np = np.full((M, N), 2.0, dtype=np.float32)
+B_np = np.full((N, P), 4.0, dtype=np.float32)
+C_np = np.full((M, P), 0.0, dtype=np.float32)
 
 # pytorch
-A_pt = torch.full((M, N), 2.0, dtype=torch.float64).to('cuda')
-B_pt = torch.full((N, P), 4.0, dtype=torch.float64).to('cuda')
-C_pt = torch.full((M, P), 0.0, dtype=torch.float64).to('cuda')
+A_pt = torch.full((M, N), 2.0, dtype=torch.float32).to('cuda')
+B_pt = torch.full((N, P), 4.0, dtype=torch.float32).to('cuda')
+C_pt = torch.full((M, P), 0.0, dtype=torch.float32).to('cuda')
 
 # pysycl
-A_ps = pysycl.matrix((M, N), device= device, dtype = pysycl.double)
-B_ps = pysycl.matrix((N, P), device= device, dtype = pysycl.double)
-C_ps = pysycl.matrix((M, P), device= device, dtype = pysycl.double)
+A_ps = pysycl.matrix((M, N), device= device, dtype = pysycl.float)
+B_ps = pysycl.matrix((N, P), device= device, dtype = pysycl.float)
+C_ps = pysycl.matrix((M, P), device= device, dtype = pysycl.float)
 
 A_ps.fill(2.0)
 B_ps.fill(4.0)
