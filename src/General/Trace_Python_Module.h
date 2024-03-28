@@ -1,5 +1,5 @@
-#ifndef MATRIX_MULTIPLICATION_PYTHON_MODULE_H
-#define MATRIX_MULTIPLICATION_PYTHON_MODULE_H
+#ifndef TRACE_PYTHON_MODULE_H
+#define TRACE_PYTHON_MODULE_H
 
 ///////////////////////////////////////////////////////////////////////
 // This file is part of the PySYCL software for SYCL development in
@@ -15,10 +15,10 @@
 
 ///////////////////////////////////////////////////////////////////////
 /// \file
-/// \brief Python module for a matrix multiplication in PySYCL.
+/// \brief Python module for to get the trace of a matrix in PySYCL.
 ///////////////////////////////////////////////////////////////////////
 
-/// Linear Algebra functionalities in PySYCL
+/// General functionalities in PySYCL
 
 ///////////////////////////////////////////////////////////////////////
 // pybind11
@@ -30,59 +30,44 @@
 // local
 ///////////////////////////////////////////////////////////////////////
 #include "../Matrix/Matrix_Type.h"
-#include "Matrix_Multiplication.h"
+#include "Trace.h"
 
 namespace py = pybind11;
 
 ///////////////////////////////////////////////////////////////////////
-// Matrix multiplication function
+// Trace function
 ///////////////////////////////////////////////////////////////////////
 template<typename Scalar_T>
-void bind_matmul_module(py::module &m) {
+void bind_trace_module(py::module &m) {
   using Matrix_T = pysycl::Matrix<Scalar_T>;
-  m.def("matmul", &pysycl::matmul<Matrix_T>, R"delim(
+  m.def("trace", &pysycl::trace<Matrix_T>, R"delim(
     Description
-      This function evaluates a matrix multiplication and returns the result.
+      This function evaluates the trace of a matrix and returns the result.
 
     Parameters
       A : pysycl.matrix
-        The first matrix for multiplication.
-
-      B : pysycl.matrix
-        The second matrix for multiplication.
-
-      wg_size : int
-        Optional: Work group size
+        The input matrix.
 
     Example
       >>> import pysycl
       >>>
-      >>> M = 4000
-      >>> N = 800
-      >>> P = 2500
-      >>>
+      >>> N = 10
       >>> device = pysycl.device.get_device(0,0)
       >>>
-      >>> A = pysycl.matrix((M, N), device= device, dtype= pysycl.float)
-      >>> B = pysycl.matrix((N, P), device= device, dtype= pysycl.float)
-      >>>
-      >>> C = pysycl.matrix((N, P), device= device, dtype= pysycl.float)
-      >>>
+      >>> A = pysycl.matrix((N, N), device= device, dtype= pysycl.float)
       >>> A.fill(8.0)
-      >>> B.fill(3.0)
-      >>> pysycl.linalg.matmul(A, B, C)
+      >>> A = pysycl.trace(A)
       >>>
-      >>> C.mem_to_cpu()
-      >>> print(C[30, 50])
-      19200.0
+      >>> print(trace)
+      80.0
   )delim",
-        py::arg("A"), py::arg("B"), py::arg("C"), py::arg("wg_size"));
+        py::arg("A"));
 }
 
-void matmul_module(py::module &m) {
-  bind_matmul_module<double>(m);
-  bind_matmul_module<float>(m);
-  bind_matmul_module<int>(m);
+void trace_module(py::module &m) {
+  bind_trace_module<double>(m);
+  bind_trace_module<float>(m);
+  bind_trace_module<int>(m);
 }
 
-#endif // MATRIX_MULTIPLICATION_PYTHON_MODULE_H
+#endif // TRACE_PYTHON_MODULE_H

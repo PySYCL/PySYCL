@@ -54,18 +54,7 @@ void matmul(Matrix_type &A, Matrix_type &B, Matrix_type &C,
     throw std::runtime_error("ERROR: Incompatible Array2D dimensions.");
   }
 
-  const bool same_platform_idx =
-      A.get_platform_index() == B.get_platform_index();
-  const bool same_device_idx = A.get_device_index() == B.get_device_index();
-
-  if (!same_platform_idx || !same_device_idx)
-    throw std::runtime_error("ERROR: Incompatible PySYCL device.");
-
-  if (C.get_platform_index() != A.get_platform_index()) {
-    throw std::runtime_error("ERROR: Incompatible PySYCL device.");
-  }
-
-  if (C.get_device_index() != A.get_device_index()) {
+  if(C.dev() != A.dev() || C.dev() != B.dev()) {
     throw std::runtime_error("ERROR: Incompatible PySYCL device.");
   }
 
@@ -73,10 +62,7 @@ void matmul(Matrix_type &A, Matrix_type &B, Matrix_type &C,
   const auto N = A.num_cols();
   const auto P = B.num_cols();
 
-  auto Q = sycl::queue(sycl::platform::get_platforms()[C.get_platform_index()]
-                           .get_devices()[C.get_device_index()]);
-
-  Q.submit([&](sycl::handler &h) {
+  A.dev().get_queue().submit([&](sycl::handler &h) {
     const size_t global_size_M = ((M + wg_size - 1)/wg_size)*wg_size;
     const size_t global_size_P = ((P + wg_size - 1)/wg_size)*wg_size;
 

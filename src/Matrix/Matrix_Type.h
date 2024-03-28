@@ -253,6 +253,11 @@ public:
   }
 
   ///////////////////////////////////////////////////////////////////////
+  /// \brief Get a reference to the SYCL queue.
+  /// \return Reference to the SYCL queue.
+  auto& dev() { return device; }
+
+  ///////////////////////////////////////////////////////////////////////
   /// \brief Get the number of rows in the Matrix.
   /// \return Number of rows in the Matrix.
   int num_rows() const { return rows; }
@@ -271,14 +276,6 @@ public:
   /// \brief Get the data pointer from Matrix.
   /// \return Pointer to Matrix device data.
   Scalar_T *get_device_data_ptr() const { return data_device; }
-
-  ///////////////////////////////////////////////////////////////////////
-  /// \brief Get platform index for the sycl device
-  int get_platform_index() { return device.get_platform_index(); }
-
-  ///////////////////////////////////////////////////////////////////////
-  /// \brief Get platform index for the sycl device
-  int get_device_index() { return device.get_device_index(); }
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief Copy memory from the CPU to the GPU.
