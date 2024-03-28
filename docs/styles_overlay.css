@@ -1,0 +1,141 @@
+body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #333333;
+  color: #ffffff;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+header{
+  background-color: #222222;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+iframe{
+  flex: 1;
+}
+
+.logo{
+  margin-right: 20px;
+}
+
+.logo img{
+  max-height: 50px;
+}
+
+nav ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li{
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a{
+  color: #ffffff;
+  text-decoration: none;
+  padding: 5px;
+}
+
+nav ul li a:hover{
+  color: #3388ff;
+}
+
+nav ul li a.selected{
+  color: #0000ff;
+}
+
+section{
+  background-color: #444444;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+h1, h2{
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+}
+
+h1{
+  font-size: 25px;
+  line-height: 0;
+}
+
+h2{
+  font-size: 28px;
+}
+
+.boxes{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.box{
+  width: 200px;
+  height: 200px;
+  background-color: #444444;
+  color: #ffffff;
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.box:hover{
+  background-color: #3388ff;
+}
+
+.box h2{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.box p{
+  font-size: 14px;
+}
+
+.nav-current a{
+  color: #3388ff;
+}
+
+.footer{
+  background-color: #191919;
+  padding: 0px;
+  text-align: center;
+  font-size: 11px;
+}
+
+.footer a{
+  color: #3388ff;
+  text-decoration: none;
+}
+
+.github-icon{
+  justify-content: center;
+  align-items: center;
+  padding-left: 40px;
+}

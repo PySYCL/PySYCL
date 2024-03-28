@@ -141,10 +141,10 @@ $(document).ready(function(){initNavTree('_matrix___multiplication___python___mo
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="stringliteral">      This function evaluates a matrix multiplication and returns the result.</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="stringliteral">    Parameters</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="stringliteral">      A : pysycl.array2D</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="stringliteral">      A : pysycl.matrix</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="stringliteral">        The first matrix for multiplication.</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="stringliteral">      B : pysycl.array2D</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="stringliteral">      B : pysycl.matrix</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="stringliteral">        The second matrix for multiplication.</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="stringliteral">      wg_size : int</span></div>
@@ -157,27 +157,31 @@ $(document).ready(function(){initNavTree('_matrix___multiplication___python___mo
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; N = 800</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; P = 2500</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="stringliteral">      &gt;&gt;&gt;</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; A = pysycl.array_2d(M, N)</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; B = pysycl.array_2d(N, P)</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="stringliteral">      &gt;&gt;&gt;</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; A.fill(8.0)</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; B.fill(3.0)</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; C = pysycl.linalg.matmul(A, B)</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; device = pysycl.device.get_device(0,0)</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="stringliteral">      &gt;&gt;&gt;</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; A = pysycl.matrix((M, N), device= device, dtype= pysycl.float)</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; B = pysycl.matrix((N, P), device= device, dtype= pysycl.float)</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="stringliteral">      &gt;&gt;&gt;</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; C = pysycl.matrix((N, P), device= device, dtype= pysycl.float)</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="stringliteral">      &gt;&gt;&gt;</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; C.mem_to_cpu()</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; print(C[30, 50])</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="stringliteral">      19200.0</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="stringliteral">  )delim&quot;,</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="stringliteral">        py::arg(</span><span class="stringliteral">&quot;A&quot;</span>), py::arg(<span class="stringliteral">&quot;B&quot;</span>), py::arg(<span class="stringliteral">&quot;C&quot;</span>), py::arg(<span class="stringliteral">&quot;tile_size&quot;</span>));</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">void</span> matmul_module(py::module &amp;m) {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  bind_matmul_module&lt;double&gt;(m);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  bind_matmul_module&lt;float&gt;(m);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  bind_matmul_module&lt;int&gt;(m);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MATRIX_MULTIPLICATION_PYTHON_MODULE_H</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; A.fill(8.0)</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; B.fill(3.0)</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; pysycl.linalg.matmul(A, B, C)</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="stringliteral">      &gt;&gt;&gt;</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; C.mem_to_cpu()</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="stringliteral">      &gt;&gt;&gt; print(C[30, 50])</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="stringliteral">      19200.0</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="stringliteral">  )delim&quot;,</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="stringliteral">        py::arg(</span><span class="stringliteral">&quot;A&quot;</span>), py::arg(<span class="stringliteral">&quot;B&quot;</span>), py::arg(<span class="stringliteral">&quot;C&quot;</span>), py::arg(<span class="stringliteral">&quot;wg_size&quot;</span>));</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keywordtype">void</span> matmul_module(py::module &amp;m) {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  bind_matmul_module&lt;double&gt;(m);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  bind_matmul_module&lt;float&gt;(m);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  bind_matmul_module&lt;int&gt;(m);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MATRIX_MULTIPLICATION_PYTHON_MODULE_H</span></div>
 <div class="ttc" id="a_matrix___multiplication_8h_html"><div class="ttname"><a href="_matrix___multiplication_8h.html">Matrix_Multiplication.h</a></div><div class="ttdoc">Matrix Multiplication in PySYCL.</div></div>
 <div class="ttc" id="a_matrix___multiplication___python___module_8h_html_ad4696cb888a592a0ab5a237bcc46992a"><div class="ttname"><a href="_matrix___multiplication___python___module_8h.html#ad4696cb888a592a0ab5a237bcc46992a">bind_matmul_module</a></div><div class="ttdeci">void bind_matmul_module(py::module &amp;m)</div><div class="ttdoc">Linear Algebra functionalities in PySYCL.</div><div class="ttdef"><b>Definition:</b> <a href="_matrix___multiplication___python___module_8h_source.html#l00041">Matrix_Multiplication_Python_Module.h:41</a></div></div>
 <div class="ttc" id="aclasspysycl_1_1_matrix_html"><div class="ttname"><a href="classpysycl_1_1_matrix.html">pysycl::Matrix</a></div><div class="ttdoc">Matrix class for PySYCL.</div><div class="ttdef"><b>Definition:</b> <a href="_matrix___type_8h_source.html#l00054">Matrix_Type.h:54</a></div></div>
@@ -187,7 +191,7 @@ $(document).ready(function(){initNavTree('_matrix___multiplication___python___mo
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_048d98b6635f6f7d0d13e92ba82f3b00.html">Linear_Algebra</a></li><li class="navelem"><a class="el" href="_matrix___multiplication___python___module_8h.html">Matrix_Multiplication_Python_Module.h</a></li>
-    <li class="footer">Generated on Sun Mar 24 2024 18:02:30 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Mar 28 2024 13:58:02 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

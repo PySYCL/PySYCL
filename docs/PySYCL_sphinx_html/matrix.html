@@ -1,0 +1,649 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="PySYCL: Vector Sub-Module" href="vector.html" /><link rel="prev" title="PySYCL: Linear Algebra Sub-Module" href="linalg.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>PySYCL: Matrix Sub-Module - PySYCL User Guide</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=82a976d7" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="_static/css/css-style.css?v=ba658b7b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #ffffff;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">PySYCL User Guide</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">PySYCL User Guide</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">PySYCL Python Module</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of PySYCL Python Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="data_types.html">PySYCL: Data Types Sub-Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">PySYCL: Device Sub-Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linalg.html">PySYCL: Linear Algebra Sub-Module</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">PySYCL: Matrix Sub-Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vector.html">PySYCL: Vector Sub-Module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-pysycl.matrix">
+<span id="pysycl-matrix-sub-module"></span><h1>PySYCL: Matrix Sub-Module<a class="headerlink" href="#module-pysycl.matrix" title="Link to this heading">#</a></h1>
+<dl class="simple">
+<dt>Matrix module for PySYCL</dt><dd><p>This module provides classes and functions for creating PySYCL matrices.</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix">
+<span class="sig-prename descclassname"><span class="pre">pysycl.matrix.</span></span><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.device.device_instance" title="pysycl.device.device_instance"><span class="pre">pysycl.device.device_instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.data_types.data_types" title="pysycl.data_types.data_types"><span class="pre">pysycl.data_types.data_types</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_double" title="pysycl.matrix.matrix_type_double"><span class="pre">pysycl.matrix.matrix_type_double</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_float" title="pysycl.matrix.matrix_type_float"><span class="pre">pysycl.matrix.matrix_type_float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_int" title="pysycl.matrix.matrix_type_int"><span class="pre">pysycl.matrix.matrix_type_int</span></a></span></span><a class="headerlink" href="#pysycl.matrix.matrix" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_double">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pysycl.matrix.</span></span><span class="sig-name descname"><span class="pre">matrix_type_double</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pysycl.matrix.matrix_type_double" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<dl class="simple">
+<dt>Description</dt><dd><p>This class creates a PySYCL type double matrix.</p>
+</dd>
+</dl>
+<p>Overloaded function.</p>
+<ol class="arabic">
+<li><p>__init__(self: pysycl.matrix.matrix_type_double, rows: int, cols: int, device: pysycl.device.device_instance) -&gt; None</p>
+<blockquote>
+<div><dl>
+<dt>Default Constructor</dt><dd><p>Constructor that creates a 2D PySYCL array.</p>
+</dd>
+<dt>Parameters</dt><dd><dl>
+<dt>cols: int</dt><dd><p>Number of columns.</p>
+</dd>
+<dt>rows: int</dt><dd><p>Number of rows.</p>
+</dd>
+<dt>device:</dt><dd><p>Optional: The target PySYCL device.</p>
+</dd>
+<dt>Returns</dt><dd><p>A PySYCL matrix of type double.</p>
+</dd>
+<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pysycl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">matrix</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p>__init__(self: pysycl.matrix.matrix_type_double, np_arr: numpy.ndarray[numpy.float64], device: pysycl.device.device_instance) -&gt; None</p>
+<blockquote>
+<div><dl>
+<dt>NumPy Constructor</dt><dd><p>Constructor that creates a PySYCL matrix from a 2D NumPy array.</p>
+</dd>
+<dt>Parameters</dt><dd><dl>
+<dt>np_arr: numpy.array()</dt><dd><p>numpy array.</p>
+</dd>
+<dt>device:</dt><dd><p>Optional: The target PySYCL device.</p>
+</dd>
+<dt>Returns</dt><dd><p>A PySYCL matrix.</p>
+</dd>
+<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pysycl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A_pysycl</span> <span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">A_np</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ol>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_double.fill">
+<span class="sig-name descname"><span class="pre">fill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_double" title="pysycl.matrix.matrix_type_double"><span class="pre">pysycl.matrix.matrix_type_double</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_double.fill" title="Link to this definition">#</a></dt>
+<dd><dl>
+<dt>Description</dt><dd><p>This function fills the matrix with a constant value.</p>
+</dd>
+<dt>Parameters</dt><dd><dl class="simple">
+<dt>C<span class="classifier">Scalar_T</span></dt><dd><p>Some scalar constant.</p>
+</dd>
+</dl>
+</dd>
+<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A_pysycl</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">45.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A_pysycl</span><span class="o">.</span><span class="n">mem_to_cpu</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">A_pysycl</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="go">45.0</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_double.max">
+<span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_double" title="pysycl.matrix.matrix_type_double"><span class="pre">pysycl.matrix.matrix_type_double</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_double.max" title="Link to this definition">#</a></dt>
+<dd><dl>
+<dt>Description</dt><dd><p>This function finds the maximum value in the matrix.</p>
+</dd>
+<dt>Returns</dt><dd><p>The maximum value.</p>
+</dd>
+<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">max</span> <span class="o">=</span> <span class="n">A_pysycl</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_double.mem_to_cpu">
+<span class="sig-name descname"><span class="pre">mem_to_cpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_double" title="pysycl.matrix.matrix_type_double"><span class="pre">pysycl.matrix.matrix_type_double</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_double.mem_to_cpu" title="Link to this definition">#</a></dt>
+<dd><dl>
+<dt>Description</dt><dd><p>This function copies array memory from GPU to CPU.</p>
+</dd>
+<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A_pysycl</span><span class="o">.</span><span class="n">mem_to_cpu</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_double.mem_to_gpu">
+<span class="sig-name descname"><span class="pre">mem_to_gpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_double" title="pysycl.matrix.matrix_type_double"><span class="pre">pysycl.matrix.matrix_type_double</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_double.mem_to_gpu" title="Link to this definition">#</a></dt>
+<dd><dl>
+<dt>Description</dt><dd><p>This function copies array memory from CPU to GPU.</p>
+</dd>
+<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">mem_to_gpu</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_double.min">
+<span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_double" title="pysycl.matrix.matrix_type_double"><span class="pre">pysycl.matrix.matrix_type_double</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_double.min" title="Link to this definition">#</a></dt>
+<dd><dl>
+<dt>Description</dt><dd><p>This function finds the minimum value in the matrix.</p>
+</dd>
+<dt>Returns</dt><dd><p>The minimum element value.</p>
+</dd>
+<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">min</span> <span class="o">=</span> <span class="n">A_pysycl</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_double.num_cols">
+<span class="sig-name descname"><span class="pre">num_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_double" title="pysycl.matrix.matrix_type_double"><span class="pre">pysycl.matrix.matrix_type_double</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_double.num_cols" title="Link to this definition">#</a></dt>
+<dd><dl>
+<dt>Description</dt><dd><p>This function returns the number of columns.</p>
+</dd>
+<dt>Returns</dt><dd><p>The number of columns.</p>
+</dd>
+<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="n">A_pysycl</span><span class="o">.</span><span class="n">num_cols</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_double.num_rows">
+<span class="sig-name descname"><span class="pre">num_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_double" title="pysycl.matrix.matrix_type_double"><span class="pre">pysycl.matrix.matrix_type_double</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_double.num_rows" title="Link to this definition">#</a></dt>
+<dd><dl>
+<dt>Description</dt><dd><p>This function returns the number of rows.</p>
+</dd>
+<dt>Returns</dt><dd><p>The number of rows.</p>
+</dd>
+<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="n">A_pysycl</span><span class="o">.</span><span class="n">num_rows</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+<span class="go">12</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_double.sum">
+<span class="sig-name descname"><span class="pre">sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_double" title="pysycl.matrix.matrix_type_double"><span class="pre">pysycl.matrix.matrix_type_double</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_double.sum" title="Link to this definition">#</a></dt>
+<dd><dl>
+<dt>Description</dt><dd><p>This function finds the sum of all element values in the matrix.</p>
+</dd>
+<dt>Returns</dt><dd><p>The sum of all element values.</p>
+</dd>
+<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_double.transpose">
+<span class="sig-name descname"><span class="pre">transpose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_double" title="pysycl.matrix.matrix_type_double"><span class="pre">pysycl.matrix.matrix_type_double</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_double.transpose" title="Link to this definition">#</a></dt>
+<dd><dl>
+<dt>Description</dt><dd><p>This function finds the tranpose of the matrix.</p>
+</dd>
+<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A_pysycl</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_float">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pysycl.matrix.</span></span><span class="sig-name descname"><span class="pre">matrix_type_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pysycl.matrix.matrix_type_float" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<dl class="simple">
+<dt>Description</dt><dd><p>This class creates a PySYCL type float matrix.</p>
+</dd>
+</dl>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: pysycl.matrix.matrix_type_float, rows: int, cols: int, device: pysycl.device.device_instance) -&gt; None</p></li>
+<li><p>__init__(self: pysycl.matrix.matrix_type_float, np_arr: numpy.ndarray[numpy.float32], device: pysycl.device.device_instance) -&gt; None</p></li>
+</ol>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_float.fill">
+<span class="sig-name descname"><span class="pre">fill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_float" title="pysycl.matrix.matrix_type_float"><span class="pre">pysycl.matrix.matrix_type_float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_float.fill" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_float.max">
+<span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_float" title="pysycl.matrix.matrix_type_float"><span class="pre">pysycl.matrix.matrix_type_float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_float.max" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_float.mem_to_cpu">
+<span class="sig-name descname"><span class="pre">mem_to_cpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_float" title="pysycl.matrix.matrix_type_float"><span class="pre">pysycl.matrix.matrix_type_float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_float.mem_to_cpu" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_float.mem_to_gpu">
+<span class="sig-name descname"><span class="pre">mem_to_gpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_float" title="pysycl.matrix.matrix_type_float"><span class="pre">pysycl.matrix.matrix_type_float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_float.mem_to_gpu" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_float.min">
+<span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_float" title="pysycl.matrix.matrix_type_float"><span class="pre">pysycl.matrix.matrix_type_float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_float.min" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_float.num_cols">
+<span class="sig-name descname"><span class="pre">num_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_float" title="pysycl.matrix.matrix_type_float"><span class="pre">pysycl.matrix.matrix_type_float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_float.num_cols" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_float.num_rows">
+<span class="sig-name descname"><span class="pre">num_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_float" title="pysycl.matrix.matrix_type_float"><span class="pre">pysycl.matrix.matrix_type_float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_float.num_rows" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_float.sum">
+<span class="sig-name descname"><span class="pre">sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_float" title="pysycl.matrix.matrix_type_float"><span class="pre">pysycl.matrix.matrix_type_float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_float.sum" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_float.transpose">
+<span class="sig-name descname"><span class="pre">transpose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_float" title="pysycl.matrix.matrix_type_float"><span class="pre">pysycl.matrix.matrix_type_float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_float.transpose" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_int">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pysycl.matrix.</span></span><span class="sig-name descname"><span class="pre">matrix_type_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pysycl.matrix.matrix_type_int" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<dl class="simple">
+<dt>Description</dt><dd><p>This class creates a PySYCL type float matrix.</p>
+</dd>
+</dl>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: pysycl.matrix.matrix_type_int, rows: int, cols: int, device: pysycl.device.device_instance) -&gt; None</p></li>
+<li><p>__init__(self: pysycl.matrix.matrix_type_int, np_arr: numpy.ndarray[numpy.int32], device: pysycl.device.device_instance) -&gt; None</p></li>
+</ol>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_int.fill">
+<span class="sig-name descname"><span class="pre">fill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_int" title="pysycl.matrix.matrix_type_int"><span class="pre">pysycl.matrix.matrix_type_int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_int.fill" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_int.max">
+<span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_int" title="pysycl.matrix.matrix_type_int"><span class="pre">pysycl.matrix.matrix_type_int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_int.max" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_int.mem_to_cpu">
+<span class="sig-name descname"><span class="pre">mem_to_cpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_int" title="pysycl.matrix.matrix_type_int"><span class="pre">pysycl.matrix.matrix_type_int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_int.mem_to_cpu" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_int.mem_to_gpu">
+<span class="sig-name descname"><span class="pre">mem_to_gpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_int" title="pysycl.matrix.matrix_type_int"><span class="pre">pysycl.matrix.matrix_type_int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_int.mem_to_gpu" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_int.min">
+<span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_int" title="pysycl.matrix.matrix_type_int"><span class="pre">pysycl.matrix.matrix_type_int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_int.min" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_int.num_cols">
+<span class="sig-name descname"><span class="pre">num_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_int" title="pysycl.matrix.matrix_type_int"><span class="pre">pysycl.matrix.matrix_type_int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_int.num_cols" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_int.num_rows">
+<span class="sig-name descname"><span class="pre">num_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_int" title="pysycl.matrix.matrix_type_int"><span class="pre">pysycl.matrix.matrix_type_int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_int.num_rows" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_int.sum">
+<span class="sig-name descname"><span class="pre">sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_int" title="pysycl.matrix.matrix_type_int"><span class="pre">pysycl.matrix.matrix_type_int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_int.sum" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysycl.matrix.matrix_type_int.transpose">
+<span class="sig-name descname"><span class="pre">transpose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.matrix.matrix_type_int" title="pysycl.matrix.matrix_type_int"><span class="pre">pysycl.matrix.matrix_type_int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pysycl.matrix.matrix_type_int.transpose" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="vector.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">PySYCL: Vector Sub-Module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="linalg.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">PySYCL: Linear Algebra Sub-Module</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Osman El-Ghotmi
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">PySYCL: Matrix Sub-Module</a><ul>
+<li><a class="reference internal" href="#pysycl.matrix.matrix"><code class="docutils literal notranslate"><span class="pre">matrix()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_double"><code class="docutils literal notranslate"><span class="pre">matrix_type_double</span></code></a><ul>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_double.fill"><code class="docutils literal notranslate"><span class="pre">matrix_type_double.fill()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_double.max"><code class="docutils literal notranslate"><span class="pre">matrix_type_double.max()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_double.mem_to_cpu"><code class="docutils literal notranslate"><span class="pre">matrix_type_double.mem_to_cpu()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_double.mem_to_gpu"><code class="docutils literal notranslate"><span class="pre">matrix_type_double.mem_to_gpu()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_double.min"><code class="docutils literal notranslate"><span class="pre">matrix_type_double.min()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_double.num_cols"><code class="docutils literal notranslate"><span class="pre">matrix_type_double.num_cols()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_double.num_rows"><code class="docutils literal notranslate"><span class="pre">matrix_type_double.num_rows()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_double.sum"><code class="docutils literal notranslate"><span class="pre">matrix_type_double.sum()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_double.transpose"><code class="docutils literal notranslate"><span class="pre">matrix_type_double.transpose()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_float"><code class="docutils literal notranslate"><span class="pre">matrix_type_float</span></code></a><ul>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_float.fill"><code class="docutils literal notranslate"><span class="pre">matrix_type_float.fill()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_float.max"><code class="docutils literal notranslate"><span class="pre">matrix_type_float.max()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_float.mem_to_cpu"><code class="docutils literal notranslate"><span class="pre">matrix_type_float.mem_to_cpu()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_float.mem_to_gpu"><code class="docutils literal notranslate"><span class="pre">matrix_type_float.mem_to_gpu()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_float.min"><code class="docutils literal notranslate"><span class="pre">matrix_type_float.min()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_float.num_cols"><code class="docutils literal notranslate"><span class="pre">matrix_type_float.num_cols()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_float.num_rows"><code class="docutils literal notranslate"><span class="pre">matrix_type_float.num_rows()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_float.sum"><code class="docutils literal notranslate"><span class="pre">matrix_type_float.sum()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_float.transpose"><code class="docutils literal notranslate"><span class="pre">matrix_type_float.transpose()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_int"><code class="docutils literal notranslate"><span class="pre">matrix_type_int</span></code></a><ul>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_int.fill"><code class="docutils literal notranslate"><span class="pre">matrix_type_int.fill()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_int.max"><code class="docutils literal notranslate"><span class="pre">matrix_type_int.max()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_int.mem_to_cpu"><code class="docutils literal notranslate"><span class="pre">matrix_type_int.mem_to_cpu()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_int.mem_to_gpu"><code class="docutils literal notranslate"><span class="pre">matrix_type_int.mem_to_gpu()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_int.min"><code class="docutils literal notranslate"><span class="pre">matrix_type_int.min()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_int.num_cols"><code class="docutils literal notranslate"><span class="pre">matrix_type_int.num_cols()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_int.num_rows"><code class="docutils literal notranslate"><span class="pre">matrix_type_int.num_rows()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_int.sum"><code class="docutils literal notranslate"><span class="pre">matrix_type_int.sum()</span></code></a></li>
+<li><a class="reference internal" href="#pysycl.matrix.matrix_type_int.transpose"><code class="docutils literal notranslate"><span class="pre">matrix_type_int.transpose()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=c80ae153"></script>
+    </body>
+</html>

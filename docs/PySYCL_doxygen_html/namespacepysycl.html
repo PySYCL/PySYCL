@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('namespacepysycl.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
-<p>Linear Algebra functionalities in PySYCL.  
+<p>General functionalities in PySYCL.  
 <a href="namespacepysycl.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -142,9 +142,31 @@ Functions</h2></td></tr>
 std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___device.html#ga05b8a8b68116eb84bc713b15cf291f90">get_device_list</a> ()</td></tr>
 <tr class="memdesc:ga05b8a8b68116eb84bc713b15cf291f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns a list of available devices. <br /></td></tr>
 <tr class="separator:ga05b8a8b68116eb84bc713b15cf291f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0c85e9b7a5b920476142de25053a560f"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di1, const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di2)</td></tr>
+<tr class="separator:ga0c85e9b7a5b920476142de25053a560f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa5104b7af9349ea55a4f63b7b353b444"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di1, const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di2)</td></tr>
+<tr class="separator:gaa5104b7af9349ea55a4f63b7b353b444"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad530a0ab0f2eb5564fb5b5feb07d4cdd"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di1, const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di2)</td></tr>
+<tr class="separator:gad530a0ab0f2eb5564fb5b5feb07d4cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga79b0f30bd145df2150be413c77312fa6"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;</b> (const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di1, const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di2)</td></tr>
+<tr class="separator:ga79b0f30bd145df2150be413c77312fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga400f576bef364fdbf8f1dbcccd26336a"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di1, const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di2)</td></tr>
+<tr class="separator:ga400f576bef364fdbf8f1dbcccd26336a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac9649b65563c8e51b45b71c6f0e76202"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di1, const <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;di2)</td></tr>
+<tr class="separator:gac9649b65563c8e51b45b71c6f0e76202"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3e14b0f0a372da5f73c4e8afcf278a66"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_device</b> (int platform_idx=0, int device_idx=0)</td></tr>
 <tr class="separator:ga3e14b0f0a372da5f73c4e8afcf278a66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a515cc721bb052c2ffc41f4dd82f700a2"><td class="memTemplParams" colspan="2">template&lt;typename Matrix_type &gt; </td></tr>
+<tr class="memitem:a515cc721bb052c2ffc41f4dd82f700a2"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepysycl.html#a515cc721bb052c2ffc41f4dd82f700a2">trace</a> (Matrix_type &amp;A)</td></tr>
+<tr class="memdesc:a515cc721bb052c2ffc41f4dd82f700a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the trace of a matrix.  <a href="namespacepysycl.html#a515cc721bb052c2ffc41f4dd82f700a2">More...</a><br /></td></tr>
+<tr class="separator:a515cc721bb052c2ffc41f4dd82f700a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fe65fdf9301fcb037c5e4f8b7de603d"><td class="memTemplParams" colspan="2">template&lt;typename Matrix_type &gt; </td></tr>
 <tr class="memitem:a5fe65fdf9301fcb037c5e4f8b7de603d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepysycl.html#a5fe65fdf9301fcb037c5e4f8b7de603d">matmul</a> (Matrix_type &amp;A, Matrix_type &amp;B, Matrix_type &amp;C, const size_t &amp;wg_size)</td></tr>
 <tr class="memdesc:a5fe65fdf9301fcb037c5e4f8b7de603d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tiled <a class="el" href="classpysycl_1_1_matrix.html" title="Matrix class for PySYCL.">Matrix</a> multiplication function.  <a href="namespacepysycl.html#a5fe65fdf9301fcb037c5e4f8b7de603d">More...</a><br /></td></tr>
@@ -159,8 +181,9 @@ Vector_Variants&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <tr class="separator:ga59dc765a02839da35ef53af68146c52f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Linear Algebra functionalities in PySYCL. </p>
+<div class="textblock"><p>General functionalities in PySYCL. </p>
 <p>The main namespace for the program, pysycl.</p>
+<p>Linear Algebra functionalities in PySYCL.</p>
 <p>All components of the code are in this namespace </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a5fe65fdf9301fcb037c5e4f8b7de603d"></a>
@@ -218,13 +241,44 @@ template&lt;typename Matrix_type &gt; </div>
 
 </div>
 </div>
+<a id="a515cc721bb052c2ffc41f4dd82f700a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a515cc721bb052c2ffc41f4dd82f700a2">&#9670;&nbsp;</a></span>trace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Matrix_type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto pysycl::trace </td>
+          <td>(</td>
+          <td class="paramtype">Matrix_type &amp;&#160;</td>
+          <td class="paramname"><em>A</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the trace of a matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">A</td><td>The input matrix. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The trace of the matrix. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_trace_8h_source.html#l00043">43</a> of file <a class="el" href="_trace_8h_source.html">Trace.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacepysycl.html">pysycl</a></li>
-    <li class="footer">Generated on Sun Mar 24 2024 18:02:30 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Mar 28 2024 13:58:02 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
