@@ -10,7 +10,7 @@ print("\033[32m| ----- MATMUL TEST SUITE ----- |\033[0m")
 ############################################
 ############## MATMUL TESTS ################
 ############################################
-class Device_Instance_Tests(unittest.TestCase):
+class Matmul_Tests(unittest.TestCase):
   @classmethod
   def setUpClass(cls):
     print("\033[34mMATMUL TESTS (STARTING)\033[0m")
