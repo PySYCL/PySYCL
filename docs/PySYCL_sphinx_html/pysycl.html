@@ -239,60 +239,8 @@
 </dl>
 </div></blockquote>
 </li>
-<li><p>trace(A: pysycl::Matrix&lt;float&gt;) -&gt; float</p>
-<blockquote>
-<div><dl>
-<dt>Description</dt><dd><p>This function evaluates the trace of a matrix and returns the result.</p>
-</dd>
-<dt>Parameters</dt><dd><dl class="simple">
-<dt>A<span class="classifier">pysycl.matrix</span></dt><dd><p>The input matrix.</p>
-</dd>
-</dl>
-</dd>
-<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pysycl</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">device</span> <span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">matrix</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span> <span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
-<span class="go">80.0</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</div></blockquote>
-</li>
-<li><p>trace(A: pysycl::Matrix&lt;int&gt;) -&gt; int</p>
-<blockquote>
-<div><dl>
-<dt>Description</dt><dd><p>This function evaluates the trace of a matrix and returns the result.</p>
-</dd>
-<dt>Parameters</dt><dd><dl class="simple">
-<dt>A<span class="classifier">pysycl.matrix</span></dt><dd><p>The input matrix.</p>
-</dd>
-</dl>
-</dd>
-<dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pysycl</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">device</span> <span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">matrix</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span> <span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
-<span class="go">80.0</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</div></blockquote>
-</li>
+<li><p>trace(A: pysycl::Matrix&lt;float&gt;) -&gt; float</p></li>
+<li><p>trace(A: pysycl::Matrix&lt;int&gt;) -&gt; int</p></li>
 </ol>
 </dd></dl>
 
