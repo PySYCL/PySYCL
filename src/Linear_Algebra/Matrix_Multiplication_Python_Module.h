@@ -38,7 +38,7 @@ namespace py = pybind11;
 // Matrix multiplication function
 ///////////////////////////////////////////////////////////////////////
 template<typename Scalar_T>
-void bind_matmul_module(py::module &m) {
+void matmul_module_double(py::module &m) {
   using Matrix_T = pysycl::Matrix<Scalar_T>;
   m.def("matmul", &pysycl::matmul<Matrix_T>, R"delim(
     Description
@@ -63,10 +63,10 @@ void bind_matmul_module(py::module &m) {
       >>>
       >>> device = pysycl.device.get_device(0,0)
       >>>
-      >>> A = pysycl.matrix((M, N), device= device, dtype= pysycl.float)
-      >>> B = pysycl.matrix((N, P), device= device, dtype= pysycl.float)
+      >>> A = pysycl.matrix((M, N), device= device, dtype= pysycl.double)
+      >>> B = pysycl.matrix((N, P), device= device, dtype= pysycl.double)
       >>>
-      >>> C = pysycl.matrix((N, P), device= device, dtype= pysycl.float)
+      >>> C = pysycl.matrix((N, P), device= device, dtype= pysycl.double)
       >>>
       >>> A.fill(8.0)
       >>> B.fill(3.0)
@@ -79,10 +79,33 @@ void bind_matmul_module(py::module &m) {
         py::arg("A"), py::arg("B"), py::arg("C"), py::arg("wg_size"));
 }
 
+///////////////////////////////////////////////////////////////////////
+// Matrix multiplication function float
+///////////////////////////////////////////////////////////////////////
+template<typename Scalar_T>
+void matmul_module_float(py::module &m) {
+  using Matrix_T = pysycl::Matrix<Scalar_T>;
+  m.def("matmul", &pysycl::matmul<Matrix_T>,
+        py::arg("A"), py::arg("B"), py::arg("C"), py::arg("wg_size"));
+}
+
+///////////////////////////////////////////////////////////////////////
+// Matrix multiplication function int
+///////////////////////////////////////////////////////////////////////
+template<typename Scalar_T>
+void matmul_module_int(py::module &m) {
+  using Matrix_T = pysycl::Matrix<Scalar_T>;
+  m.def("matmul", &pysycl::matmul<Matrix_T>,
+        py::arg("A"), py::arg("B"), py::arg("C"), py::arg("wg_size"));
+}
+
+///////////////////////////////////////////////////////////////////////
+// Binding all scalar variants of the matmul function
+///////////////////////////////////////////////////////////////////////
 void matmul_module(py::module &m) {
-  bind_matmul_module<double>(m);
-  bind_matmul_module<float>(m);
-  bind_matmul_module<int>(m);
+  matmul_module_double<double>(m);
+  matmul_module_float<float>(m);
+  matmul_module_int<int>(m);
 }
 
 #endif // MATRIX_MULTIPLICATION_PYTHON_MODULE_H
