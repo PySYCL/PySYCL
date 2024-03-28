@@ -8,4 +8,5 @@ PySYCL Python Module
   device
   linalg
   matrix
+  pysycl
   vector
