@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="PySYCL: Matrix Sub-Module" href="matrix.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="PySYCL: General PySYCL Module" href="pysycl.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
         <title>PySYCL: Vector Sub-Module - PySYCL User Guide</title>
@@ -163,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="device.html">PySYCL: Device Sub-Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linalg.html">PySYCL: Linear Algebra Sub-Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="matrix.html">PySYCL: Matrix Sub-Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysycl.html">PySYCL: General PySYCL Module</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">PySYCL: Vector Sub-Module</a></li>
 </ul>
 </li>
@@ -208,7 +209,7 @@
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="pysycl.vector.vector">
-<span class="sig-prename descclassname"><span class="pre">pysycl.vector.</span></span><span class="sig-name descname"><span class="pre">vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.device.device_instance" title="pysycl.device.device_instance"><span class="pre">pysycl.device.device_instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pysycl.html#pysycl.data_types.data_types" title="pysycl.data_types.data_types"><span class="pre">pysycl.data_types.data_types</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pysycl.vector.vector_type_double" title="pysycl.vector.vector_type_double"><span class="pre">pysycl.vector.vector_type_double</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pysycl.vector.vector_type_float" title="pysycl.vector.vector_type_float"><span class="pre">pysycl.vector.vector_type_float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pysycl.vector.vector_type_int" title="pysycl.vector.vector_type_int"><span class="pre">pysycl.vector.vector_type_int</span></a></span></span><a class="headerlink" href="#pysycl.vector.vector" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pysycl.vector.</span></span><span class="sig-name descname"><span class="pre">vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="device.html#pysycl.device.device_instance" title="pysycl.device.device_instance"><span class="pre">pysycl.device.device_instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data_types.html#pysycl.data_types.data_types" title="pysycl.data_types.data_types"><span class="pre">pysycl.data_types.data_types</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pysycl.vector.vector_type_double" title="pysycl.vector.vector_type_double"><span class="pre">pysycl.vector.vector_type_double</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pysycl.vector.vector_type_float" title="pysycl.vector.vector_type_float"><span class="pre">pysycl.vector.vector_type_float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pysycl.vector.vector_type_int" title="pysycl.vector.vector_type_int"><span class="pre">pysycl.vector.vector_type_int</span></a></span></span><a class="headerlink" href="#pysycl.vector.vector" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py class">
@@ -488,14 +489,14 @@
         
         <div class="related-pages">
           
-          <a class="prev-page" href="matrix.html">
+          <a class="prev-page" href="pysycl.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">PySYCL: Matrix Sub-Module</div>
+                <div class="title">PySYCL: General PySYCL Module</div>
                 
               </div>
             </a>
