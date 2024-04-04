@@ -177,8 +177,8 @@ $(document).ready(function(){initNavTree('_vector___type___python___module_8h_so
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="stringliteral">        Example</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="stringliteral">          &gt;&gt;&gt; import pysycl</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="stringliteral">          &gt;&gt;&gt; import numpy as np</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="stringliteral">          &gt;&gt;&gt; A_np = np.full(N, 86.74, dtype= np.float64)</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="stringliteral">          &gt;&gt;&gt; A_pysycl = pysycl.vector(A_np)</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="stringliteral">          &gt;&gt;&gt; A_np = np.random.rand(N).astype(np.float64)</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="stringliteral">          &gt;&gt;&gt; A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.double)</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="stringliteral">      )delim&quot;,</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="stringliteral">           py::arg(</span><span class="stringliteral">&quot;np_arr&quot;</span>), py::arg(<span class="stringliteral">&quot;device&quot;</span>))</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      .def(<span class="stringliteral">&quot;get_size&quot;</span>, &amp;Vector_T::get_size, R<span class="stringliteral">&quot;delim(</span></div>
@@ -394,7 +394,7 @@ $(document).ready(function(){initNavTree('_vector___type___python___module_8h_so
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d2653df67fea485f1bf2e407794c9984.html">Vector</a></li><li class="navelem"><a class="el" href="_vector___type___python___module_8h.html">Vector_Type_Python_Module.h</a></li>
-    <li class="footer">Generated on Thu Mar 28 2024 15:01:04 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 3 2024 21:47:24 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

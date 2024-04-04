@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_7earray1d_87',['~Array1D',['../classpysycl_1_1_array1_d.html#a70162e3d69156a8c2de249f3abebda57',1,'pysycl::Array1D']]],
-  ['_7earray2d_88',['~Array2D',['../classpysycl_1_1_array2_d.html#a874615a2a6e5f887a57ea355ad04b4c6',1,'pysycl::Array2D']]]
+  ['_7ematrix_108',['~Matrix',['../classpysycl_1_1_matrix.html#a05675fc3ec26ff3154d3a06f21df41f1',1,'pysycl::Matrix']]],
+  ['_7evector_109',['~Vector',['../classpysycl_1_1_vector.html#a31d06bda2ec76bc43e3db74a083d3f18',1,'pysycl::Vector']]]
 ];

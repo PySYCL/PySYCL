@@ -6,6 +6,7 @@ PySYCL Python Module
 
   data_types
   device
+  fft
   linalg
   matrix
   pysycl

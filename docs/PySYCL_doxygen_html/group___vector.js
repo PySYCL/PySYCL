@@ -16,6 +16,7 @@ var group___vector =
       [ "Vector", "classpysycl_1_1_vector.html#a06b56ed615e38a1516ae78e12bd42a1b", null ],
       [ "~Vector", "classpysycl_1_1_vector.html#a31d06bda2ec76bc43e3db74a083d3f18", null ],
       [ "binary_vector_operations", "classpysycl_1_1_vector.html#a2331967cc8306a7727113a0f60423218", null ],
+      [ "dev", "classpysycl_1_1_vector.html#ad26d9f50f4e049b67064a235a4364110", null ],
       [ "fill", "classpysycl_1_1_vector.html#a5a58a792f4ad66fd8126ba2f3629f7d0", null ],
       [ "get_device_data_ptr", "classpysycl_1_1_vector.html#a96fdc87c3f15e9f674b6b2136e44b86b", null ],
       [ "get_device_index", "classpysycl_1_1_vector.html#a458d8d73962c5c50d5fcd3f22f364fc3", null ],
@@ -47,5 +48,6 @@ var group___vector =
       [ "Q", "classpysycl_1_1_vector.html#a862b87014b5134f1cc4251dc74fbdc28", null ],
       [ "size", "classpysycl_1_1_vector.html#a391579a7f67afe2cbc5067ad4670440c", null ]
     ] ],
-    [ "vector_factories", "group___vector.html#ga59dc765a02839da35ef53af68146c52f", null ]
+    [ "vector_factories", "group___vector.html#ga59dc765a02839da35ef53af68146c52f", null ],
+    [ "vector_factories", "group___vector.html#ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36", null ]
 ];

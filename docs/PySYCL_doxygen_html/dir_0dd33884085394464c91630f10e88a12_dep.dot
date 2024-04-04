@@ -1,0 +1,16 @@
+digraph "Fast_Fourier_Transform" {
+  bgcolor=transparent;
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_0dd33884085394464c91630f10e88a12 [shape=box, label="Fast_Fourier_Transform", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_0dd33884085394464c91630f10e88a12.html"];
+  dir_3813464283bee2267f39dcf080a84d74 [shape=box label="Math" URL="dir_3813464283bee2267f39dcf080a84d74.html"];
+  dir_737e998198a830156af4433d00da986d [shape=box label="Device" URL="dir_737e998198a830156af4433d00da986d.html"];
+  dir_9275c86910715c36ba63291f66ce00ee [shape=box label="Bit_Manipulation" URL="dir_9275c86910715c36ba63291f66ce00ee.html"];
+  dir_d2653df67fea485f1bf2e407794c9984 [shape=box label="Vector" URL="dir_d2653df67fea485f1bf2e407794c9984.html"];
+  dir_0dd33884085394464c91630f10e88a12->dir_3813464283bee2267f39dcf080a84d74 [headlabel="1", labeldistance=1.5 headhref="dir_000004_000007.html"];
+  dir_0dd33884085394464c91630f10e88a12->dir_737e998198a830156af4433d00da986d [headlabel="1", labeldistance=1.5 headhref="dir_000004_000003.html"];
+  dir_0dd33884085394464c91630f10e88a12->dir_9275c86910715c36ba63291f66ce00ee [headlabel="1", labeldistance=1.5 headhref="dir_000004_000001.html"];
+  dir_0dd33884085394464c91630f10e88a12->dir_d2653df67fea485f1bf2e407794c9984 [headlabel="1", labeldistance=1.5 headhref="dir_000004_000009.html"];
+  dir_d2653df67fea485f1bf2e407794c9984->dir_737e998198a830156af4433d00da986d [headlabel="6", labeldistance=1.5 headhref="dir_000009_000003.html"];
+}

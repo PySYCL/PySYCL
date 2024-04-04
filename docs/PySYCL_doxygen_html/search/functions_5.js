@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['name_153',['name',['../group___device.html#ga535336d3a6bc41aeedeaf97d5c859342',1,'pysycl::Device_Instance']]],
-  ['num_5fcols_154',['num_cols',['../classpysycl_1_1_matrix.html#a8255a68f9a0912345cb6f2580032d56e',1,'pysycl::Matrix']]],
-  ['num_5frows_155',['num_rows',['../classpysycl_1_1_matrix.html#a3e7539002f66c0ea9aaeb9bc166be35e',1,'pysycl::Matrix']]]
+  ['is_5fpower_5fof_5ftwo_171',['is_power_of_two',['../namespacepysycl.html#ad9f1437fc6f1dad511b3f6f5bb2a757d',1,'pysycl']]]
 ];

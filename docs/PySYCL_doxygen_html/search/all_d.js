@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['trace_78',['trace',['../namespacepysycl.html#a515cc721bb052c2ffc41f4dd82f700a2',1,'pysycl']]],
-  ['trace_2eh_79',['Trace.h',['../_trace_8h.html',1,'']]],
-  ['trace_5fmodule_5fdouble_80',['trace_module_double',['../_trace___python___module_8h.html#aa77fd16d8780c1117237d72ad1aa03fe',1,'Trace_Python_Module.h']]],
-  ['trace_5fpython_5fmodule_2eh_81',['Trace_Python_Module.h',['../_trace___python___module_8h.html',1,'']]],
-  ['transpose_82',['transpose',['../classpysycl_1_1_matrix.html#a0a629cb0485c23385405373f2658ce04',1,'pysycl::Matrix']]],
-  ['types_83',['Types',['../group___data.html',1,'']]]
+  ['scalar_5ft_91',['Scalar_T',['../classpysycl_1_1_matrix.html#a46c30c509247436f61f2b8cc8ba5ee06',1,'pysycl::Matrix::Scalar_T()'],['../classpysycl_1_1_vector.html#a1095ad2d05b4c91e9878fe544a003c0c',1,'pysycl::Vector::Scalar_T()']]],
+  ['size_92',['size',['../classpysycl_1_1_vector.html#a391579a7f67afe2cbc5067ad4670440c',1,'pysycl::Vector']]],
+  ['sum_93',['sum',['../classpysycl_1_1_matrix.html#aeb44fc62728e05705bdb9a2b6b804099',1,'pysycl::Matrix::sum()'],['../classpysycl_1_1_vector.html#a17bcfd4fb24640c4b74b7cb2f9feaa9b',1,'pysycl::Vector::sum()']]]
 ];

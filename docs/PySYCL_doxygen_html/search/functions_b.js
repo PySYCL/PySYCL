@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['_7ematrix_174',['~Matrix',['../classpysycl_1_1_matrix.html#a05675fc3ec26ff3154d3a06f21df41f1',1,'pysycl::Matrix']]],
-  ['_7evector_175',['~Vector',['../classpysycl_1_1_vector.html#a31d06bda2ec76bc43e3db74a083d3f18',1,'pysycl::Vector']]]
+  ['trace_197',['trace',['../namespacepysycl.html#a515cc721bb052c2ffc41f4dd82f700a2',1,'pysycl']]],
+  ['trace_5fmodule_5fdouble_198',['trace_module_double',['../_trace___python___module_8h.html#aa77fd16d8780c1117237d72ad1aa03fe',1,'Trace_Python_Module.h']]],
+  ['transpose_199',['transpose',['../classpysycl_1_1_matrix.html#a0a629cb0485c23385405373f2658ce04',1,'pysycl::Matrix']]]
 ];

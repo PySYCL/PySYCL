@@ -11,10 +11,18 @@ var namespacepysycl =
       [ "FLOAT", "group___data.html#ggadd3366a2a7918736064f09238c4b2838ae738c26bf4ce1037fa81b039a915cbf6", null ],
       [ "INT", "group___data.html#ggadd3366a2a7918736064f09238c4b2838a53f93baa3057821107c750323892fa92", null ]
     ] ],
+    [ "bit_reverse", "namespacepysycl.html#a1d5f7328814b4771f90bc71cf63df73b", null ],
+    [ "chirpz", "namespacepysycl.html#a542ffc1f98d6233b86f17bd327fb9c9f", null ],
+    [ "cooley_turkey", "namespacepysycl.html#a119983130c06ee05ec197f09068b25e7", null ],
+    [ "cooley_turkey_algorithm", "namespacepysycl.html#a5991bc40abf15d51976b049be1a87410", null ],
+    [ "fft1d", "namespacepysycl.html#a0af01038bb863ccf982baf83a9abdd47", null ],
     [ "get_device", "group___device.html#ga3e14b0f0a372da5f73c4e8afcf278a66", null ],
     [ "get_device_list", "group___device.html#ga05b8a8b68116eb84bc713b15cf291f90", null ],
+    [ "is_power_of_two", "namespacepysycl.html#ad9f1437fc6f1dad511b3f6f5bb2a757d", null ],
     [ "matmul", "namespacepysycl.html#a5fe65fdf9301fcb037c5e4f8b7de603d", null ],
+    [ "matrix_factories", "group___matrix.html#gab3f807177431e12809955c0fbf6bd56e", null ],
     [ "matrix_factories", "group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35", null ],
+    [ "next_power_of_two", "namespacepysycl.html#a0c632b9d4c5f87821541f97325d6f857", null ],
     [ "operator!=", "group___device.html#gaa5104b7af9349ea55a4f63b7b353b444", null ],
     [ "operator<", "group___device.html#gad530a0ab0f2eb5564fb5b5feb07d4cdd", null ],
     [ "operator<=", "group___device.html#ga400f576bef364fdbf8f1dbcccd26336a", null ],
@@ -22,5 +30,7 @@ var namespacepysycl =
     [ "operator>", "group___device.html#ga79b0f30bd145df2150be413c77312fa6", null ],
     [ "operator>=", "group___device.html#gac9649b65563c8e51b45b71c6f0e76202", null ],
     [ "trace", "namespacepysycl.html#a515cc721bb052c2ffc41f4dd82f700a2", null ],
-    [ "vector_factories", "group___vector.html#ga59dc765a02839da35ef53af68146c52f", null ]
+    [ "vector_factories", "group___vector.html#ga59dc765a02839da35ef53af68146c52f", null ],
+    [ "vector_factories", "group___vector.html#ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36", null ],
+    [ "PI", "group___math.html#ga9baf1d5396e29136ea21b62fbf05b77e", null ]
 ];

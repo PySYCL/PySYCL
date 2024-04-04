@@ -161,6 +161,7 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">PySYCL Python Module</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of PySYCL Python Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="data_types.html">PySYCL: Data Types Sub-Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device.html">PySYCL: Device Sub-Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft.html">PySYCL: FFT Sub-Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linalg.html">PySYCL: Linear Algebra Sub-Module</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">PySYCL: Matrix Sub-Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pysycl.html">PySYCL: General PySYCL Module</a></li>
@@ -209,8 +210,15 @@
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="pysycl.matrix.matrix">
-<span class="sig-prename descclassname"><span class="pre">pysycl.matrix.</span></span><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="device.html#pysycl.device.device_instance" title="pysycl.device.device_instance"><span class="pre">pysycl.device.device_instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data_types.html#pysycl.data_types.data_types" title="pysycl.data_types.data_types"><span class="pre">pysycl.data_types.data_types</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pysycl.matrix.matrix_type_double" title="pysycl.matrix.matrix_type_double"><span class="pre">pysycl.matrix.matrix_type_double</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pysycl.matrix.matrix_type_float" title="pysycl.matrix.matrix_type_float"><span class="pre">pysycl.matrix.matrix_type_float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pysycl.matrix.matrix_type_int" title="pysycl.matrix.matrix_type_int"><span class="pre">pysycl.matrix.matrix_type_int</span></a></span></span><a class="headerlink" href="#pysycl.matrix.matrix" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">pysycl.matrix.</span></span><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pysycl.matrix.matrix" title="Link to this definition">#</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>matrix(dims: Tuple[int, int], device: pysycl.device.device_instance, dtype: pysycl.data_types.data_types) -&gt; Union[pysycl.matrix.matrix_type_double, pysycl.matrix.matrix_type_float, pysycl.matrix.matrix_type_int]</p></li>
+<li><p>matrix(np_array: numpy.ndarray[numpy.float64], device: pysycl.device.device_instance, dtype: pysycl.data_types.data_types) -&gt; Union[pysycl.matrix.matrix_type_double, pysycl.matrix.matrix_type_float, pysycl.matrix.matrix_type_int]</p></li>
+<li><p>matrix(np_array: numpy.ndarray[numpy.float32], device: pysycl.device.device_instance, dtype: pysycl.data_types.data_types) -&gt; Union[pysycl.matrix.matrix_type_double, pysycl.matrix.matrix_type_float, pysycl.matrix.matrix_type_int]</p></li>
+<li><p>matrix(np_array: numpy.ndarray[numpy.int32], device: pysycl.device.device_instance, dtype: pysycl.data_types.data_types) -&gt; Union[pysycl.matrix.matrix_type_double, pysycl.matrix.matrix_type_float, pysycl.matrix.matrix_type_int]</p></li>
+</ol>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pysycl.matrix.matrix_type_double">
@@ -262,8 +270,8 @@
 </dd>
 <dt>Example</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pysycl</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">A_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">A_pysycl</span> <span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">A_np</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A_pysycl</span> <span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">A_np</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span> <span class="n">pysycl</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>

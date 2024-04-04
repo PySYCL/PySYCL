@@ -142,19 +142,33 @@ $(document).ready(function(){initNavTree('_matrix___factories___python___module_
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;     py::arg(<span class="stringliteral">&quot;device&quot;</span>),</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;     py::arg(<span class="stringliteral">&quot;dtype&quot;</span>));</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MATRIX_FACTORIES_PYTHON_MODULE_H</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span><span class="comment">// Matrix Factories function with input numpt array</span><span class="comment"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scalar_T&gt;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> matrix_factories_numpy_module(py::module &amp;m) {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  m.def(<span class="stringliteral">&quot;matrix&quot;</span>, [](py::array_t&lt;Scalar_T&gt; np_array,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                     <a class="code" href="classpysycl_1_1_device___instance.html">Device_T</a>&amp; device,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                     <a class="code" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">Data_T</a>&amp; dtype) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">pysycl::matrix_factories</a>(np_array, device, dtype);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  }, py::arg(<span class="stringliteral">&quot;np_array&quot;</span>),</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;     py::arg(<span class="stringliteral">&quot;device&quot;</span>),</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;     py::arg(<span class="stringliteral">&quot;dtype&quot;</span>));</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MATRIX_FACTORIES_PYTHON_MODULE_H</span></div>
 <div class="ttc" id="a_matrix___factories_8h_html"><div class="ttname"><a href="_matrix___factories_8h.html">Matrix_Factories.h</a></div><div class="ttdoc">PySYCL Matrix Factories.</div></div>
 <div class="ttc" id="aclasspysycl_1_1_device___instance_html"><div class="ttname"><a href="classpysycl_1_1_device___instance.html">pysycl::Device_Instance</a></div><div class="ttdoc">Class representing a device instance.</div><div class="ttdef"><b>Definition:</b> <a href="_device___instance_8h_source.html#l00036">Device_Instance.h:36</a></div></div>
 <div class="ttc" id="agroup___data_html_gadd3366a2a7918736064f09238c4b2838"><div class="ttname"><a href="group___data.html#gadd3366a2a7918736064f09238c4b2838">pysycl::Data_Types</a></div><div class="ttdeci">Data_Types</div><div class="ttdoc">Data types.</div><div class="ttdef"><b>Definition:</b> <a href="_data___types_8h_source.html#l00030">Data_Types.h:30</a></div></div>
-<div class="ttc" id="agroup___matrix_html_ga82ef1d9821c0cbe1f7b0138417e8fc35"><div class="ttname"><a href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">pysycl::matrix_factories</a></div><div class="ttdeci">Matrix_Variants matrix_factories(std::tuple&lt; int, int &gt; dims, Device_Instance &amp;device, Data_Types &amp;dtype)</div><div class="ttdoc">Function specialization for Matrix.</div><div class="ttdef"><b>Definition:</b> <a href="_matrix___factories_8h_source.html#l00052">Matrix_Factories.h:52</a></div></div>
+<div class="ttc" id="agroup___matrix_html_ga82ef1d9821c0cbe1f7b0138417e8fc35"><div class="ttname"><a href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">pysycl::matrix_factories</a></div><div class="ttdeci">Matrix_Variants matrix_factories(std::tuple&lt; int, int &gt; dims, Device_Instance &amp;device, Data_Types &amp;dtype)</div><div class="ttdoc">Function specialization for Matrix.</div><div class="ttdef"><b>Definition:</b> <a href="_matrix___factories_8h_source.html#l00055">Matrix_Factories.h:55</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b16e19d0c4a2719fd01fb3b9035a19cd.html">Matrix</a></li><li class="navelem"><a class="el" href="_matrix___factories___python___module_8h.html">Matrix_Factories_Python_Module.h</a></li>
-    <li class="footer">Generated on Thu Mar 28 2024 15:01:04 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 3 2024 21:47:24 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

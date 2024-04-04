@@ -6,7 +6,7 @@ digraph "Linear_Algebra" {
   dir_048d98b6635f6f7d0d13e92ba82f3b00 [shape=box, label="Linear_Algebra", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_048d98b6635f6f7d0d13e92ba82f3b00.html"];
   dir_737e998198a830156af4433d00da986d [shape=box label="Device" URL="dir_737e998198a830156af4433d00da986d.html"];
   dir_b16e19d0c4a2719fd01fb3b9035a19cd [shape=box label="Matrix" URL="dir_b16e19d0c4a2719fd01fb3b9035a19cd.html"];
-  dir_048d98b6635f6f7d0d13e92ba82f3b00->dir_737e998198a830156af4433d00da986d [headlabel="1", labeldistance=1.5 headhref="dir_000004_000002.html"];
-  dir_048d98b6635f6f7d0d13e92ba82f3b00->dir_b16e19d0c4a2719fd01fb3b9035a19cd [headlabel="1", labeldistance=1.5 headhref="dir_000004_000005.html"];
-  dir_b16e19d0c4a2719fd01fb3b9035a19cd->dir_737e998198a830156af4433d00da986d [headlabel="6", labeldistance=1.5 headhref="dir_000005_000002.html"];
+  dir_048d98b6635f6f7d0d13e92ba82f3b00->dir_737e998198a830156af4433d00da986d [headlabel="1", labeldistance=1.5 headhref="dir_000006_000003.html"];
+  dir_048d98b6635f6f7d0d13e92ba82f3b00->dir_b16e19d0c4a2719fd01fb3b9035a19cd [headlabel="1", labeldistance=1.5 headhref="dir_000006_000008.html"];
+  dir_b16e19d0c4a2719fd01fb3b9035a19cd->dir_737e998198a830156af4433d00da986d [headlabel="6", labeldistance=1.5 headhref="dir_000008_000003.html"];
 }

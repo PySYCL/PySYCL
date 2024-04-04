@@ -94,13 +94,14 @@ $(document).ready(function(){initNavTree('namespacepysycl.html',''); initResizab
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">pysycl Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>General functionalities in PySYCL.  
+<p>Functions for Bit Manipulation in PySYCL.  
 <a href="namespacepysycl.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -138,6 +139,14 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a1d5f7328814b4771f90bc71cf63df73b"><td class="memTemplParams" colspan="2">template&lt;typename Int_T &gt; </td></tr>
+<tr class="memitem:a1d5f7328814b4771f90bc71cf63df73b"><td class="memTemplItemLeft" align="right" valign="top">Int_T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepysycl.html#a1d5f7328814b4771f90bc71cf63df73b">bit_reverse</a> (Int_T N)</td></tr>
+<tr class="memdesc:a1d5f7328814b4771f90bc71cf63df73b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the bits of the input number.  <a href="namespacepysycl.html#a1d5f7328814b4771f90bc71cf63df73b">More...</a><br /></td></tr>
+<tr class="separator:a1d5f7328814b4771f90bc71cf63df73b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c632b9d4c5f87821541f97325d6f857"><td class="memTemplParams" colspan="2">template&lt;typename Int_T &gt; </td></tr>
+<tr class="memitem:a0c632b9d4c5f87821541f97325d6f857"><td class="memTemplItemLeft" align="right" valign="top">Int_T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepysycl.html#a0c632b9d4c5f87821541f97325d6f857">next_power_of_two</a> (Int_T N)</td></tr>
+<tr class="memdesc:a0c632b9d4c5f87821541f97325d6f857"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the next power of 2 larger than N.  <a href="namespacepysycl.html#a0c632b9d4c5f87821541f97325d6f857">More...</a><br /></td></tr>
+<tr class="separator:a0c632b9d4c5f87821541f97325d6f857"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga05b8a8b68116eb84bc713b15cf291f90"><td class="memItemLeft" align="right" valign="top">
 std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___device.html#ga05b8a8b68116eb84bc713b15cf291f90">get_device_list</a> ()</td></tr>
 <tr class="memdesc:ga05b8a8b68116eb84bc713b15cf291f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns a list of available devices. <br /></td></tr>
@@ -163,6 +172,25 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (co
 <tr class="memitem:ga3e14b0f0a372da5f73c4e8afcf278a66"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_device</b> (int platform_idx=0, int device_idx=0)</td></tr>
 <tr class="separator:ga3e14b0f0a372da5f73c4e8afcf278a66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9f1437fc6f1dad511b3f6f5bb2a757d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepysycl.html#ad9f1437fc6f1dad511b3f6f5bb2a757d">is_power_of_two</a> (int N)</td></tr>
+<tr class="memdesc:ad9f1437fc6f1dad511b3f6f5bb2a757d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to check if the input value is a power of two.  <a href="namespacepysycl.html#ad9f1437fc6f1dad511b3f6f5bb2a757d">More...</a><br /></td></tr>
+<tr class="separator:ad9f1437fc6f1dad511b3f6f5bb2a757d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a119983130c06ee05ec197f09068b25e7"><td class="memTemplParams" colspan="2">template&lt;typename Input_T , typename Output_T , typename Int_T &gt; </td></tr>
+<tr class="memitem:a119983130c06ee05ec197f09068b25e7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepysycl.html#a119983130c06ee05ec197f09068b25e7">cooley_turkey</a> (Input_T *data, Output_T *result_device, Int_T N, Int_T logn, Int_T wg_size, sycl::queue Q)</td></tr>
+<tr class="memdesc:a119983130c06ee05ec197f09068b25e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">1-dimensional fast fourier transform function kernel. This implementation adapts the CUDA FFT approach discussed in the GitHub repository: <a href="https://github.com/roguh/cuda-fft">roguh/cuda-fft</a>.  <a href="namespacepysycl.html#a119983130c06ee05ec197f09068b25e7">More...</a><br /></td></tr>
+<tr class="separator:a119983130c06ee05ec197f09068b25e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5991bc40abf15d51976b049be1a87410"><td class="memTemplParams" colspan="2">template&lt;typename Vector_type &gt; </td></tr>
+<tr class="memitem:a5991bc40abf15d51976b049be1a87410"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepysycl.html#a5991bc40abf15d51976b049be1a87410">cooley_turkey_algorithm</a> (Vector_type &amp;A)</td></tr>
+<tr class="memdesc:a5991bc40abf15d51976b049be1a87410"><td class="mdescLeft">&#160;</td><td class="mdescRight">1-dimensional fast fourier transform function (cooley-turkey). This implementation adapts the CUDA FFT approach discussed in the GitHub repository: <a href="https://github.com/roguh/cuda-fft">roguh/cuda-fft</a>.  <a href="namespacepysycl.html#a5991bc40abf15d51976b049be1a87410">More...</a><br /></td></tr>
+<tr class="separator:a5991bc40abf15d51976b049be1a87410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a542ffc1f98d6233b86f17bd327fb9c9f"><td class="memTemplParams" colspan="2">template&lt;typename Vector_type &gt; </td></tr>
+<tr class="memitem:a542ffc1f98d6233b86f17bd327fb9c9f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepysycl.html#a542ffc1f98d6233b86f17bd327fb9c9f">chirpz</a> (Vector_type &amp;A)</td></tr>
+<tr class="memdesc:a542ffc1f98d6233b86f17bd327fb9c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">1-dimensional fast fourier transform function (chirp-z). Reference for the Chirp Z-transform implementation, followed <a href="https://en.wikipedia.org/wiki/Chirp_Z-transform">Chirp Z-transform</a>.  <a href="namespacepysycl.html#a542ffc1f98d6233b86f17bd327fb9c9f">More...</a><br /></td></tr>
+<tr class="separator:a542ffc1f98d6233b86f17bd327fb9c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0af01038bb863ccf982baf83a9abdd47"><td class="memTemplParams" colspan="2">template&lt;typename Vector_type &gt; </td></tr>
+<tr class="memitem:a0af01038bb863ccf982baf83a9abdd47"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepysycl.html#a0af01038bb863ccf982baf83a9abdd47">fft1d</a> (Vector_type &amp;A)</td></tr>
+<tr class="memdesc:a0af01038bb863ccf982baf83a9abdd47"><td class="mdescLeft">&#160;</td><td class="mdescRight">1-dimensional fast fourier transform function.  <a href="namespacepysycl.html#a0af01038bb863ccf982baf83a9abdd47">More...</a><br /></td></tr>
+<tr class="separator:a0af01038bb863ccf982baf83a9abdd47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a515cc721bb052c2ffc41f4dd82f700a2"><td class="memTemplParams" colspan="2">template&lt;typename Matrix_type &gt; </td></tr>
 <tr class="memitem:a515cc721bb052c2ffc41f4dd82f700a2"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepysycl.html#a515cc721bb052c2ffc41f4dd82f700a2">trace</a> (Matrix_type &amp;A)</td></tr>
 <tr class="memdesc:a515cc721bb052c2ffc41f4dd82f700a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the trace of a matrix.  <a href="namespacepysycl.html#a515cc721bb052c2ffc41f4dd82f700a2">More...</a><br /></td></tr>
@@ -171,21 +199,249 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (co
 <tr class="memitem:a5fe65fdf9301fcb037c5e4f8b7de603d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepysycl.html#a5fe65fdf9301fcb037c5e4f8b7de603d">matmul</a> (Matrix_type &amp;A, Matrix_type &amp;B, Matrix_type &amp;C, const size_t &amp;wg_size)</td></tr>
 <tr class="memdesc:a5fe65fdf9301fcb037c5e4f8b7de603d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tiled <a class="el" href="classpysycl_1_1_matrix.html" title="Matrix class for PySYCL.">Matrix</a> multiplication function.  <a href="namespacepysycl.html#a5fe65fdf9301fcb037c5e4f8b7de603d">More...</a><br /></td></tr>
 <tr class="separator:a5fe65fdf9301fcb037c5e4f8b7de603d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga82ef1d9821c0cbe1f7b0138417e8fc35"><td class="memItemLeft" align="right" valign="top">
-Matrix_Variants&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">matrix_factories</a> (std::tuple&lt; int, int &gt; dims, <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;device, <a class="el" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">Data_Types</a> &amp;dtype)</td></tr>
-<tr class="memdesc:ga82ef1d9821c0cbe1f7b0138417e8fc35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function specialization for <a class="el" href="classpysycl_1_1_matrix.html" title="Matrix class for PySYCL.">Matrix</a>. <br /></td></tr>
+<tr class="memitem:ga82ef1d9821c0cbe1f7b0138417e8fc35"><td class="memItemLeft" align="right" valign="top">Matrix_Variants&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">matrix_factories</a> (std::tuple&lt; int, int &gt; dims, <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;device, <a class="el" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">Data_Types</a> &amp;dtype)</td></tr>
+<tr class="memdesc:ga82ef1d9821c0cbe1f7b0138417e8fc35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function specialization for <a class="el" href="classpysycl_1_1_matrix.html" title="Matrix class for PySYCL.">Matrix</a>.  <a href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">More...</a><br /></td></tr>
 <tr class="separator:ga82ef1d9821c0cbe1f7b0138417e8fc35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga59dc765a02839da35ef53af68146c52f"><td class="memItemLeft" align="right" valign="top">
-Vector_Variants&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vector.html#ga59dc765a02839da35ef53af68146c52f">vector_factories</a> (int dims, <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;device, <a class="el" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">Data_Types</a> &amp;dtype)</td></tr>
-<tr class="memdesc:ga59dc765a02839da35ef53af68146c52f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function factory for <a class="el" href="classpysycl_1_1_vector.html" title="Vector class for PySYCL.">Vector</a> Types. <br /></td></tr>
+<tr class="memitem:gab3f807177431e12809955c0fbf6bd56e"><td class="memTemplParams" colspan="2">template&lt;typename Scalar_T &gt; </td></tr>
+<tr class="memitem:gab3f807177431e12809955c0fbf6bd56e"><td class="memTemplItemLeft" align="right" valign="top">Matrix_Variants&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___matrix.html#gab3f807177431e12809955c0fbf6bd56e">matrix_factories</a> (py::array_t&lt; Scalar_T &gt; np_array, <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;device, <a class="el" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">Data_Types</a> &amp;dtype)</td></tr>
+<tr class="memdesc:gab3f807177431e12809955c0fbf6bd56e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function factory for <a class="el" href="classpysycl_1_1_matrix.html" title="Matrix class for PySYCL.">Matrix</a> Types with input numpy array.  <a href="group___matrix.html#gab3f807177431e12809955c0fbf6bd56e">More...</a><br /></td></tr>
+<tr class="separator:gab3f807177431e12809955c0fbf6bd56e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga59dc765a02839da35ef53af68146c52f"><td class="memItemLeft" align="right" valign="top">Vector_Variants&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vector.html#ga59dc765a02839da35ef53af68146c52f">vector_factories</a> (int dims, <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;device, <a class="el" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">Data_Types</a> &amp;dtype)</td></tr>
+<tr class="memdesc:ga59dc765a02839da35ef53af68146c52f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function factory for <a class="el" href="classpysycl_1_1_vector.html" title="Vector class for PySYCL.">Vector</a> Types.  <a href="group___vector.html#ga59dc765a02839da35ef53af68146c52f">More...</a><br /></td></tr>
 <tr class="separator:ga59dc765a02839da35ef53af68146c52f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36"><td class="memTemplParams" colspan="2">template&lt;typename Scalar_T &gt; </td></tr>
+<tr class="memitem:ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36"><td class="memTemplItemLeft" align="right" valign="top">Vector_Variants&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vector.html#ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36">vector_factories</a> (py::array_t&lt; Scalar_T &gt; np_array, <a class="el" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;device, <a class="el" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">Data_Types</a> &amp;dtype)</td></tr>
+<tr class="memdesc:ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function factory for <a class="el" href="classpysycl_1_1_vector.html" title="Vector class for PySYCL.">Vector</a> Types with input numpy array.  <a href="group___vector.html#ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36">More...</a><br /></td></tr>
+<tr class="separator:ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ga9baf1d5396e29136ea21b62fbf05b77e"><td class="memItemLeft" align="right" valign="top">
+constexpr static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___math.html#ga9baf1d5396e29136ea21b62fbf05b77e">PI</a> = 3.1415926535897932384626433832795028841971693993751058209749445</td></tr>
+<tr class="memdesc:ga9baf1d5396e29136ea21b62fbf05b77e"><td class="mdescLeft">&#160;</td><td class="mdescRight">PI with 61 decimal places. <br /></td></tr>
+<tr class="separator:ga9baf1d5396e29136ea21b62fbf05b77e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>General functionalities in PySYCL. </p>
+<div class="textblock"><p>Functions for Bit Manipulation in PySYCL. </p>
 <p>The main namespace for the program, pysycl.</p>
 <p>Linear Algebra functionalities in PySYCL.</p>
+<p>General functionalities in PySYCL.</p>
+<p>FFT Functions in PySYCL.</p>
 <p>All components of the code are in this namespace </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a1d5f7328814b4771f90bc71cf63df73b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d5f7328814b4771f90bc71cf63df73b">&#9670;&nbsp;</a></span>bit_reverse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Int_T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Int_T pysycl::bit_reverse </td>
+          <td>(</td>
+          <td class="paramtype">Int_T&#160;</td>
+          <td class="paramname"><em>N</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reverses the bits of the input number. </p>
+<dl class="section return"><dt>Returns</dt><dd>The number with reversed bits. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_bit___manipulation___functions_8h_source.html#l00037">37</a> of file <a class="el" href="_bit___manipulation___functions_8h_source.html">Bit_Manipulation_Functions.h</a>.</p>
+
+</div>
+</div>
+<a id="a542ffc1f98d6233b86f17bd327fb9c9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a542ffc1f98d6233b86f17bd327fb9c9f">&#9670;&nbsp;</a></span>chirpz()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Vector_type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto pysycl::chirpz </td>
+          <td>(</td>
+          <td class="paramtype">Vector_type &amp;&#160;</td>
+          <td class="paramname"><em>A</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>1-dimensional fast fourier transform function (chirp-z). Reference for the Chirp Z-transform implementation, followed <a href="https://en.wikipedia.org/wiki/Chirp_Z-transform">Chirp Z-transform</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">A</td><td>The input vector for fft. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The result of the fft </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_f_f_t__1_d_8h_source.html#l00149">149</a> of file <a class="el" href="_f_f_t__1_d_8h_source.html">FFT_1D.h</a>.</p>
+
+</div>
+</div>
+<a id="a119983130c06ee05ec197f09068b25e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a119983130c06ee05ec197f09068b25e7">&#9670;&nbsp;</a></span>cooley_turkey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Input_T , typename Output_T , typename Int_T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto pysycl::cooley_turkey </td>
+          <td>(</td>
+          <td class="paramtype">Input_T *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Output_T *&#160;</td>
+          <td class="paramname"><em>result_device</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Int_T&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Int_T&#160;</td>
+          <td class="paramname"><em>logn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Int_T&#160;</td>
+          <td class="paramname"><em>wg_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sycl::queue&#160;</td>
+          <td class="paramname"><em>Q</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>1-dimensional fast fourier transform function kernel. This implementation adapts the CUDA FFT approach discussed in the GitHub repository: <a href="https://github.com/roguh/cuda-fft">roguh/cuda-fft</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">A</td><td>The input vector for fft. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">result</td><td>The result vector for fft. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Q</td><td>The sycl queue. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_f_f_t__1_d_8h_source.html#l00064">64</a> of file <a class="el" href="_f_f_t__1_d_8h_source.html">FFT_1D.h</a>.</p>
+
+</div>
+</div>
+<a id="a5991bc40abf15d51976b049be1a87410"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5991bc40abf15d51976b049be1a87410">&#9670;&nbsp;</a></span>cooley_turkey_algorithm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Vector_type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto pysycl::cooley_turkey_algorithm </td>
+          <td>(</td>
+          <td class="paramtype">Vector_type &amp;&#160;</td>
+          <td class="paramname"><em>A</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>1-dimensional fast fourier transform function (cooley-turkey). This implementation adapts the CUDA FFT approach discussed in the GitHub repository: <a href="https://github.com/roguh/cuda-fft">roguh/cuda-fft</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">A</td><td>The input vector for fft. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The result of the fft </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_f_f_t__1_d_8h_source.html#l00120">120</a> of file <a class="el" href="_f_f_t__1_d_8h_source.html">FFT_1D.h</a>.</p>
+
+</div>
+</div>
+<a id="a0af01038bb863ccf982baf83a9abdd47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0af01038bb863ccf982baf83a9abdd47">&#9670;&nbsp;</a></span>fft1d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Vector_type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto pysycl::fft1d </td>
+          <td>(</td>
+          <td class="paramtype">Vector_type &amp;&#160;</td>
+          <td class="paramname"><em>A</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>1-dimensional fast fourier transform function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">A</td><td>The input vector for fft. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The result of the fft </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_f_f_t__1_d_8h_source.html#l00278">278</a> of file <a class="el" href="_f_f_t__1_d_8h_source.html">FFT_1D.h</a>.</p>
+
+</div>
+</div>
+<a id="ad9f1437fc6f1dad511b3f6f5bb2a757d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9f1437fc6f1dad511b3f6f5bb2a757d">&#9670;&nbsp;</a></span>is_power_of_two()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pysycl::is_power_of_two </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to check if the input value is a power of two. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">N</td><td>The input value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>If the function is a power of two. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_f_f_t__1_d_8h_source.html#l00051">51</a> of file <a class="el" href="_f_f_t__1_d_8h_source.html">FFT_1D.h</a>.</p>
+
+</div>
+</div>
 <a id="a5fe65fdf9301fcb037c5e4f8b7de603d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5fe65fdf9301fcb037c5e4f8b7de603d">&#9670;&nbsp;</a></span>matmul()</h2>
 
@@ -241,6 +497,31 @@ template&lt;typename Matrix_type &gt; </div>
 
 </div>
 </div>
+<a id="a0c632b9d4c5f87821541f97325d6f857"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c632b9d4c5f87821541f97325d6f857">&#9670;&nbsp;</a></span>next_power_of_two()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Int_T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Int_T pysycl::next_power_of_two </td>
+          <td>(</td>
+          <td class="paramtype">Int_T&#160;</td>
+          <td class="paramname"><em>N</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finds the next power of 2 larger than N. </p>
+<dl class="section return"><dt>Returns</dt><dd>Next power of 2. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_bit___manipulation___functions_8h_source.html#l00053">53</a> of file <a class="el" href="_bit___manipulation___functions_8h_source.html">Bit_Manipulation_Functions.h</a>.</p>
+
+</div>
+</div>
 <a id="a515cc721bb052c2ffc41f4dd82f700a2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a515cc721bb052c2ffc41f4dd82f700a2">&#9670;&nbsp;</a></span>trace()</h2>
 
@@ -278,7 +559,7 @@ template&lt;typename Matrix_type &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacepysycl.html">pysycl</a></li>
-    <li class="footer">Generated on Thu Mar 28 2024 15:01:05 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 3 2024 21:47:24 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

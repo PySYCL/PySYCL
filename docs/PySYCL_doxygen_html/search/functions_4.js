@@ -1,12 +1,13 @@
 var searchData=
 [
-  ['matmul_144',['matmul',['../namespacepysycl.html#a5fe65fdf9301fcb037c5e4f8b7de603d',1,'pysycl']]],
-  ['matmul_5fmodule_5fdouble_145',['matmul_module_double',['../_matrix___multiplication___python___module_8h.html#a90b43ba0e8d201c2f646e1d8ebbfc2b2',1,'Matrix_Multiplication_Python_Module.h']]],
-  ['matrix_146',['Matrix',['../classpysycl_1_1_matrix.html#ae4758ea73df1053130191c8c0ed0aa5b',1,'pysycl::Matrix::Matrix(int rows_in, int cols_in, Device_T &amp;device_in=get_device())'],['../classpysycl_1_1_matrix.html#a800900f82afa3fa8267230e42c50bf1e',1,'pysycl::Matrix::Matrix(py::array_t&lt; Scalar_T &gt; np_array_in, Device_T &amp;device_in=get_device())'],['../classpysycl_1_1_matrix.html#a806681f496f473cd5b9d21870d0aa86f',1,'pysycl::Matrix::Matrix(const Matrix &amp;og)'],['../classpysycl_1_1_matrix.html#a115aa1d4acf082052e95a00383544ff1',1,'pysycl::Matrix::Matrix(Matrix &amp;&amp;og) noexcept']]],
-  ['matrix_5ffactories_147',['matrix_factories',['../group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35',1,'pysycl']]],
-  ['matrix_5ftype_5fdouble_5fmodule_148',['matrix_type_double_module',['../_matrix___type___python___module_8h.html#a293c3709ed52a8595f8514b231242e19',1,'Matrix_Type_Python_Module.h']]],
-  ['max_149',['max',['../classpysycl_1_1_matrix.html#a4c7eea41627352bf8ee78549d5433950',1,'pysycl::Matrix::max()'],['../classpysycl_1_1_vector.html#acbffdc808b77f2d56d0d7c557aba570c',1,'pysycl::Vector::max()']]],
-  ['mem_5fto_5fcpu_150',['mem_to_cpu',['../classpysycl_1_1_matrix.html#a31b17be6ac1e739ffa6cba037e7ff9a1',1,'pysycl::Matrix::mem_to_cpu()'],['../classpysycl_1_1_vector.html#acd760d2c6b553117c848b46ac8611476',1,'pysycl::Vector::mem_to_cpu()']]],
-  ['mem_5fto_5fgpu_151',['mem_to_gpu',['../classpysycl_1_1_matrix.html#ae9177d507ca40cde0d3de202858e0cc2',1,'pysycl::Matrix::mem_to_gpu()'],['../classpysycl_1_1_vector.html#af0192f10cb80b28416be5ebda3d6c0fe',1,'pysycl::Vector::mem_to_gpu()']]],
-  ['min_152',['min',['../classpysycl_1_1_matrix.html#ab631e4be691e812b984e49fca66023e5',1,'pysycl::Matrix::min()'],['../classpysycl_1_1_vector.html#aba2f9a4c243dd2e930a768a46e1b0a2e',1,'pysycl::Vector::min()']]]
+  ['get_5fdevice_5fdata_5fptr_161',['get_device_data_ptr',['../classpysycl_1_1_matrix.html#a91d721db198f4af1dd0321c7def2eb6c',1,'pysycl::Matrix::get_device_data_ptr()'],['../classpysycl_1_1_vector.html#a96fdc87c3f15e9f674b6b2136e44b86b',1,'pysycl::Vector::get_device_data_ptr()']]],
+  ['get_5fdevice_5findex_162',['get_device_index',['../group___device.html#gaa3be9965ebad1b5ac3ed88ae17afff4f',1,'pysycl::Device_Instance::get_device_index()'],['../classpysycl_1_1_vector.html#a458d8d73962c5c50d5fcd3f22f364fc3',1,'pysycl::Vector::get_device_index()']]],
+  ['get_5fdevice_5flist_163',['get_device_list',['../group___device.html#ga05b8a8b68116eb84bc713b15cf291f90',1,'pysycl']]],
+  ['get_5fdevice_5fmanager_164',['get_device_manager',['../group___device.html#ga2dbc4682b0a02336ac52931b500eade2',1,'pysycl::Device_Manager']]],
+  ['get_5fhost_5fdata_5fvector_165',['get_host_data_vector',['../classpysycl_1_1_matrix.html#a4406eb696b32a8c6e0e0942bb9ad6ae8',1,'pysycl::Matrix::get_host_data_vector()'],['../classpysycl_1_1_vector.html#a92600ae7b97c02ecfa2bbf28a1f02ec4',1,'pysycl::Vector::get_host_data_vector()']]],
+  ['get_5flocal_5fdevice_166',['get_local_device',['../classpysycl_1_1_vector.html#a2c3393d1fd32d2d97d542e1cdaf8f66f',1,'pysycl::Vector']]],
+  ['get_5fmax_5fworkgroup_5fsize_167',['get_max_workgroup_size',['../group___device.html#gac5533c9e3e1f56b136b688ac2da24d76',1,'pysycl::Device_Instance']]],
+  ['get_5fplatform_5findex_168',['get_platform_index',['../group___device.html#ga7143e0873ae512f8ce3ebd6c3b325677',1,'pysycl::Device_Instance::get_platform_index()'],['../classpysycl_1_1_vector.html#a410c716a638c7e1452d90784369912cb',1,'pysycl::Vector::get_platform_index()']]],
+  ['get_5fqueue_169',['get_queue',['../group___device.html#ga7d3f4c66425950311bb8b0186ef0e021',1,'pysycl::Device_Instance']]],
+  ['get_5fsize_170',['get_size',['../classpysycl_1_1_vector.html#a339a3a5cdb4f360a3e3746fd872ad8e7',1,'pysycl::Vector']]]
 ];

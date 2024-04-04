@@ -48,5 +48,6 @@ var group___matrix =
       [ "Q", "classpysycl_1_1_matrix.html#a6d6cddfbb73514131489a96cd871a5b9", null ],
       [ "rows", "classpysycl_1_1_matrix.html#a3eaa7f142095c5f2f27418e277d0bd8e", null ]
     ] ],
+    [ "matrix_factories", "group___matrix.html#gab3f807177431e12809955c0fbf6bd56e", null ],
     [ "matrix_factories", "group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35", null ]
 ];

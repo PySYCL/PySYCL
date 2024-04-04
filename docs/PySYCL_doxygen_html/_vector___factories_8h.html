@@ -101,12 +101,14 @@ $(document).ready(function(){initNavTree('_vector___factories_8h.html',''); init
 
 <p>PySYCL Vector Factories.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;tuple&gt;</code><br />
-<code>#include &lt;variant&gt;</code><br />
-<code>#include &quot;<a class="el" href="_data___types_8h_source.html">../Data_Types/Data_Types.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_data___types_8h_source.html">../Data_Types/Data_Types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_device___instance_8h_source.html">../Device/Device_Instance.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_device___manager_8h_source.html">../Device/Device_Manager.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_vector___type_8h_source.html">Vector_Type.h</a>&quot;</code><br />
+<code>#include &lt;pybind11/numpy.h&gt;</code><br />
+<code>#include &lt;pybind11/pybind11.h&gt;</code><br />
+<code>#include &lt;tuple&gt;</code><br />
+<code>#include &lt;variant&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Vector_Factories.h:</div>
 <div class="dyncontent">
@@ -125,13 +127,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacepysycl"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepysycl.html">pysycl</a></td></tr>
-<tr class="memdesc:namespacepysycl"><td class="mdescLeft">&#160;</td><td class="mdescRight">General functionalities in PySYCL. <br /></td></tr>
+<tr class="memdesc:namespacepysycl"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions for Bit Manipulation in PySYCL. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a05f2a4e4fbca5e62cf8cf1d50741aee0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_vector___factories_8h.html#a05f2a4e4fbca5e62cf8cf1d50741aee0">Device_T</a> = <a class="el" href="classpysycl_1_1_device___instance.html">pysycl::Device_Instance</a></td></tr>
-<tr class="memdesc:a05f2a4e4fbca5e62cf8cf1d50741aee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">stl  <a href="_vector___factories_8h.html#a05f2a4e4fbca5e62cf8cf1d50741aee0">More...</a><br /></td></tr>
+<tr class="memdesc:a05f2a4e4fbca5e62cf8cf1d50741aee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">local  <a href="_vector___factories_8h.html#a05f2a4e4fbca5e62cf8cf1d50741aee0">More...</a><br /></td></tr>
 <tr class="separator:a05f2a4e4fbca5e62cf8cf1d50741aee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbf625ab9ba9668f28112e38647ab9fd"><td class="memItemLeft" align="right" valign="top"><a id="adbf625ab9ba9668f28112e38647ab9fd"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>Data_T</b> = <a class="el" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">pysycl::Data_Types</a></td></tr>
@@ -142,10 +144,13 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>pysycl::Vector_Varia
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga59dc765a02839da35ef53af68146c52f"><td class="memItemLeft" align="right" valign="top">
-Vector_Variants&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vector.html#ga59dc765a02839da35ef53af68146c52f">pysycl::vector_factories</a> (int dims, Device_Instance &amp;device, Data_Types &amp;dtype)</td></tr>
-<tr class="memdesc:ga59dc765a02839da35ef53af68146c52f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function factory for <a class="el" href="classpysycl_1_1_vector.html" title="Vector class for PySYCL.">Vector</a> Types. <br /></td></tr>
+<tr class="memitem:ga59dc765a02839da35ef53af68146c52f"><td class="memItemLeft" align="right" valign="top">Vector_Variants&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vector.html#ga59dc765a02839da35ef53af68146c52f">pysycl::vector_factories</a> (int dims, Device_Instance &amp;device, Data_Types &amp;dtype)</td></tr>
+<tr class="memdesc:ga59dc765a02839da35ef53af68146c52f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function factory for <a class="el" href="classpysycl_1_1_vector.html" title="Vector class for PySYCL.">Vector</a> Types.  <a href="group___vector.html#ga59dc765a02839da35ef53af68146c52f">More...</a><br /></td></tr>
 <tr class="separator:ga59dc765a02839da35ef53af68146c52f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36"><td class="memTemplParams" colspan="2">template&lt;typename Scalar_T &gt; </td></tr>
+<tr class="memitem:ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36"><td class="memTemplItemLeft" align="right" valign="top">Vector_Variants&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vector.html#ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36">pysycl::vector_factories</a> (py::array_t&lt; Scalar_T &gt; np_array, Device_Instance &amp;device, Data_Types &amp;dtype)</td></tr>
+<tr class="memdesc:ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function factory for <a class="el" href="classpysycl_1_1_vector.html" title="Vector class for PySYCL.">Vector</a> Types with input numpy array.  <a href="group___vector.html#ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36">More...</a><br /></td></tr>
+<tr class="separator:ga8ccbabbe2c5f3f60cc45d5dcb4bf5e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>PySYCL Vector Factories. </p>
@@ -164,10 +169,10 @@ Vector_Variants&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
       </table>
 </div><div class="memdoc">
 
-<p>stl </p>
 <p>local </p>
+<p>stl </p>
 
-<p class="definition">Definition at line <a class="el" href="_vector___factories_8h_source.html#l00037">37</a> of file <a class="el" href="_vector___factories_8h_source.html">Vector_Factories.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vector___factories_8h_source.html#l00043">43</a> of file <a class="el" href="_vector___factories_8h_source.html">Vector_Factories.h</a>.</p>
 
 </div>
 </div>
@@ -177,7 +182,7 @@ Vector_Variants&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d2653df67fea485f1bf2e407794c9984.html">Vector</a></li><li class="navelem"><a class="el" href="_vector___factories_8h.html">Vector_Factories.h</a></li>
-    <li class="footer">Generated on Thu Mar 28 2024 15:01:04 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 3 2024 21:47:24 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

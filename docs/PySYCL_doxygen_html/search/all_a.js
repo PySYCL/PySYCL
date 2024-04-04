@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['q_72',['Q',['../group___device.html#ga64f4163d091013ece5a2fc71c6adf691',1,'pysycl::Device_Instance::Q()'],['../classpysycl_1_1_matrix.html#a6d6cddfbb73514131489a96cd871a5b9',1,'pysycl::Matrix::Q()'],['../classpysycl_1_1_vector.html#a862b87014b5134f1cc4251dc74fbdc28',1,'pysycl::Vector::Q()']]]
+  ['pi_85',['PI',['../group___math.html#ga9baf1d5396e29136ea21b62fbf05b77e',1,'pysycl']]],
+  ['platform_5fidx_86',['platform_idx',['../group___device.html#gab9b208c263a41e33e44d9d5655b66579',1,'pysycl::Device_Instance']]],
+  ['pysycl_87',['pysycl',['../namespacepysycl.html',1,'']]]
 ];

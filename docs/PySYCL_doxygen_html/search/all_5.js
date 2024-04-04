@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['linear_5falgebra_5fpython_5fmodule_2ecpp_40',['Linear_Algebra_Python_Module.cpp',['../_linear___algebra___python___module_8cpp.html',1,'']]]
+  ['is_5fpower_5fof_5ftwo_52',['is_power_of_two',['../namespacepysycl.html#ad9f1437fc6f1dad511b3f6f5bb2a757d',1,'pysycl']]]
 ];

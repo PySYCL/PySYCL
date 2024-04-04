@@ -1,4 +1,9 @@
 var searchData=
 [
-  ['fill_133',['fill',['../classpysycl_1_1_matrix.html#ac5594045eeb1341afbf84d3ff0942019',1,'pysycl::Matrix::fill()'],['../classpysycl_1_1_vector.html#a5a58a792f4ad66fd8126ba2f3629f7d0',1,'pysycl::Vector::fill()']]]
+  ['dev_152',['dev',['../classpysycl_1_1_matrix.html#a395facdeef1a0cd6a7772e1cf044d00c',1,'pysycl::Matrix::dev()'],['../classpysycl_1_1_vector.html#ad26d9f50f4e049b67064a235a4364110',1,'pysycl::Vector::dev()']]],
+  ['device_5finquiry_5fmodule_153',['device_inquiry_module',['../_device___inquiry___python___module_8h.html#a7f0a529b52249231aefc70c1cb81e232',1,'Device_Inquiry_Python_Module.h']]],
+  ['device_5finstance_154',['Device_Instance',['../group___device.html#gaaff26c4d0d7b11fbb38cc256e3949ec4',1,'pysycl::Device_Instance::Device_Instance(const Device_Instance &amp;)=default'],['../group___device.html#ga0bd9318e415a494c69a2fd57ce20cc28',1,'pysycl::Device_Instance::Device_Instance(Device_Instance &amp;&amp;)=default'],['../group___device.html#ga1d65787fdbb9917999035f48e375f0c9',1,'pysycl::Device_Instance::Device_Instance(int platform_idx_in=0, int device_idx_in=0)']]],
+  ['device_5finstance_5fmodule_155',['device_instance_module',['../_device___instance___python___module_8h.html#aa17e1e7d3f713714e065f7c9b22d7ebb',1,'Device_Instance_Python_Module.h']]],
+  ['device_5fmanager_156',['Device_Manager',['../group___device.html#ga12b90568c3dc6de58d411ef163f57f3e',1,'pysycl::Device_Manager::Device_Manager(const Device_Manager &amp;)=delete'],['../group___device.html#gad47bdf464d643ba3ff38f4d59c7e056a',1,'pysycl::Device_Manager::Device_Manager()=default']]],
+  ['device_5fmanager_5fmodule_157',['device_manager_module',['../_device___manager___python___module_8h.html#aa42e993eeaa7fb39ef0b34b72be1360d',1,'Device_Manager_Python_Module.h']]]
 ];

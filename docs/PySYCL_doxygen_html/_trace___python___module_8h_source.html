@@ -179,14 +179,17 @@ $(document).ready(function(){initNavTree('_trace___python___module_8h_source.htm
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  m.def(<span class="stringliteral">&quot;trace&quot;</span>, &amp;pysycl::trace&lt;Matrix_T&gt;,</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        py::arg(<span class="stringliteral">&quot;A&quot;</span>));</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">void</span> trace_module(py::module &amp;m) {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  trace_module_double&lt;double&gt;(m);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  trace_module_float&lt;float&gt;(m);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  trace_module_int&lt;int&gt;(m);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// TRACE_PYTHON_MODULE_H</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"></span><span class="comment">// Binding all scalar variants of the trace function</span><span class="comment"></span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"></span><span class="keywordtype">void</span> trace_module(py::module &amp;m) {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  trace_module_double&lt;double&gt;(m);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  trace_module_float&lt;float&gt;(m);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  trace_module_int&lt;int&gt;(m);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// TRACE_PYTHON_MODULE_H</span></div>
 <div class="ttc" id="a_trace_8h_html"><div class="ttname"><a href="_trace_8h.html">Trace.h</a></div><div class="ttdoc">Trace in PySYCL.</div></div>
 <div class="ttc" id="a_trace___python___module_8h_html_aa77fd16d8780c1117237d72ad1aa03fe"><div class="ttname"><a href="_trace___python___module_8h.html#aa77fd16d8780c1117237d72ad1aa03fe">trace_module_double</a></div><div class="ttdeci">void trace_module_double(py::module &amp;m)</div><div class="ttdoc">General functionalities in PySYCL.</div><div class="ttdef"><b>Definition:</b> <a href="_trace___python___module_8h_source.html#l00041">Trace_Python_Module.h:41</a></div></div>
 <div class="ttc" id="aclasspysycl_1_1_matrix_html"><div class="ttname"><a href="classpysycl_1_1_matrix.html">pysycl::Matrix</a></div><div class="ttdoc">Matrix class for PySYCL.</div><div class="ttdef"><b>Definition:</b> <a href="_matrix___type_8h_source.html#l00054">Matrix_Type.h:54</a></div></div>
@@ -196,7 +199,7 @@ $(document).ready(function(){initNavTree('_trace___python___module_8h_source.htm
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_dafe2725f7a087e9364cfe7fbd37f564.html">General</a></li><li class="navelem"><a class="el" href="_trace___python___module_8h.html">Trace_Python_Module.h</a></li>
-    <li class="footer">Generated on Thu Mar 28 2024 15:01:04 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 3 2024 21:47:24 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
