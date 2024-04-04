@@ -260,7 +260,7 @@ public:
   ///////////////////////////////////////////////////////////////////////
   /// \brief Get a reference to the SYCL queue.
   /// \return Reference to the SYCL queue.
-  auto& dev() { return device; }
+  auto &dev() { return device; }
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief Get the number of rows in the Matrix.
@@ -285,13 +285,15 @@ public:
   ///////////////////////////////////////////////////////////////////////
   /// \brief Copy memory from the CPU to the GPU.
   void mem_to_gpu() {
-    Q.memcpy(data_device, data_host.data(), rows * cols * sizeof(Scalar_T)).wait();
+    Q.memcpy(data_device, data_host.data(), rows * cols * sizeof(Scalar_T))
+        .wait();
   }
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief Copy memory from the GPU to the CPU
   void mem_to_cpu() {
-    Q.memcpy(data_host.data(), data_device, rows * cols * sizeof(Scalar_T)).wait();
+    Q.memcpy(data_host.data(), data_device, rows * cols * sizeof(Scalar_T))
+        .wait();
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -352,12 +354,12 @@ public:
     rows = cols_old;
     cols = rows_old;
 
-    Scalar_T* old_data = sycl::malloc_device<Scalar_T>(rows_old * cols_old, Q);
+    Scalar_T *old_data = sycl::malloc_device<Scalar_T>(rows_old * cols_old, Q);
 
     auto setup = Q.submit([&](sycl::handler &h) {
       auto data_device_ptr = data_device;
 
-      h.parallel_for(sycl::range<2>(rows_old, cols_old), [=](sycl::id<2> idx){
+      h.parallel_for(sycl::range<2>(rows_old, cols_old), [=](sycl::id<2> idx) {
         const int i = idx[0];
         const int j = idx[1];
 
@@ -366,17 +368,17 @@ public:
     });
 
     Q.submit([&](sycl::handler &h) {
-      auto data_device_ptr = data_device;
+       auto data_device_ptr = data_device;
 
-      h.depends_on(setup);
+       h.depends_on(setup);
 
-      h.parallel_for(sycl::range<2>(rows_old, cols_old), [=](sycl::id<2> idx){
-        const int i = idx[0];
-        const int j = idx[1];
+       h.parallel_for(sycl::range<2>(rows_old, cols_old), [=](sycl::id<2> idx) {
+         const int i = idx[0];
+         const int j = idx[1];
 
-        data_device_ptr[j * rows_old + i] = old_data[i * cols_old + j];
-      });
-    }).wait();
+         data_device_ptr[j * rows_old + i] = old_data[i * cols_old + j];
+       });
+     }).wait();
 
     sycl::free(old_data, Q);
   }
@@ -497,7 +499,7 @@ private:
 
                         el.combine(data_device_ptr[idx]);
                       });
-    }).wait();
+     }).wait();
 
     sycl::host_accessor val_host{buf, sycl::read_only};
     val = val_host[0];

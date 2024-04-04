@@ -42,20 +42,19 @@ using Data_T = pysycl::Data_Types;
 /// @{
 namespace pysycl {
 
-using Matrix_Variants = std::variant<Matrix<double>,
-                                     Matrix<float>,
-                                     Matrix<int>>;
+using Matrix_Variants =
+    std::variant<Matrix<double>, Matrix<float>, Matrix<int>>;
 
 ///////////////////////////////////////////////////////////////////////
 /// \brief Function specialization for Matrix.
 /// \param[in] dims The dimension of the matrix.
 /// \param[in] device_in The target sycl device.
 /// \param[in] dtype The data type of the matrix.
-Matrix_Variants
-matrix_factories(std::tuple<int, int> dims, Device_Instance &device, Data_Types& dtype) {
-  if(dtype == Data_Types::DOUBLE) {
+Matrix_Variants matrix_factories(std::tuple<int, int> dims,
+                                 Device_Instance &device, Data_Types &dtype) {
+  if (dtype == Data_Types::DOUBLE) {
     return Matrix<double>(std::get<0>(dims), std::get<1>(dims), device);
-  } else if(dtype == Data_Types::FLOAT) {
+  } else if (dtype == Data_Types::FLOAT) {
     return Matrix<float>(std::get<0>(dims), std::get<1>(dims), device);
   } else if (dtype == Data_Types::INT) {
     return Matrix<int>(std::get<0>(dims), std::get<1>(dims), device);
@@ -69,14 +68,12 @@ matrix_factories(std::tuple<int, int> dims, Device_Instance &device, Data_Types&
 /// \param[in] np_array The input numpy array.
 /// \param[in] device The target sycl device.
 /// \param[in] dtype The data type of the vector.
-template<typename Scalar_T>
-Matrix_Variants
-matrix_factories(py::array_t<Scalar_T> np_array,
-                 Device_Instance &device,
-                 Data_Types& dtype) {
-  if(dtype == Data_Types::DOUBLE) {
+template <typename Scalar_T>
+Matrix_Variants matrix_factories(py::array_t<Scalar_T> np_array,
+                                 Device_Instance &device, Data_Types &dtype) {
+  if (dtype == Data_Types::DOUBLE) {
     return Matrix<double>(np_array, device);
-  } else if(dtype == Data_Types::FLOAT) {
+  } else if (dtype == Data_Types::FLOAT) {
     return Matrix<float>(np_array, device);
   } else if (dtype == Data_Types::INT) {
     return Matrix<int>(np_array, device);

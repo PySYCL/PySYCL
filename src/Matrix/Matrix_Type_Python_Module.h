@@ -204,16 +204,15 @@ void matrix_type_float_module(py::module &m) {
     Description
       This class creates a PySYCL type float matrix.
     )delim")
-      .def(py::init<int, int, pysycl::Device_Instance &>(),
-           py::arg("rows"), py::arg("cols"), py::arg("device"))
+      .def(py::init<int, int, pysycl::Device_Instance &>(), py::arg("rows"),
+           py::arg("cols"), py::arg("device"))
       .def(py::init<py::array_t<Scalar_T>, pysycl::Device_Instance &>(),
            py::arg("np_arr"), py::arg("device"))
       .def("num_rows", &Matrix_T::num_rows)
       .def("num_cols", &Matrix_T::num_cols)
-      .def("fill", &Matrix_T::fill,
-           py::arg("C"))
+      .def("fill", &Matrix_T::fill, py::arg("C"))
       .def("mem_to_gpu", &Matrix_T::mem_to_gpu)
-      .def("mem_to_cpu", &Matrix_T::mem_to_cpu )
+      .def("mem_to_cpu", &Matrix_T::mem_to_cpu)
       .def("max", &Matrix_T::max)
       .def("min", &Matrix_T::min)
       .def("sum", &Matrix_T::sum)
@@ -247,16 +246,15 @@ void matrix_type_int_module(py::module &m) {
     Description
       This class creates a PySYCL type float matrix.
     )delim")
-      .def(py::init<int, int, pysycl::Device_Instance &>(),
-           py::arg("rows"), py::arg("cols"), py::arg("device"))
+      .def(py::init<int, int, pysycl::Device_Instance &>(), py::arg("rows"),
+           py::arg("cols"), py::arg("device"))
       .def(py::init<py::array_t<Scalar_T>, pysycl::Device_Instance &>(),
            py::arg("np_arr"), py::arg("device"))
       .def("num_rows", &Matrix_T::num_rows)
       .def("num_cols", &Matrix_T::num_cols)
-      .def("fill", &Matrix_T::fill,
-           py::arg("C"))
+      .def("fill", &Matrix_T::fill, py::arg("C"))
       .def("mem_to_gpu", &Matrix_T::mem_to_gpu)
-      .def("mem_to_cpu", &Matrix_T::mem_to_cpu )
+      .def("mem_to_cpu", &Matrix_T::mem_to_cpu)
       .def("max", &Matrix_T::max)
       .def("min", &Matrix_T::min)
       .def("sum", &Matrix_T::sum)

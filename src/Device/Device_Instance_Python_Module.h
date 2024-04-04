@@ -65,18 +65,24 @@ void device_instance_module(py::module &m) {
         >>> print(my_device.vendor())
         NVIDIA Corporation
       )delim")
-      .def("__eq__", [](const pysycl::Device_Instance& di1,
-                        const pysycl::Device_Instance& di2){return di1 == di2;})
-      .def("__ne__", [](const pysycl::Device_Instance& di1,
-                        const pysycl::Device_Instance& di2){return di1 != di2;})
-      .def("__lt__", [](const pysycl::Device_Instance& di1,
-                        const pysycl::Device_Instance& di2){return di1 < di2;})
-      .def("__le__", [](const pysycl::Device_Instance& di1,
-                        const pysycl::Device_Instance& di2){return di1 <= di2;})
-      .def("__gt__", [](const pysycl::Device_Instance& di1,
-                        const pysycl::Device_Instance& di2){return di1 > di2;})
-      .def("__ge__", [](const pysycl::Device_Instance& di1,
-                        const pysycl::Device_Instance& di2){return di1 >= di2;});
+      .def("__eq__",
+           [](const pysycl::Device_Instance &di1,
+              const pysycl::Device_Instance &di2) { return di1 == di2; })
+      .def("__ne__",
+           [](const pysycl::Device_Instance &di1,
+              const pysycl::Device_Instance &di2) { return di1 != di2; })
+      .def("__lt__",
+           [](const pysycl::Device_Instance &di1,
+              const pysycl::Device_Instance &di2) { return di1 < di2; })
+      .def("__le__",
+           [](const pysycl::Device_Instance &di1,
+              const pysycl::Device_Instance &di2) { return di1 <= di2; })
+      .def("__gt__",
+           [](const pysycl::Device_Instance &di1,
+              const pysycl::Device_Instance &di2) { return di1 > di2; })
+      .def("__ge__",
+           [](const pysycl::Device_Instance &di1,
+              const pysycl::Device_Instance &di2) { return di1 >= di2; });
 }
 
 #endif // DEVICE_INSTANCE_PYTHON_MODULE_H

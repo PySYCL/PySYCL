@@ -37,8 +37,7 @@ namespace py = pybind11;
 ///////////////////////////////////////////////////////////////////////
 // Trace function double
 ///////////////////////////////////////////////////////////////////////
-template<typename Scalar_T>
-void trace_module_double(py::module &m) {
+template <typename Scalar_T> void trace_module_double(py::module &m) {
   using Matrix_T = pysycl::Matrix<Scalar_T>;
   m.def("trace", &pysycl::trace<Matrix_T>, R"delim(
     Description
@@ -67,21 +66,17 @@ void trace_module_double(py::module &m) {
 ///////////////////////////////////////////////////////////////////////
 // Trace function float
 ///////////////////////////////////////////////////////////////////////
-template<typename Scalar_T>
-void trace_module_float(py::module &m) {
+template <typename Scalar_T> void trace_module_float(py::module &m) {
   using Matrix_T = pysycl::Matrix<Scalar_T>;
-  m.def("trace", &pysycl::trace<Matrix_T>,
-        py::arg("A"));
+  m.def("trace", &pysycl::trace<Matrix_T>, py::arg("A"));
 }
 
 ///////////////////////////////////////////////////////////////////////
 // Trace function int
 ///////////////////////////////////////////////////////////////////////
-template<typename Scalar_T>
-void trace_module_int(py::module &m) {
+template <typename Scalar_T> void trace_module_int(py::module &m) {
   using Matrix_T = pysycl::Matrix<Scalar_T>;
-  m.def("trace", &pysycl::trace<Matrix_T>,
-        py::arg("A"));
+  m.def("trace", &pysycl::trace<Matrix_T>, py::arg("A"));
 }
 
 ///////////////////////////////////////////////////////////////////////

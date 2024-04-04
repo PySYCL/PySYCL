@@ -23,8 +23,8 @@
 ///////////////////////////////////////////////////////////////////////
 // pybind11
 ///////////////////////////////////////////////////////////////////////
-#include <pybind11/pybind11.h>
 #include <pybind11/numpy.h>
+#include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
 ///////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ void fft1d_module_double(py::module &m) {
       >>> import pysycl
       >>> A_np = np.random.rand(N).astype(np.float64)
       >>> A_pysycl = pysycl.vector(A_np, device = device, dtype= pysycl.double)
-      >>> fft = pysycl.fft1d(A_pysycl)
+      >>> A_pysycl_fft = pysycl.fft.fft1d(A_pysycl)
   )delim",
         py::arg("A"));
 }
@@ -62,8 +62,7 @@ void fft1d_module_double(py::module &m) {
 ///////////////////////////////////////////////////////////////////////
 void fft1d_module_float(py::module &m) {
   using Vector_T = pysycl::Vector<float>;
-  m.def("fft1d", &pysycl::fft1d<Vector_T>,
-        py::arg("A"));
+  m.def("fft1d", &pysycl::fft1d<Vector_T>, py::arg("A"));
 }
 
 ///////////////////////////////////////////////////////////////////////

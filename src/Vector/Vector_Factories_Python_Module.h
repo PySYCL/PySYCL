@@ -41,25 +41,24 @@ using Data_T = pysycl::Data_Types;
 // Vector Factories function
 ///////////////////////////////////////////////////////////////////////
 void vector_factories_module(py::module &m) {
-  m.def("vector", [](int dims, Device_T& device, Data_T& dtype) {
-    return pysycl::vector_factories(dims, device, dtype);
-  }, py::arg("dims"),
-     py::arg("device"),
-     py::arg("dtype"));
+  m.def(
+      "vector",
+      [](int dims, Device_T &device, Data_T &dtype) {
+        return pysycl::vector_factories(dims, device, dtype);
+      },
+      py::arg("dims"), py::arg("device"), py::arg("dtype"));
 }
 
 ///////////////////////////////////////////////////////////////////////
 // Vector Factories function with input numpt array
 ///////////////////////////////////////////////////////////////////////
-template<typename Scalar_T>
-void vector_factories_numpy_module(py::module &m) {
-  m.def("vector", [](py::array_t<Scalar_T> np_array,
-                     Device_T& device,
-                     Data_T& dtype) {
-    return pysycl::vector_factories(np_array, device, dtype);
-  }, py::arg("np_array"),
-     py::arg("device"),
-     py::arg("dtype"));
+template <typename Scalar_T> void vector_factories_numpy_module(py::module &m) {
+  m.def(
+      "vector",
+      [](py::array_t<Scalar_T> np_array, Device_T &device, Data_T &dtype) {
+        return pysycl::vector_factories(np_array, device, dtype);
+      },
+      py::arg("np_array"), py::arg("device"), py::arg("dtype"));
 }
 
 #endif // VECTOR_FACTORIES_PYTHON_MODULE_H

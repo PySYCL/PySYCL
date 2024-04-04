@@ -83,8 +83,8 @@ void matmul_module_double(py::module &m) {
 ///////////////////////////////////////////////////////////////////////
 void matmul_module_float(py::module &m) {
   using Matrix_T = pysycl::Matrix<float>;
-  m.def("matmul", &pysycl::matmul<Matrix_T>,
-        py::arg("A"), py::arg("B"), py::arg("C"), py::arg("wg_size"));
+  m.def("matmul", &pysycl::matmul<Matrix_T>, py::arg("A"), py::arg("B"),
+        py::arg("C"), py::arg("wg_size"));
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -92,8 +92,8 @@ void matmul_module_float(py::module &m) {
 ///////////////////////////////////////////////////////////////////////
 void matmul_module_int(py::module &m) {
   using Matrix_T = pysycl::Matrix<int>;
-  m.def("matmul", &pysycl::matmul<Matrix_T>,
-        py::arg("A"), py::arg("B"), py::arg("C"), py::arg("wg_size"));
+  m.def("matmul", &pysycl::matmul<Matrix_T>, py::arg("A"), py::arg("B"),
+        py::arg("C"), py::arg("wg_size"));
 }
 
 ///////////////////////////////////////////////////////////////////////
