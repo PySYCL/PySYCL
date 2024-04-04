@@ -55,14 +55,14 @@ bool is_power_of_two(int N) {
 }
 
 ///////////////////////////////////////////////////////////////////////
-/// \brief 1-dimensional fast fourier transform function kernel.
+/// \brief 1-dimensional fast fourier transform (cooley-turkey) kernel.
 /// This implementation adapts the CUDA FFT approach discussed in
 /// the GitHub repository: [roguh/cuda-fft](https://github.com/roguh/cuda-fft).
 /// \param[in] A The input vector for fft.
 /// \param[in] result The result vector for fft.
 /// \param[in] Q The sycl queue.
 template <typename Input_T, typename Output_T, typename Int_T>
-auto cooley_turkey(Input_T *data, Output_T *result_device, Int_T N, Int_T logn,
+auto cooley_turkey_kernel(Input_T *data, Output_T *result_device, Int_T N, Int_T logn,
                    Int_T wg_size, sycl::queue Q) {
   Q.submit([&](sycl::handler &h) {
      const size_t global_size = ((N / 2 + wg_size - 1) / wg_size) * wg_size;
@@ -113,7 +113,7 @@ auto cooley_turkey(Input_T *data, Output_T *result_device, Int_T N, Int_T logn,
 /// the GitHub repository: [roguh/cuda-fft](https://github.com/roguh/cuda-fft).
 /// \param[in] A The input vector for fft.
 /// \return The result of the fft
-template <typename Vector_type> auto cooley_turkey_algorithm(Vector_type &A) {
+template <typename Vector_type> auto cooley_turkey(Vector_type &A) {
   using Scalar_T = typename Vector_type::Scalar_T;
   using Int_T = uint32_t;
 
@@ -130,7 +130,7 @@ template <typename Vector_type> auto cooley_turkey_algorithm(Vector_type &A) {
   Scalar_T *data = A.get_device_data_ptr();
   sycl::queue &Q = A.dev().get_queue();
 
-  cooley_turkey(data, result_device, N, logn, wg_size, Q);
+  cooley_turkey_kernel(data, result_device, N, logn, wg_size, Q);
 
   A.dev()
       .get_queue()
@@ -202,8 +202,8 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
    }).wait();
 
   const Int_T logm = std::log2(M);
-  cooley_turkey(a_n, a_n_star, M, logm, wg_size, Q);
-  cooley_turkey(b_n, b_n_star, M, logm, wg_size, Q);
+  cooley_turkey_kernel(a_n, a_n_star, M, logm, wg_size, Q);
+  cooley_turkey_kernel(b_n, b_n_star, M, logm, wg_size, Q);
 
   Q.submit([&](sycl::handler &h) {
      const size_t global_size = ((M + wg_size - 1) / wg_size) * wg_size;
@@ -236,7 +236,7 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
      });
    }).wait();
 
-  cooley_turkey(a_n, a_n_star, M, logm, wg_size, Q);
+  cooley_turkey_kernel(a_n, a_n_star, M, logm, wg_size, Q);
 
   Q.submit([&](sycl::handler &h) {
      const size_t global_size = ((M + wg_size - 1) / wg_size) * wg_size;
@@ -248,7 +248,6 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
        const Int_T i = it.get_global_id(0);
 
        a_n[i] = conj(a_n_star[i]) / static_cast<Scalar_T>(M);
-       ;
      });
    }).wait();
 
@@ -288,7 +287,7 @@ template <typename Vector_type> auto fft1d(Vector_type &A) {
   const auto N = A.get_size();
 
   if (is_power_of_two(N))
-    return cooley_turkey_algorithm(A);
+    return cooley_turkey(A);
   else
     return chirpz(A);
 }
