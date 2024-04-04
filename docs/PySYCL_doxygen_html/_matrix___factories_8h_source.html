@@ -138,59 +138,56 @@ $(document).ready(function(){initNavTree('_matrix___factories_8h_source.html',''
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">/// @{</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"></span><span class="keyword">namespace </span><a class="code" href="namespacepysycl.html">pysycl</a> {</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">using</span> Matrix_Variants = std::variant&lt;Matrix&lt;double&gt;,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                                     Matrix&lt;float&gt;,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                     Matrix&lt;int&gt;&gt;;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/// \brief Function specialization for Matrix.</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/// \param[in] dims The dimension of the matrix.</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/// \param[in] device_in The target sycl device.</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/// \param[in] dtype The data type of the matrix.</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span>Matrix_Variants</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">   55</a></span>&#160;<a class="code" href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">matrix_factories</a>(std::tuple&lt;int, int&gt; dims, <a class="code" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;device, <a class="code" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">Data_Types</a>&amp; dtype) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordflow">if</span>(dtype == Data_Types::DOUBLE) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;double&gt;</a>(std::get&lt;0&gt;(dims), std::get&lt;1&gt;(dims), device);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(dtype == Data_Types::FLOAT) {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;float&gt;</a>(std::get&lt;0&gt;(dims), std::get&lt;1&gt;(dims), device);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dtype == Data_Types::INT) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;int&gt;</a>(std::get&lt;0&gt;(dims), std::get&lt;1&gt;(dims), device);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;ERROR IN MATRIX: Unsupported datatype.&quot;</span>);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/// \brief Function factory for Matrix Types with input numpy array.</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">/// \param[in] np_array The input numpy array.</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/// \param[in] device The target sycl device.</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/// \param[in] dtype The data type of the vector.</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scalar_T&gt;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;Matrix_Variants</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="group___matrix.html#gab3f807177431e12809955c0fbf6bd56e">   74</a></span>&#160;<a class="code" href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">matrix_factories</a>(py::array_t&lt;Scalar_T&gt; np_array,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                 <a class="code" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;device,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                 <a class="code" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">Data_Types</a>&amp; dtype) {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordflow">if</span>(dtype == Data_Types::DOUBLE) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;double&gt;</a>(np_array, device);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(dtype == Data_Types::FLOAT) {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;float&gt;</a>(np_array, device);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dtype == Data_Types::INT) {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;int&gt;</a>(np_array, device);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;ERROR IN MATRIX: Unsupported data type.&quot;</span>);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">/// @} // end &quot;Matrix&quot; doxygen group</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;} <span class="comment">// namespace pysycl</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MATRIX_FACTORIES_H</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">using</span> Matrix_Variants =</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    std::variant&lt;Matrix&lt;double&gt;, Matrix&lt;float&gt;, Matrix&lt;int&gt;&gt;;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/// \brief Function specialization for Matrix.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/// \param[in] dims The dimension of the matrix.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/// \param[in] device_in The target sycl device.</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/// \param[in] dtype The data type of the matrix.</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">   53</a></span>&#160;<span class="comment"></span>Matrix_Variants <a class="code" href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">matrix_factories</a>(std::tuple&lt;int, int&gt; dims,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                 <a class="code" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;device, <a class="code" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">Data_Types</a> &amp;dtype) {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordflow">if</span> (dtype == Data_Types::DOUBLE) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;double&gt;</a>(std::get&lt;0&gt;(dims), std::get&lt;1&gt;(dims), device);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dtype == Data_Types::FLOAT) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;float&gt;</a>(std::get&lt;0&gt;(dims), std::get&lt;1&gt;(dims), device);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dtype == Data_Types::INT) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;int&gt;</a>(std::get&lt;0&gt;(dims), std::get&lt;1&gt;(dims), device);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;ERROR IN MATRIX: Unsupported datatype.&quot;</span>);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">/// \brief Function factory for Matrix Types with input numpy array.</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/// \param[in] np_array The input numpy array.</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">/// \param[in] device The target sycl device.</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/// \param[in] dtype The data type of the vector.</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Scalar_T&gt;</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="group___matrix.html#gab3f807177431e12809955c0fbf6bd56e">   72</a></span>&#160;Matrix_Variants <a class="code" href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">matrix_factories</a>(py::array_t&lt;Scalar_T&gt; np_array,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                                 <a class="code" href="classpysycl_1_1_device___instance.html">Device_Instance</a> &amp;device, <a class="code" href="group___data.html#gadd3366a2a7918736064f09238c4b2838">Data_Types</a> &amp;dtype) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordflow">if</span> (dtype == Data_Types::DOUBLE) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;double&gt;</a>(np_array, device);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dtype == Data_Types::FLOAT) {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;float&gt;</a>(np_array, device);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dtype == Data_Types::INT) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpysycl_1_1_matrix.html">Matrix&lt;int&gt;</a>(np_array, device);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;ERROR IN MATRIX: Unsupported data type.&quot;</span>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">/// @} // end &quot;Matrix&quot; doxygen group</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;} <span class="comment">// namespace pysycl</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MATRIX_FACTORIES_H</span></div>
 <div class="ttc" id="a_matrix___type_8h_html"><div class="ttname"><a href="_matrix___type_8h.html">Matrix_Type.h</a></div><div class="ttdoc">Matrix Type Object in PySYCL.</div></div>
 <div class="ttc" id="aclasspysycl_1_1_device___instance_html"><div class="ttname"><a href="classpysycl_1_1_device___instance.html">pysycl::Device_Instance</a></div><div class="ttdoc">Class representing a device instance.</div><div class="ttdef"><b>Definition:</b> <a href="_device___instance_8h_source.html#l00036">Device_Instance.h:36</a></div></div>
 <div class="ttc" id="aclasspysycl_1_1_matrix_html"><div class="ttname"><a href="classpysycl_1_1_matrix.html">pysycl::Matrix</a></div><div class="ttdoc">Matrix class for PySYCL.</div><div class="ttdef"><b>Definition:</b> <a href="_matrix___type_8h_source.html#l00054">Matrix_Type.h:54</a></div></div>
 <div class="ttc" id="agroup___data_html_gadd3366a2a7918736064f09238c4b2838"><div class="ttname"><a href="group___data.html#gadd3366a2a7918736064f09238c4b2838">pysycl::Data_Types</a></div><div class="ttdeci">Data_Types</div><div class="ttdoc">Data types.</div><div class="ttdef"><b>Definition:</b> <a href="_data___types_8h_source.html#l00030">Data_Types.h:30</a></div></div>
-<div class="ttc" id="agroup___matrix_html_ga82ef1d9821c0cbe1f7b0138417e8fc35"><div class="ttname"><a href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">pysycl::matrix_factories</a></div><div class="ttdeci">Matrix_Variants matrix_factories(std::tuple&lt; int, int &gt; dims, Device_Instance &amp;device, Data_Types &amp;dtype)</div><div class="ttdoc">Function specialization for Matrix.</div><div class="ttdef"><b>Definition:</b> <a href="_matrix___factories_8h_source.html#l00055">Matrix_Factories.h:55</a></div></div>
+<div class="ttc" id="agroup___matrix_html_ga82ef1d9821c0cbe1f7b0138417e8fc35"><div class="ttname"><a href="group___matrix.html#ga82ef1d9821c0cbe1f7b0138417e8fc35">pysycl::matrix_factories</a></div><div class="ttdeci">Matrix_Variants matrix_factories(std::tuple&lt; int, int &gt; dims, Device_Instance &amp;device, Data_Types &amp;dtype)</div><div class="ttdoc">Function specialization for Matrix.</div><div class="ttdef"><b>Definition:</b> <a href="_matrix___factories_8h_source.html#l00053">Matrix_Factories.h:53</a></div></div>
 <div class="ttc" id="anamespacepysycl_html"><div class="ttname"><a href="namespacepysycl.html">pysycl</a></div><div class="ttdoc">Functions for Bit Manipulation in PySYCL.</div><div class="ttdef"><b>Definition:</b> <a href="_bit___manipulation___functions_8h_source.html#l00031">Bit_Manipulation_Functions.h:31</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -198,7 +195,7 @@ $(document).ready(function(){initNavTree('_matrix___factories_8h_source.html',''
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b16e19d0c4a2719fd01fb3b9035a19cd.html">Matrix</a></li><li class="navelem"><a class="el" href="_matrix___factories_8h.html">Matrix_Factories.h</a></li>
-    <li class="footer">Generated on Wed Apr 3 2024 21:58:10 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Apr 4 2024 07:08:53 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

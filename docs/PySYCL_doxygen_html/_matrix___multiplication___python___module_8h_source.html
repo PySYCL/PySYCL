@@ -179,8 +179,8 @@ $(document).ready(function(){initNavTree('_matrix___multiplication___python___mo
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"></span><span class="keywordtype">void</span> matmul_module_float(py::module &amp;m) {</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keyword">using</span> Matrix_T = <a class="code" href="classpysycl_1_1_matrix.html">pysycl::Matrix&lt;float&gt;</a>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  m.def(<span class="stringliteral">&quot;matmul&quot;</span>, &amp;pysycl::matmul&lt;Matrix_T&gt;,</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        py::arg(<span class="stringliteral">&quot;A&quot;</span>), py::arg(<span class="stringliteral">&quot;B&quot;</span>), py::arg(<span class="stringliteral">&quot;C&quot;</span>), py::arg(<span class="stringliteral">&quot;wg_size&quot;</span>));</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  m.def(<span class="stringliteral">&quot;matmul&quot;</span>, &amp;pysycl::matmul&lt;Matrix_T&gt;, py::arg(<span class="stringliteral">&quot;A&quot;</span>), py::arg(<span class="stringliteral">&quot;B&quot;</span>),</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        py::arg(<span class="stringliteral">&quot;C&quot;</span>), py::arg(<span class="stringliteral">&quot;wg_size&quot;</span>));</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
@@ -188,8 +188,8 @@ $(document).ready(function(){initNavTree('_matrix___multiplication___python___mo
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"></span><span class="keywordtype">void</span> matmul_module_int(py::module &amp;m) {</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keyword">using</span> Matrix_T = <a class="code" href="classpysycl_1_1_matrix.html">pysycl::Matrix&lt;int&gt;</a>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  m.def(<span class="stringliteral">&quot;matmul&quot;</span>, &amp;pysycl::matmul&lt;Matrix_T&gt;,</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        py::arg(<span class="stringliteral">&quot;A&quot;</span>), py::arg(<span class="stringliteral">&quot;B&quot;</span>), py::arg(<span class="stringliteral">&quot;C&quot;</span>), py::arg(<span class="stringliteral">&quot;wg_size&quot;</span>));</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  m.def(<span class="stringliteral">&quot;matmul&quot;</span>, &amp;pysycl::matmul&lt;Matrix_T&gt;, py::arg(<span class="stringliteral">&quot;A&quot;</span>), py::arg(<span class="stringliteral">&quot;B&quot;</span>),</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        py::arg(<span class="stringliteral">&quot;C&quot;</span>), py::arg(<span class="stringliteral">&quot;wg_size&quot;</span>));</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
@@ -211,7 +211,7 @@ $(document).ready(function(){initNavTree('_matrix___multiplication___python___mo
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_048d98b6635f6f7d0d13e92ba82f3b00.html">Linear_Algebra</a></li><li class="navelem"><a class="el" href="_matrix___multiplication___python___module_8h.html">Matrix_Multiplication_Python_Module.h</a></li>
-    <li class="footer">Generated on Wed Apr 3 2024 21:58:10 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Apr 4 2024 07:08:53 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

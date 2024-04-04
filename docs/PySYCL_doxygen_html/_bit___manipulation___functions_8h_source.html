@@ -129,53 +129,52 @@ $(document).ready(function(){initNavTree('_bit___manipulation___functions_8h_sou
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/// \brief Reverses the bits of the input number.</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/// \return The number with reversed bits.</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Int_T&gt;</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="namespacepysycl.html#a1d5f7328814b4771f90bc71cf63df73b">   37</a></span>&#160;Int_T <a class="code" href="namespacepysycl.html#a1d5f7328814b4771f90bc71cf63df73b">bit_reverse</a>(Int_T N) {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  Int_T N_r = 0;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">for</span>(Int_T i = 0; i &lt; <span class="keyword">sizeof</span>(N)*8; ++i) {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    N_r &lt;&lt;= 1;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    N_r |= (N &amp; 1);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    N &gt;&gt;= 1;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordflow">return</span> N_r;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/// \brief Finds the next power of 2 larger than N.</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/// \return Next power of 2.</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"></span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Int_T&gt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="namespacepysycl.html#a0c632b9d4c5f87821541f97325d6f857">   53</a></span>&#160;Int_T <a class="code" href="namespacepysycl.html#a0c632b9d4c5f87821541f97325d6f857">next_power_of_two</a>(Int_T N) {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordflow">if</span> (N &lt;= 0) <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  --N;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  N |= N &gt;&gt; 1;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  N |= N &gt;&gt; 2;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  N |= N &gt;&gt; 4;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  N |= N &gt;&gt; 8;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  N |= N &gt;&gt; 16;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  ++N;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordflow">return</span> N;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/// @} // end &quot;Bit_Manipulation&quot; doxygen group</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;} <span class="comment">// namespace pysycl</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// BIT_MANIPULATION_FUNCTIONS_H</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="namespacepysycl.html#a1d5f7328814b4771f90bc71cf63df73b">   36</a></span>&#160;<span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Int_T&gt; Int_T <a class="code" href="namespacepysycl.html#a1d5f7328814b4771f90bc71cf63df73b">bit_reverse</a>(Int_T N) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  Int_T N_r = 0;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordflow">for</span> (Int_T i = 0; i &lt; <span class="keyword">sizeof</span>(N) * 8; ++i) {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    N_r &lt;&lt;= 1;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    N_r |= (N &amp; 1);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    N &gt;&gt;= 1;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordflow">return</span> N_r;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/// \brief Finds the next power of 2 larger than N.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/// \return Next power of 2.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="namespacepysycl.html#a0c632b9d4c5f87821541f97325d6f857">   51</a></span>&#160;<span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Int_T&gt; Int_T <a class="code" href="namespacepysycl.html#a0c632b9d4c5f87821541f97325d6f857">next_power_of_two</a>(Int_T N) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordflow">if</span> (N &lt;= 0)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  --N;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  N |= N &gt;&gt; 1;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  N |= N &gt;&gt; 2;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  N |= N &gt;&gt; 4;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  N |= N &gt;&gt; 8;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  N |= N &gt;&gt; 16;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  ++N;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">return</span> N;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">/// @} // end &quot;Bit_Manipulation&quot; doxygen group</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;} <span class="comment">// namespace pysycl</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// BIT_MANIPULATION_FUNCTIONS_H</span></div>
 <div class="ttc" id="anamespacepysycl_html"><div class="ttname"><a href="namespacepysycl.html">pysycl</a></div><div class="ttdoc">Functions for Bit Manipulation in PySYCL.</div><div class="ttdef"><b>Definition:</b> <a href="_bit___manipulation___functions_8h_source.html#l00031">Bit_Manipulation_Functions.h:31</a></div></div>
-<div class="ttc" id="anamespacepysycl_html_a0c632b9d4c5f87821541f97325d6f857"><div class="ttname"><a href="namespacepysycl.html#a0c632b9d4c5f87821541f97325d6f857">pysycl::next_power_of_two</a></div><div class="ttdeci">Int_T next_power_of_two(Int_T N)</div><div class="ttdoc">Finds the next power of 2 larger than N.</div><div class="ttdef"><b>Definition:</b> <a href="_bit___manipulation___functions_8h_source.html#l00053">Bit_Manipulation_Functions.h:53</a></div></div>
-<div class="ttc" id="anamespacepysycl_html_a1d5f7328814b4771f90bc71cf63df73b"><div class="ttname"><a href="namespacepysycl.html#a1d5f7328814b4771f90bc71cf63df73b">pysycl::bit_reverse</a></div><div class="ttdeci">Int_T bit_reverse(Int_T N)</div><div class="ttdoc">Reverses the bits of the input number.</div><div class="ttdef"><b>Definition:</b> <a href="_bit___manipulation___functions_8h_source.html#l00037">Bit_Manipulation_Functions.h:37</a></div></div>
+<div class="ttc" id="anamespacepysycl_html_a0c632b9d4c5f87821541f97325d6f857"><div class="ttname"><a href="namespacepysycl.html#a0c632b9d4c5f87821541f97325d6f857">pysycl::next_power_of_two</a></div><div class="ttdeci">Int_T next_power_of_two(Int_T N)</div><div class="ttdoc">Finds the next power of 2 larger than N.</div><div class="ttdef"><b>Definition:</b> <a href="_bit___manipulation___functions_8h_source.html#l00051">Bit_Manipulation_Functions.h:51</a></div></div>
+<div class="ttc" id="anamespacepysycl_html_a1d5f7328814b4771f90bc71cf63df73b"><div class="ttname"><a href="namespacepysycl.html#a1d5f7328814b4771f90bc71cf63df73b">pysycl::bit_reverse</a></div><div class="ttdeci">Int_T bit_reverse(Int_T N)</div><div class="ttdoc">Reverses the bits of the input number.</div><div class="ttdef"><b>Definition:</b> <a href="_bit___manipulation___functions_8h_source.html#l00036">Bit_Manipulation_Functions.h:36</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_9275c86910715c36ba63291f66ce00ee.html">Bit_Manipulation</a></li><li class="navelem"><a class="el" href="_bit___manipulation___functions_8h.html">Bit_Manipulation_Functions.h</a></li>
-    <li class="footer">Generated on Wed Apr 3 2024 21:58:10 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Apr 4 2024 07:08:53 for PySYCL Dev Guide by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
