@@ -19,18 +19,24 @@
 ///////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////
-/// stl
-///////////////////////////////////////////////////////////////////////
-#include <tuple>
-#include <variant>
-
-///////////////////////////////////////////////////////////////////////
 /// local
 ///////////////////////////////////////////////////////////////////////
 #include "../Data_Types/Data_Types.h"
 #include "../Device/Device_Instance.h"
 #include "../Device/Device_Manager.h"
 #include "Vector_Type.h"
+
+///////////////////////////////////////////////////////////////////////
+// pybind11
+///////////////////////////////////////////////////////////////////////
+#include <pybind11/numpy.h>
+#include <pybind11/pybind11.h>
+
+///////////////////////////////////////////////////////////////////////
+/// stl
+///////////////////////////////////////////////////////////////////////
+#include <tuple>
+#include <variant>
 
 namespace py = pybind11;
 
@@ -48,6 +54,9 @@ using Vector_Variants = std::variant<Vector<double>,
 
 ///////////////////////////////////////////////////////////////////////
 /// \brief Function factory for Vector Types.
+/// \param[in] dims The dimension of the vector.
+/// \param[in] device_in The target sycl device.
+/// \param[in] dtype The data type of the vector.
 Vector_Variants
 vector_factories(int dims, Device_Instance &device, Data_Types& dtype) {
   if(dtype == Data_Types::DOUBLE) {
@@ -57,7 +66,28 @@ vector_factories(int dims, Device_Instance &device, Data_Types& dtype) {
   } else if (dtype == Data_Types::INT) {
     return Vector<int>(dims, device);
   } else {
-    throw std::runtime_error("ERROR IN VECTOR: Unsupported datatype.");
+    throw std::runtime_error("ERROR IN VECTOR: Unsupported data type.");
+  }
+}
+
+///////////////////////////////////////////////////////////////////////
+/// \brief Function factory for Vector Types with input numpy array.
+/// \param[in] np_array The input numpy array.
+/// \param[in] device The target sycl device.
+/// \param[in] dtype The data type of the vector.
+template<typename Scalar_T>
+Vector_Variants
+vector_factories(py::array_t<Scalar_T> np_array,
+                 Device_Instance &device,
+                 Data_Types& dtype) {
+  if(dtype == Data_Types::DOUBLE) {
+    return Vector<double>(np_array, device);
+  } else if(dtype == Data_Types::FLOAT) {
+    return Vector<float>(np_array, device);
+  } else if (dtype == Data_Types::INT) {
+    return Vector<int>(np_array, device);
+  } else {
+    throw std::runtime_error("ERROR IN VECTOR: Unsupported data type.");
   }
 }
 

@@ -93,6 +93,10 @@ public:
     cols = unchecked.shape(1);
     data_host.resize(rows * cols);
 
+    if (rows <= 0 || cols <= 0)
+      throw std::runtime_error(
+          "ERROR IN MATRIX: number of cols and rows must be > 0.");
+
     for (int i = 0; i < rows; ++i) {
       for (int j = 0; j < cols; ++j) {
         data_host[i * cols + j] = unchecked(i, j);
@@ -100,6 +104,7 @@ public:
     }
 
     data_device = sycl::malloc_device<Scalar_T>(rows * cols, Q);
+    mem_to_gpu();
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -280,13 +285,13 @@ public:
   ///////////////////////////////////////////////////////////////////////
   /// \brief Copy memory from the CPU to the GPU.
   void mem_to_gpu() {
-    Q.memcpy(data_device, &data_host[0], rows * cols * sizeof(Scalar_T)).wait();
+    Q.memcpy(data_device, data_host.data(), rows * cols * sizeof(Scalar_T)).wait();
   }
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief Copy memory from the GPU to the CPU
   void mem_to_cpu() {
-    Q.memcpy(&data_host[0], data_device, rows * cols * sizeof(Scalar_T)).wait();
+    Q.memcpy(data_host.data(), data_device, rows * cols * sizeof(Scalar_T)).wait();
   }
 
   ///////////////////////////////////////////////////////////////////////

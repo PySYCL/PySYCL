@@ -41,4 +41,7 @@ PYBIND11_MODULE(matrix, m) {
   matrix_type_float_module(m);
   matrix_type_int_module(m);
   matrix_factories_module(m);
+  matrix_factories_numpy_module<double>(m);
+  matrix_factories_numpy_module<float>(m);
+  matrix_factories_numpy_module<int>(m);
 }

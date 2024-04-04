@@ -1,5 +1,5 @@
-#ifndef MATRIX_FACTORIES_PYTHON_MODULE_H
-#define MATRIX_FACTORIES_PYTHON_MODULE_H
+#ifndef FFT_1D_PYTHON_MODULE_H
+#define FFT_1D_PYTHON_MODULE_H
 
 ///////////////////////////////////////////////////////////////////////
 // This file is part of the PySYCL software for SYCL development in
@@ -15,50 +15,60 @@
 
 ///////////////////////////////////////////////////////////////////////
 /// \file
-/// \brief Python module for an matrix factories in PySYCL.
+/// \brief Python module for a 1-dimensional fft in PySYCL.
 ///////////////////////////////////////////////////////////////////////
 
+/// FFT Functions in PySYCL
+
 ///////////////////////////////////////////////////////////////////////
-/// pybind11
+// pybind11
 ///////////////////////////////////////////////////////////////////////
 #include <pybind11/pybind11.h>
+#include <pybind11/numpy.h>
 #include <pybind11/stl.h>
 
 ///////////////////////////////////////////////////////////////////////
-/// local
+// local
 ///////////////////////////////////////////////////////////////////////
-#include "../Data_Types/Data_Types.h"
-#include "../Device/Device_Instance.h"
-#include "Matrix_Factories.h"
+#include "../Vector/Vector_Type.h"
+#include "FFT_1D.h"
 
 namespace py = pybind11;
 
-using Device_T = pysycl::Device_Instance;
-using Data_T = pysycl::Data_Types;
+///////////////////////////////////////////////////////////////////////
+// FFT 1D function double
+///////////////////////////////////////////////////////////////////////
+void fft1d_module_double(py::module &m) {
+  using Vector_T = pysycl::Vector<double>;
+  m.def("fft1d", &pysycl::fft1d<Vector_T>, R"delim(
+    Description
+      This function evaluates the 1-dimensional fft on a pysycl vector.
 
-///////////////////////////////////////////////////////////////////////
-// Matrix Factories function
-///////////////////////////////////////////////////////////////////////
-void matrix_factories_module(py::module &m) {
-  m.def("matrix", [](std::tuple<int, int> dims, Device_T& device, Data_T& dtype) {
-    return pysycl::matrix_factories(dims, device, dtype);
-  }, py::arg("dims"),
-     py::arg("device"),
-     py::arg("dtype"));
+    Parameters
+      A : pysycl.vector
+        The vector to transform.
+
+    Example
+      >>> import pysycl
+  )delim",
+        py::arg("A"));
 }
 
 ///////////////////////////////////////////////////////////////////////
-// Matrix Factories function with input numpt array
+// FFT 1D function float
 ///////////////////////////////////////////////////////////////////////
-template<typename Scalar_T>
-void matrix_factories_numpy_module(py::module &m) {
-  m.def("matrix", [](py::array_t<Scalar_T> np_array,
-                     Device_T& device,
-                     Data_T& dtype) {
-    return pysycl::matrix_factories(np_array, device, dtype);
-  }, py::arg("np_array"),
-     py::arg("device"),
-     py::arg("dtype"));
+void fft1d_module_float(py::module &m) {
+  using Vector_T = pysycl::Vector<float>;
+  m.def("fft1d", &pysycl::fft1d<Vector_T>,
+        py::arg("A"));
 }
 
-#endif // MATRIX_FACTORIES_PYTHON_MODULE_H
+///////////////////////////////////////////////////////////////////////
+// Binding all scalar variants of the fft1d function
+///////////////////////////////////////////////////////////////////////
+void fft1d_module(py::module &m) {
+  fft1d_module_double(m);
+  fft1d_module_float(m);
+}
+
+#endif // FFT_1D_PYTHON_MODULE_H

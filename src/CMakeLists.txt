@@ -45,6 +45,7 @@ include(CMake/PyBind11.cmake)
 # ######################################################################
 add_subdirectory(Data_Types)
 add_subdirectory(Device)
+add_subdirectory(Fast_Fourier_Transform)
 add_subdirectory(General)
 add_subdirectory(Linear_Algebra)
 add_subdirectory(Matrix)
