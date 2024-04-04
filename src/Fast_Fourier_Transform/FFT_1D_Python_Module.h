@@ -50,6 +50,9 @@ void fft1d_module_double(py::module &m) {
 
     Example
       >>> import pysycl
+      >>> A_np = np.random.rand(N).astype(np.float64)
+      >>> A_pysycl = pysycl.vector(A_np, device = device, dtype= pysycl.double)
+      >>> fft = pysycl.fft1d(A_pysycl)
   )delim",
         py::arg("A"));
 }
