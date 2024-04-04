@@ -81,8 +81,8 @@ void matrix_type_double_module(py::module &m) {
         Example
           >>> import pysycl
           >>> import numpy as np
-          >>> A_np = np.array()
-          >>> A_pysycl = pysycl.matrix(A_np)
+          >>> A_np = np.random.rand(M, N).astype(np.float64)
+          >>> A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.double)
       )delim",
            py::arg("np_arr"), py::arg("device"))
       .def("num_rows", &Matrix_T::num_rows, R"delim(

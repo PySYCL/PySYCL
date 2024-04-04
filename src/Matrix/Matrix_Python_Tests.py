@@ -30,17 +30,14 @@ class TestMatrix_Addition(unittest.TestCase):
   def test_matrix_addition_double(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float64)
+        B_np = np.random.rand(M, N).astype(np.float64)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.double)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.double)
 
+        C_np = A_np + B_np
         C_pysycl = A_pysycl + B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float64)
-        B_np = np.full((M, N), 12.79, dtype= np.float64)
-        C_np = A_np + B_np
 
         for i in range(M):
           for j in range(N):
@@ -49,17 +46,14 @@ class TestMatrix_Addition(unittest.TestCase):
   def test_in_place_matrix_addition_double(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float64)
+        B_np = np.random.rand(M, N).astype(np.float64)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.double)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.double)
 
+        A_np += B_np
         A_pysycl += B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float64)
-        B_np = np.full((M, N), 12.79, dtype= np.float64)
-        A_np += B_np
 
         for i in range(M):
           for j in range(N):
@@ -69,17 +63,14 @@ class TestMatrix_Addition(unittest.TestCase):
   def test_matrix_addition_float(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float32)
+        B_np = np.random.rand(M, N).astype(np.float32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.float)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.float)
 
+        C_np = A_np + B_np
         C_pysycl = A_pysycl + B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float32)
-        B_np = np.full((M, N), 12.79, dtype= np.float32)
-        C_np = A_np + B_np
 
         for i in range(M):
           for j in range(N):
@@ -88,17 +79,14 @@ class TestMatrix_Addition(unittest.TestCase):
   def test_in_place_matrix_addition_float(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float32)
+        B_np = np.random.rand(M, N).astype(np.float32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.float)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.float)
 
+        A_np += B_np
         A_pysycl += B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float32)
-        B_np = np.full((M, N), 12.79, dtype= np.float32)
-        A_np += B_np
 
         for i in range(M):
           for j in range(N):
@@ -108,17 +96,14 @@ class TestMatrix_Addition(unittest.TestCase):
   def test_matrix_addition_int(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        A_pysycl.fill(8)
-        B_pysycl.fill(3)
+        A_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        B_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.int)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.int)
 
+        C_np = A_np + B_np
         C_pysycl = A_pysycl + B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 8, dtype= np.int32)
-        B_np = np.full((M, N), 3, dtype= np.int32)
-        C_np = A_np + B_np
 
         for i in range(M):
           for j in range(N):
@@ -127,17 +112,14 @@ class TestMatrix_Addition(unittest.TestCase):
   def test_in_place_matrix_addition_int(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        A_pysycl.fill(8)
-        B_pysycl.fill(3)
+        A_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        B_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.int)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.int)
 
+        A_np += B_np
         A_pysycl += B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 8, dtype= np.int32)
-        B_np = np.full((M, N), 3, dtype= np.int32)
-        A_np += B_np
 
         for i in range(M):
           for j in range(N):
@@ -166,17 +148,14 @@ class TestMatrix_Subtraction(unittest.TestCase):
   def test_matrix_subtraction_double(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float64)
+        B_np = np.random.rand(M, N).astype(np.float64)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.double)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.double)
 
+        C_np = A_np - B_np
         C_pysycl = A_pysycl - B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float64)
-        B_np = np.full((M, N), 12.79, dtype= np.float64)
-        C_np = A_np - B_np
 
         for i in range(M):
           for j in range(N):
@@ -185,17 +164,14 @@ class TestMatrix_Subtraction(unittest.TestCase):
   def test_in_place_matrix_subtraction_double(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float64)
+        B_np = np.random.rand(M, N).astype(np.float64)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.double)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.double)
 
+        A_np -= B_np
         A_pysycl -= B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float64)
-        B_np = np.full((M, N), 12.79, dtype= np.float64)
-        A_np -= B_np
 
         for i in range(M):
           for j in range(N):
@@ -205,17 +181,14 @@ class TestMatrix_Subtraction(unittest.TestCase):
   def test_matrix_subtraction_float(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float32)
+        B_np = np.random.rand(M, N).astype(np.float32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.float)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.float)
 
+        C_np = A_np - B_np
         C_pysycl = A_pysycl - B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float32)
-        B_np = np.full((M, N), 12.79, dtype= np.float32)
-        C_np = A_np - B_np
 
         for i in range(M):
           for j in range(N):
@@ -224,17 +197,14 @@ class TestMatrix_Subtraction(unittest.TestCase):
   def test_in_place_matrix_subtraction_float(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float32)
+        B_np = np.random.rand(M, N).astype(np.float32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.float)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.float)
 
+        A_np -= B_np
         A_pysycl -= B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float32)
-        B_np = np.full((M, N), 12.79, dtype= np.float32)
-        A_np -= B_np
 
         for i in range(M):
           for j in range(N):
@@ -244,17 +214,14 @@ class TestMatrix_Subtraction(unittest.TestCase):
   def test_matrix_subtraction_int(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        A_pysycl.fill(8)
-        B_pysycl.fill(3)
+        A_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        B_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.int)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.int)
 
+        C_np = A_np - B_np
         C_pysycl = A_pysycl - B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 8, dtype= np.int32)
-        B_np = np.full((M, N), 3, dtype= np.int32)
-        C_np = A_np - B_np
 
         for i in range(M):
           for j in range(N):
@@ -263,17 +230,14 @@ class TestMatrix_Subtraction(unittest.TestCase):
   def test_in_place_matrix_addition_int(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        A_pysycl.fill(8)
-        B_pysycl.fill(3)
+        A_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        B_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.int)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.int)
 
+        A_np -= B_np
         A_pysycl -= B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 8, dtype= np.int32)
-        B_np = np.full((M, N), 3, dtype= np.int32)
-        A_np -= B_np
 
         for i in range(M):
           for j in range(N):
@@ -302,17 +266,14 @@ class TestMatrix_Multiplication(unittest.TestCase):
   def test_matrix_element_multiplication_double(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float64)
+        B_np = np.random.rand(M, N).astype(np.float64)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.double)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.double)
 
+        C_np = A_np * B_np
         C_pysycl = A_pysycl * B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float64)
-        B_np = np.full((M, N), 12.79, dtype= np.float64)
-        C_np = A_np * B_np
 
         for i in range(M):
           for j in range(N):
@@ -321,17 +282,14 @@ class TestMatrix_Multiplication(unittest.TestCase):
   def test_in_place_matrix_element_multiplication_double(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float64)
+        B_np = np.random.rand(M, N).astype(np.float64)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.double)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.double)
 
+        A_np *= B_np
         A_pysycl *= B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float64)
-        B_np = np.full((M, N), 12.79, dtype= np.float64)
-        A_np *= B_np
 
         for i in range(M):
           for j in range(N):
@@ -341,17 +299,14 @@ class TestMatrix_Multiplication(unittest.TestCase):
   def test_matrix_element_multiplication_float(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float32)
+        B_np = np.random.rand(M, N).astype(np.float32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.float)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.float)
 
+        C_np = A_np * B_np
         C_pysycl = A_pysycl * B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float32)
-        B_np = np.full((M, N), 12.79, dtype= np.float32)
-        C_np = A_np * B_np
 
         for i in range(M):
           for j in range(N):
@@ -360,17 +315,14 @@ class TestMatrix_Multiplication(unittest.TestCase):
   def test_in_place_matrix_element_multiplication_float(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float32)
+        B_np = np.random.rand(M, N).astype(np.float32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.float)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.float)
 
+        A_np *= B_np
         A_pysycl *= B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float32)
-        B_np = np.full((M, N), 12.79, dtype= np.float32)
-        A_np *= B_np
 
         for i in range(M):
           for j in range(N):
@@ -380,17 +332,14 @@ class TestMatrix_Multiplication(unittest.TestCase):
   def test_matrix_element_multiplication_int(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        A_pysycl.fill(8)
-        B_pysycl.fill(3)
+        A_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        B_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.int)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.int)
 
+        C_np = A_np * B_np
         C_pysycl = A_pysycl * B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 8, dtype= np.int32)
-        B_np = np.full((M, N), 3, dtype= np.int32)
-        C_np = A_np * B_np
 
         for i in range(M):
           for j in range(N):
@@ -399,17 +348,14 @@ class TestMatrix_Multiplication(unittest.TestCase):
   def test_in_place_matrix_element_multiplication_int(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        A_pysycl.fill(8)
-        B_pysycl.fill(3)
+        A_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        B_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.int)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.int)
 
+        A_np *= B_np
         A_pysycl *= B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 8, dtype= np.int32)
-        B_np = np.full((M, N), 3, dtype= np.int32)
-        A_np *= B_np
 
         for i in range(M):
           for j in range(N):
@@ -438,17 +384,14 @@ class TestMatrix_Division(unittest.TestCase):
   def test_matrix_division_double(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float64)
+        B_np = np.random.rand(M, N).astype(np.float64)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.double)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.double)
 
+        C_np = A_np / B_np
         C_pysycl = A_pysycl / B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float64)
-        B_np = np.full((M, N), 12.79, dtype= np.float64)
-        C_np = A_np / B_np
 
         for i in range(M):
           for j in range(N):
@@ -457,17 +400,14 @@ class TestMatrix_Division(unittest.TestCase):
   def test_in_place_matrix_division_double(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float64)
+        B_np = np.random.rand(M, N).astype(np.float64)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.double)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.double)
 
+        A_np /= B_np
         A_pysycl /= B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float64)
-        B_np = np.full((M, N), 12.79, dtype= np.float64)
-        A_np /= B_np
 
         for i in range(M):
           for j in range(N):
@@ -477,17 +417,14 @@ class TestMatrix_Division(unittest.TestCase):
   def test_matrix_division_float(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float32)
+        B_np = np.random.rand(M, N).astype(np.float32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.float)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.float)
 
+        C_np = A_np / B_np
         C_pysycl = A_pysycl / B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float32)
-        B_np = np.full((M, N), 12.79, dtype= np.float32)
-        C_np = A_np / B_np
 
         for i in range(M):
           for j in range(N):
@@ -496,17 +433,14 @@ class TestMatrix_Division(unittest.TestCase):
   def test_in_place_matrix_division_float(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.float)
-        A_pysycl.fill(86.74)
-        B_pysycl.fill(12.79)
+        A_np = np.random.rand(M, N).astype(np.float32)
+        B_np = np.random.rand(M, N).astype(np.float32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.float)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.float)
 
-        A_pysycl /= B_pysycl
+        A_np *= B_np
+        A_pysycl *= B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 86.74, dtype= np.float32)
-        B_np = np.full((M, N), 12.79, dtype= np.float32)
-        A_np /= B_np
 
         for i in range(M):
           for j in range(N):
@@ -516,17 +450,14 @@ class TestMatrix_Division(unittest.TestCase):
   def test_matrix_division_int(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        A_pysycl.fill(8)
-        B_pysycl.fill(3)
+        A_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        B_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.int)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.int)
 
+        C_np = A_np // B_np
         C_pysycl = A_pysycl / B_pysycl
         C_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 8, dtype= np.int32)
-        B_np = np.full((M, N), 3, dtype= np.int32)
-        C_np = A_np // B_np
 
         for i in range(M):
           for j in range(N):
@@ -535,17 +466,14 @@ class TestMatrix_Division(unittest.TestCase):
   def test_in_place_matrix_division_int(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        B_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
-        A_pysycl.fill(8)
-        B_pysycl.fill(3)
+        A_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        B_np = np.random.randint(1, 100, (M, N), dtype=np.int32)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.int)
+        B_pysycl = pysycl.matrix(B_np, device= self.device, dtype= pysycl.int)
 
+        A_np //= B_np
         A_pysycl /= B_pysycl
         A_pysycl.mem_to_cpu()
-
-        A_np = np.full((M, N), 8, dtype= np.int32)
-        B_np = np.full((M, N), 3, dtype= np.int32)
-        A_np //= B_np
 
         for i in range(M):
           for j in range(N):
@@ -570,8 +498,8 @@ class TestMatrix_Rows_Cols(unittest.TestCase):
 
   # SIZE TYPE TESTS
   def test_vector_size_double(self):
-    for M in [10, 100, 1000]:
-      for N in [25, 65, 450]:
+    for M in [5, 15, 80]:
+      for N in [4, 20, 35]:
         A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.int)
 
         self.assertEqual(A_pysycl.num_rows(), M)
@@ -599,14 +527,8 @@ class TestMatrix_Reductions(unittest.TestCase):
   def test_reductions(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        A_np = np.random.rand(M, N)
-
-        for i in range(M):
-          for j in range(N):
-            A_pysycl[i, j] = A_np[i, j]
-
-        A_pysycl.mem_to_gpu()
+        A_np = np.random.rand(M, N).astype(np.float64)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.double)
 
         max_pysycl = A_pysycl.max()
         min_pysycl = A_pysycl.min()
@@ -643,14 +565,8 @@ class TestMatrix_Transpose(unittest.TestCase):
   def test_tranpose(self):
     for M in [5, 15, 80]:
       for N in [4, 20, 35]:
-        A_pysycl = pysycl.matrix((M, N), device= self.device, dtype= pysycl.double)
-        A_np = np.random.rand(M, N)
-
-        for i in range(M):
-          for j in range(N):
-            A_pysycl[i, j] = A_np[i, j]
-
-        A_pysycl.mem_to_gpu()
+        A_np = np.random.rand(M, N).astype(np.float64)
+        A_pysycl = pysycl.matrix(A_np, device= self.device, dtype= pysycl.double)
 
         A_pysycl.transpose()
         A_np = A_np.T

@@ -99,6 +99,7 @@ public:
     }
 
     data_device = sycl::malloc_device<Scalar_T>(size, Q);
+    mem_to_gpu();
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -242,6 +243,11 @@ public:
   }
 
   ///////////////////////////////////////////////////////////////////////
+  /// \brief Get a reference to the SYCL queue.
+  /// \return Reference to the SYCL queue.
+  auto& dev() { return device; }
+
+  ///////////////////////////////////////////////////////////////////////
   /// \brief Get the number of elements in the Vector.
   /// \return Number of elements in the Vector.
   int get_size() const { return size; }
@@ -267,13 +273,13 @@ public:
   ///////////////////////////////////////////////////////////////////////
   /// \brief Copy memory from the CPU to the GPU.
   void mem_to_gpu() {
-    Q.memcpy(data_device, &data_host[0], size * sizeof(Scalar_T)).wait();
+    Q.memcpy(data_device, data_host.data(), size * sizeof(Scalar_T)).wait();
   }
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief Copy memory from the GPU to the CPU
   void mem_to_cpu() {
-    Q.memcpy(&data_host[0], data_device, size * sizeof(Scalar_T)).wait();
+    Q.memcpy(data_host.data(), data_device, size * sizeof(Scalar_T)).wait();
   }
 
   ///////////////////////////////////////////////////////////////////////

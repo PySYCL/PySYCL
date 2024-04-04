@@ -1,6 +1,3 @@
-#ifndef MATRIX_FACTORIES_PYTHON_MODULE_H
-#define MATRIX_FACTORIES_PYTHON_MODULE_H
-
 ///////////////////////////////////////////////////////////////////////
 // This file is part of the PySYCL software for SYCL development in
 // Python.  It is licensed under the MIT licence.  A copy of
@@ -15,50 +12,31 @@
 
 ///////////////////////////////////////////////////////////////////////
 /// \file
-/// \brief Python module for an matrix factories in PySYCL.
+/// \brief Python module for fft in PySYCL.
 ///////////////////////////////////////////////////////////////////////
 
+/// FFT Functions in PySYCL
+
 ///////////////////////////////////////////////////////////////////////
-/// pybind11
+// pybind11
 ///////////////////////////////////////////////////////////////////////
 #include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
 
 ///////////////////////////////////////////////////////////////////////
-/// local
+// local
 ///////////////////////////////////////////////////////////////////////
-#include "../Data_Types/Data_Types.h"
-#include "../Device/Device_Instance.h"
-#include "Matrix_Factories.h"
+#include "FFT_1D_Python_Module.h"
 
 namespace py = pybind11;
 
-using Device_T = pysycl::Device_Instance;
-using Data_T = pysycl::Data_Types;
+///////////////////////////////////////////////////////////////////////
+// Fast Fourier Transform module for PySYCL
+///////////////////////////////////////////////////////////////////////
+PYBIND11_MODULE(fft, m) {
+  m.doc() = R"delim(
+    Fast Fourier Transform module for PySYCL
+      This module provides classes and functions for fast fourier transforms.
+    )delim";
 
-///////////////////////////////////////////////////////////////////////
-// Matrix Factories function
-///////////////////////////////////////////////////////////////////////
-void matrix_factories_module(py::module &m) {
-  m.def("matrix", [](std::tuple<int, int> dims, Device_T& device, Data_T& dtype) {
-    return pysycl::matrix_factories(dims, device, dtype);
-  }, py::arg("dims"),
-     py::arg("device"),
-     py::arg("dtype"));
+  fft1d_module(m);
 }
-
-///////////////////////////////////////////////////////////////////////
-// Matrix Factories function with input numpt array
-///////////////////////////////////////////////////////////////////////
-template<typename Scalar_T>
-void matrix_factories_numpy_module(py::module &m) {
-  m.def("matrix", [](py::array_t<Scalar_T> np_array,
-                     Device_T& device,
-                     Data_T& dtype) {
-    return pysycl::matrix_factories(np_array, device, dtype);
-  }, py::arg("np_array"),
-     py::arg("device"),
-     py::arg("dtype"));
-}
-
-#endif // MATRIX_FACTORIES_PYTHON_MODULE_H

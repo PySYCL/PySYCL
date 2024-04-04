@@ -35,11 +35,10 @@
 namespace py = pybind11;
 
 ///////////////////////////////////////////////////////////////////////
-// Matrix multiplication function
+// Matrix multiplication function double
 ///////////////////////////////////////////////////////////////////////
-template<typename Scalar_T>
 void matmul_module_double(py::module &m) {
-  using Matrix_T = pysycl::Matrix<Scalar_T>;
+  using Matrix_T = pysycl::Matrix<double>;
   m.def("matmul", &pysycl::matmul<Matrix_T>, R"delim(
     Description
       This function evaluates a matrix multiplication and returns the result.
@@ -82,9 +81,8 @@ void matmul_module_double(py::module &m) {
 ///////////////////////////////////////////////////////////////////////
 // Matrix multiplication function float
 ///////////////////////////////////////////////////////////////////////
-template<typename Scalar_T>
 void matmul_module_float(py::module &m) {
-  using Matrix_T = pysycl::Matrix<Scalar_T>;
+  using Matrix_T = pysycl::Matrix<float>;
   m.def("matmul", &pysycl::matmul<Matrix_T>,
         py::arg("A"), py::arg("B"), py::arg("C"), py::arg("wg_size"));
 }
@@ -92,9 +90,8 @@ void matmul_module_float(py::module &m) {
 ///////////////////////////////////////////////////////////////////////
 // Matrix multiplication function int
 ///////////////////////////////////////////////////////////////////////
-template<typename Scalar_T>
 void matmul_module_int(py::module &m) {
-  using Matrix_T = pysycl::Matrix<Scalar_T>;
+  using Matrix_T = pysycl::Matrix<int>;
   m.def("matmul", &pysycl::matmul<Matrix_T>,
         py::arg("A"), py::arg("B"), py::arg("C"), py::arg("wg_size"));
 }
@@ -103,9 +100,9 @@ void matmul_module_int(py::module &m) {
 // Binding all scalar variants of the matmul function
 ///////////////////////////////////////////////////////////////////////
 void matmul_module(py::module &m) {
-  matmul_module_double<double>(m);
-  matmul_module_float<float>(m);
-  matmul_module_int<int>(m);
+  matmul_module_double(m);
+  matmul_module_float(m);
+  matmul_module_int(m);
 }
 
 #endif // MATRIX_MULTIPLICATION_PYTHON_MODULE_H

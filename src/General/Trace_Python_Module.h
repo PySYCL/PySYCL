@@ -84,6 +84,9 @@ void trace_module_int(py::module &m) {
         py::arg("A"));
 }
 
+///////////////////////////////////////////////////////////////////////
+// Binding all scalar variants of the trace function
+///////////////////////////////////////////////////////////////////////
 void trace_module(py::module &m) {
   trace_module_double<double>(m);
   trace_module_float<float>(m);

@@ -81,8 +81,8 @@ void vector_type_double_module(py::module &m) {
         Example
           >>> import pysycl
           >>> import numpy as np
-          >>> A_np = np.full(N, 86.74, dtype= np.float64)
-          >>> A_pysycl = pysycl.vector(A_np)
+          >>> A_np = np.random.rand(N).astype(np.float64)
+          >>> A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.double)
       )delim",
            py::arg("np_arr"), py::arg("device"))
       .def("get_size", &Vector_T::get_size, R"delim(

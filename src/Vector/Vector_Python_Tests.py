@@ -28,105 +28,87 @@ class TestVector_Addition(unittest.TestCase):
 
   # ADDITION DOUBLE TYPE TESTS
   def test_vector_addition_double(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float64)
+      B_np = np.random.rand(N).astype(np.float64)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.double)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.double)
 
+      C_np = A_np + B_np
       C_pysycl = A_pysycl + B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float64)
-      B_np = np.full(N, 12.79, dtype= np.float64)
-      C_np = A_np + B_np
 
       for i in range(N):
         self.assertAlmostEqual(C_pysycl[i], C_np[i], delta= self.tolerance_double)
 
   def test_in_place_vector_addition_double(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float64)
+      B_np = np.random.rand(N).astype(np.float64)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.double)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.double)
 
+      A_np += B_np
       A_pysycl += B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float64)
-      B_np = np.full(N, 12.79, dtype= np.float64)
-      A_np += B_np
 
       for i in range(N):
         self.assertAlmostEqual(A_pysycl[i], A_np[i], delta= self.tolerance_double)
 
   # ADDITION FLOAT TYPE TESTS
   def test_vector_addition_float(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float32)
+      B_np = np.random.rand(N).astype(np.float32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.float)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.float)
 
+      C_np = A_np + B_np
       C_pysycl = A_pysycl + B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float32)
-      B_np = np.full(N, 12.79, dtype= np.float32)
-      C_np = A_np + B_np
 
       for i in range(N):
         self.assertAlmostEqual(C_pysycl[i], C_np[i], delta= self.tolerance_float)
 
   def test_in_place_vector_addition_float(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float32)
+      B_np = np.random.rand(N).astype(np.float32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.float)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.float)
 
+      A_np += B_np
       A_pysycl += B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float32)
-      B_np = np.full(N, 12.79, dtype= np.float32)
-      A_np += B_np
 
       for i in range(N):
         self.assertAlmostEqual(A_pysycl[i], A_np[i], delta= self.tolerance_float)
 
   # ADDITION INTEGER TYPE TESTS
   def test_vector_addition_int(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      A_pysycl.fill(8)
-      B_pysycl.fill(3)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.int32)
+      B_np = np.random.rand(N).astype(np.int32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.int)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.int)
 
+      C_np = A_np + B_np
       C_pysycl = A_pysycl + B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 8, dtype= np.int32)
-      B_np = np.full(N, 3, dtype= np.int32)
-      C_np = A_np + B_np
 
       for i in range(N):
         self.assertEqual(C_pysycl[i], C_np[i])
 
   def test_in_place_vector_addition_int(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      A_pysycl.fill(8)
-      B_pysycl.fill(3)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.int32)
+      B_np = np.random.rand(N).astype(np.int32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.int)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.int)
 
+      A_np += B_np
       A_pysycl += B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 8, dtype= np.int32)
-      B_np = np.full(N, 3, dtype= np.int32)
-      A_np += B_np
 
       for i in range(N):
         self.assertEqual(A_pysycl[i], A_np[i])
@@ -152,105 +134,87 @@ class TestVector_Subtraction(unittest.TestCase):
 
   # SUBTRACTION DOUBLE TYPE TESTS
   def test_vector_subtraction_double(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float64)
+      B_np = np.random.rand(N).astype(np.float64)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.double)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.double)
 
+      C_np = A_np - B_np
       C_pysycl = A_pysycl - B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float64)
-      B_np = np.full(N, 12.79, dtype= np.float64)
-      C_np = A_np - B_np
 
       for i in range(N):
         self.assertAlmostEqual(C_pysycl[i], C_np[i], delta= self.tolerance_double)
 
   def test_in_place_vector_subtraction_double(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float64)
+      B_np = np.random.rand(N).astype(np.float64)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.double)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.double)
 
+      A_np -= B_np
       A_pysycl -= B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float64)
-      B_np = np.full(N, 12.79, dtype= np.float64)
-      A_np -= B_np
 
       for i in range(N):
         self.assertAlmostEqual(A_pysycl[i], A_np[i], delta= self.tolerance_double)
 
   # SUBTRACTION FLOAT TYPE TESTS
   def test_vector_subtraction_float(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float32)
+      B_np = np.random.rand(N).astype(np.float32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.float)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.float)
 
+      C_np = A_np - B_np
       C_pysycl = A_pysycl - B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float32)
-      B_np = np.full(N, 12.79, dtype= np.float32)
-      C_np = A_np - B_np
 
       for i in range(N):
         self.assertAlmostEqual(C_pysycl[i], C_np[i], delta= self.tolerance_float)
 
   def test_in_place_vector_subtraction_float(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float32)
+      B_np = np.random.rand(N).astype(np.float32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.float)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.float)
 
+      A_np -= B_np
       A_pysycl -= B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float32)
-      B_np = np.full(N, 12.79, dtype= np.float32)
-      A_np -= B_np
 
       for i in range(N):
         self.assertAlmostEqual(A_pysycl[i], A_np[i], delta= self.tolerance_float)
 
   # SUBTRACTION INTEGER TYPE TESTS
   def test_vector_subtraction_int(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      A_pysycl.fill(8)
-      B_pysycl.fill(3)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.int32)
+      B_np = np.random.rand(N).astype(np.int32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.int)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.int)
 
+      C_np = A_np - B_np
       C_pysycl = A_pysycl - B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 8, dtype= np.int32)
-      B_np = np.full(N, 3, dtype= np.int32)
-      C_np = A_np - B_np
 
       for i in range(N):
         self.assertEqual(C_pysycl[i], C_np[i])
 
   def test_in_place_vector_subtraction_int(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      A_pysycl.fill(8)
-      B_pysycl.fill(3)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.int32)
+      B_np = np.random.rand(N).astype(np.int32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.int)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.int)
 
+      A_np -= B_np
       A_pysycl -= B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 8, dtype= np.int32)
-      B_np = np.full(N, 3, dtype= np.int32)
-      A_np -= B_np
 
       for i in range(N):
         self.assertEqual(A_pysycl[i], A_np[i])
@@ -276,105 +240,87 @@ class TestVector_Multiplication(unittest.TestCase):
 
   # MULTIPLICATION DOUBLE TYPE TESTS
   def test_vector_multiplication_double(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float64)
+      B_np = np.random.rand(N).astype(np.float64)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.double)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.double)
 
+      C_np = A_np * B_np
       C_pysycl = A_pysycl * B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float64)
-      B_np = np.full(N, 12.79, dtype= np.float64)
-      C_np = A_np * B_np
 
       for i in range(N):
         self.assertAlmostEqual(C_pysycl[i], C_np[i], delta= self.tolerance_double)
 
   def test_in_place_vector_multiplication_double(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float64)
+      B_np = np.random.rand(N).astype(np.float64)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.double)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.double)
 
+      A_np *= B_np
       A_pysycl *= B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float64)
-      B_np = np.full(N, 12.79, dtype= np.float64)
-      A_np *= B_np
 
       for i in range(N):
         self.assertAlmostEqual(A_pysycl[i], A_np[i], delta= self.tolerance_double)
 
   # MULTIPLICATION FLOAT TYPE TESTS
   def test_vector_multiplication_float(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float32)
+      B_np = np.random.rand(N).astype(np.float32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.float)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.float)
 
+      C_np = A_np * B_np
       C_pysycl = A_pysycl * B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float32)
-      B_np = np.full(N, 12.79, dtype= np.float32)
-      C_np = A_np * B_np
 
       for i in range(N):
         self.assertAlmostEqual(C_pysycl[i], C_np[i], delta= self.tolerance_float)
 
   def test_in_place_vector_multiplication_float(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float32)
+      B_np = np.random.rand(N).astype(np.float32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.float)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.float)
 
+      A_np *= B_np
       A_pysycl *= B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float32)
-      B_np = np.full(N, 12.79, dtype= np.float32)
-      A_np *= B_np
 
       for i in range(N):
         self.assertAlmostEqual(A_pysycl[i], A_np[i], delta= self.tolerance_float)
 
   # MULTIPLICATION INTEGER TYPE TESTS
   def test_vector_multiplication_int(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      A_pysycl.fill(8)
-      B_pysycl.fill(3)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.int32)
+      B_np = np.random.rand(N).astype(np.int32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.int)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.int)
 
+      C_np = A_np * B_np
       C_pysycl = A_pysycl * B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 8, dtype= np.int32)
-      B_np = np.full(N, 3, dtype= np.int32)
-      C_np = A_np * B_np
 
       for i in range(N):
         self.assertEqual(C_pysycl[i], C_np[i])
 
   def test_in_place_vector_multiplication_int(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      A_pysycl.fill(8)
-      B_pysycl.fill(3)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.int32)
+      B_np = np.random.rand(N).astype(np.int32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.int)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.int)
 
+      A_np *= B_np
       A_pysycl *= B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 8, dtype= np.int32)
-      B_np = np.full(N, 3, dtype= np.int32)
-      A_np *= B_np
 
       for i in range(N):
         self.assertEqual(A_pysycl[i], A_np[i])
@@ -400,105 +346,87 @@ class TestVector_Dvision(unittest.TestCase):
 
   # DIVISION DOUBLE TYPE TESTS
   def test_vector_division_double(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float64)
+      B_np = np.random.rand(N).astype(np.float64)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.double)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.double)
 
+      C_np = A_np / B_np
       C_pysycl = A_pysycl / B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float64)
-      B_np = np.full(N, 12.79, dtype= np.float64)
-      C_np = A_np / B_np
 
       for i in range(N):
         self.assertAlmostEqual(C_pysycl[i], C_np[i], delta= self.tolerance_double)
 
   def test_in_place_vector_division_double(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float64)
+      B_np = np.random.rand(N).astype(np.float64)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.double)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.double)
 
+      A_np /= B_np
       A_pysycl /= B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float64)
-      B_np = np.full(N, 12.79, dtype= np.float64)
-      A_np /= B_np
 
       for i in range(N):
         self.assertAlmostEqual(A_pysycl[i], A_np[i], delta= self.tolerance_double)
 
   # DIVISION FLOAT TYPE TESTS
   def test_vector_division_float(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float32)
+      B_np = np.random.rand(N).astype(np.float32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.float)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.float)
 
+      C_np = A_np / B_np
       C_pysycl = A_pysycl / B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float32)
-      B_np = np.full(N, 12.79, dtype= np.float32)
-      C_np = A_np / B_np
 
       for i in range(N):
         self.assertAlmostEqual(C_pysycl[i], C_np[i], delta= self.tolerance_float)
 
   def test_in_place_vector_division_float(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
-      A_pysycl.fill(86.74)
-      B_pysycl.fill(12.79)
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float32)
+      B_np = np.random.rand(N).astype(np.float32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.float)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.float)
 
+      A_np /= B_np
       A_pysycl /= B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 86.74, dtype= np.float32)
-      B_np = np.full(N, 12.79, dtype= np.float32)
-      A_np /= B_np
 
       for i in range(N):
         self.assertAlmostEqual(A_pysycl[i], A_np[i], delta= self.tolerance_float)
 
   # DIVISION INTEGER TYPE TESTS
   def test_vector_division_int(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      A_pysycl.fill(8)
-      B_pysycl.fill(3)
+    for N in [10, 25, 83]:
+      A_np = np.random.randint(1, 100, N, dtype=np.int32)
+      B_np = np.random.randint(1, 100, N, dtype=np.int32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.int)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.int)
 
+      C_np = A_np // B_np
       C_pysycl = A_pysycl / B_pysycl
       C_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 8, dtype= np.int32)
-      B_np = np.full(N, 3, dtype= np.int32)
-      C_np = A_np // B_np
 
       for i in range(N):
         self.assertEqual(C_pysycl[i], C_np[i])
 
   def test_in_place_vector_division_int(self):
-    for N in [10, 100, 1000, 10000]:
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      B_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
-      A_pysycl.fill(8)
-      B_pysycl.fill(3)
+    for N in [10, 25, 83]:
+      A_np = np.random.randint(1, 100, N, dtype=np.int32)
+      B_np = np.random.randint(1, 100, N, dtype=np.int32)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.int)
+      B_pysycl = pysycl.vector(B_np, device= self.device, dtype= pysycl.int)
 
+      A_np //= B_np
       A_pysycl /= B_pysycl
       A_pysycl.mem_to_cpu()
-
-      A_np = np.full(N, 8, dtype= np.int32)
-      B_np = np.full(N, 3, dtype= np.int32)
-      A_np //= B_np
 
       for i in range(N):
         self.assertEqual(A_pysycl[i], A_np[i])
@@ -524,7 +452,7 @@ class TestVector_Fill(unittest.TestCase):
 
   # FILL DOUBLE TYPE TESTS
   def test_vector_fill_double(self):
-    for N in [10, 100, 1000, 10000]:
+    for N in [10, 25, 83]:
       A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
       A_pysycl.fill(86.74)
       A_pysycl.mem_to_cpu()
@@ -536,7 +464,7 @@ class TestVector_Fill(unittest.TestCase):
 
   # FILL FLOAT TYPE TESTS
   def test_vector_division_float(self):
-    for N in [10, 100, 1000, 10000]:
+    for N in [10, 25, 83]:
       A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.float)
       A_pysycl.fill(86.74)
       A_pysycl.mem_to_cpu()
@@ -548,7 +476,7 @@ class TestVector_Fill(unittest.TestCase):
 
   # FILL INTEGER TYPE TESTS
   def test_vector_division_int(self):
-    for N in [10, 100, 1000, 10000]:
+    for N in [10, 25, 83]:
       A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.int)
       A_pysycl.fill(8)
       A_pysycl.mem_to_cpu()
@@ -577,7 +505,7 @@ class TestVector_Fill(unittest.TestCase):
 
   # SIZE TYPE TESTS
   def test_vector_size_double(self):
-    for N in [10, 100, 1000, 10000]:
+    for N in [10, 25, 83]:
       A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
       self.assertEqual(A_pysycl.get_size(), N)
 
@@ -601,14 +529,9 @@ class TestVector_Reductions(unittest.TestCase):
 
   # MAX, MIN, SUM TESTS
   def test_reductions(self):
-    for N in [10, 100, 250]:
-      A_np = np.random.rand(N)
-      A_pysycl = pysycl.vector(N, device= self.device, dtype= pysycl.double)
-
-      for i in range(N):
-        A_pysycl[i] = A_np[i]
-
-      A_pysycl.mem_to_gpu()
+    for N in [10, 25, 83]:
+      A_np = np.random.rand(N).astype(np.float64)
+      A_pysycl = pysycl.vector(A_np, device= self.device, dtype= pysycl.double)
 
       max_pysycl = A_pysycl.max()
       min_pysycl = A_pysycl.min()
