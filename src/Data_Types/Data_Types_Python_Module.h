@@ -35,13 +35,12 @@ namespace py = pybind11;
 
 using Data_T = pysycl::Data_Types;
 
-void data_types_module(py::module& m){
+void data_types_module(py::module &m) {
   py::enum_<Data_T>(m, "data_types")
-    .value("double", Data_T::DOUBLE)
-    .value("float",  Data_T::FLOAT)
-    .value("int",    Data_T::INT)
-    .export_values();
+      .value("double", Data_T::DOUBLE)
+      .value("float", Data_T::FLOAT)
+      .value("int", Data_T::INT)
+      .export_values();
 }
-
 
 #endif // DATA_TYPES_PYTHON_MODULE_H

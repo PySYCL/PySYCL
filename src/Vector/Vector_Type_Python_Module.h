@@ -195,13 +195,11 @@ void vector_type_float_module(py::module &m) {
     Description
       This class creates a PySYCL type float vector.
     )delim")
-      .def(py::init<int, Device_T &>(),
-           py::arg("size"), py::arg("device"))
+      .def(py::init<int, Device_T &>(), py::arg("size"), py::arg("device"))
       .def(py::init<py::array_t<Scalar_T>, pysycl::Device_Instance &>(),
            py::arg("np_arr"), py::arg("device"))
       .def("get_size", &Vector_T::get_size)
-      .def("fill", &Vector_T::fill,
-           py::arg("C"))
+      .def("fill", &Vector_T::fill, py::arg("C"))
       .def("mem_to_gpu", &Vector_T::mem_to_gpu)
       .def("mem_to_cpu", &Vector_T::mem_to_cpu)
       .def("max", &Vector_T::max)
@@ -246,13 +244,11 @@ void vector_type_int_module(py::module &m) {
     Description
       This class creates a PySYCL type int vector.
     )delim")
-      .def(py::init<int, Device_T &>(),
-           py::arg("size"), py::arg("device"))
+      .def(py::init<int, Device_T &>(), py::arg("size"), py::arg("device"))
       .def(py::init<py::array_t<Scalar_T>, pysycl::Device_Instance &>(),
            py::arg("np_arr"), py::arg("device"))
       .def("get_size", &Vector_T::get_size)
-      .def("fill", &Vector_T::fill,
-           py::arg("C"))
+      .def("fill", &Vector_T::fill, py::arg("C"))
       .def("mem_to_gpu", &Vector_T::mem_to_gpu)
       .def("mem_to_cpu", &Vector_T::mem_to_cpu)
       .def("max", &Vector_T::max)

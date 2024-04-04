@@ -27,11 +27,7 @@ namespace pysycl {
 
 ///////////////////////////////////////////////////////////////////////
 /// \brief Data types
-enum class Data_Types{
-  DOUBLE,
-  FLOAT,
-  INT
-};
+enum class Data_Types { DOUBLE, FLOAT, INT };
 
 /// @} // end "Data_Types" doxygen group
 

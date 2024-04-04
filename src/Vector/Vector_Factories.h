@@ -48,20 +48,19 @@ using Data_T = pysycl::Data_Types;
 /// @{
 namespace pysycl {
 
-using Vector_Variants = std::variant<Vector<double>,
-                                     Vector<float>,
-                                     Vector<int>>;
+using Vector_Variants =
+    std::variant<Vector<double>, Vector<float>, Vector<int>>;
 
 ///////////////////////////////////////////////////////////////////////
 /// \brief Function factory for Vector Types.
 /// \param[in] dims The dimension of the vector.
 /// \param[in] device_in The target sycl device.
 /// \param[in] dtype The data type of the vector.
-Vector_Variants
-vector_factories(int dims, Device_Instance &device, Data_Types& dtype) {
-  if(dtype == Data_Types::DOUBLE) {
+Vector_Variants vector_factories(int dims, Device_Instance &device,
+                                 Data_Types &dtype) {
+  if (dtype == Data_Types::DOUBLE) {
     return Vector<double>(dims, device);
-  } else if(dtype == Data_Types::FLOAT) {
+  } else if (dtype == Data_Types::FLOAT) {
     return Vector<float>(dims, device);
   } else if (dtype == Data_Types::INT) {
     return Vector<int>(dims, device);
@@ -75,14 +74,12 @@ vector_factories(int dims, Device_Instance &device, Data_Types& dtype) {
 /// \param[in] np_array The input numpy array.
 /// \param[in] device The target sycl device.
 /// \param[in] dtype The data type of the vector.
-template<typename Scalar_T>
-Vector_Variants
-vector_factories(py::array_t<Scalar_T> np_array,
-                 Device_Instance &device,
-                 Data_Types& dtype) {
-  if(dtype == Data_Types::DOUBLE) {
+template <typename Scalar_T>
+Vector_Variants vector_factories(py::array_t<Scalar_T> np_array,
+                                 Device_Instance &device, Data_Types &dtype) {
+  if (dtype == Data_Types::DOUBLE) {
     return Vector<double>(np_array, device);
-  } else if(dtype == Data_Types::FLOAT) {
+  } else if (dtype == Data_Types::FLOAT) {
     return Vector<float>(np_array, device);
   } else if (dtype == Data_Types::INT) {
     return Vector<int>(np_array, device);

@@ -135,39 +135,41 @@ private:
 
 ///////////////////////////////////////////////////////////////////////////
 // Equality operator.
-inline bool operator==(const Device_Instance& di1, const Device_Instance& di2){
-  return (di1.platform_idx == di2.platform_idx)  &&
+inline bool operator==(const Device_Instance &di1, const Device_Instance &di2) {
+  return (di1.platform_idx == di2.platform_idx) &&
          (di1.device_idx == di2.device_idx);
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // Inequality operator.
-inline bool operator!=(const Device_Instance& di1, const Device_Instance& di2){
+inline bool operator!=(const Device_Instance &di1, const Device_Instance &di2) {
   return !(di1 == di2);
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // Less than operator.
-inline bool operator<(const Device_Instance& di1, const Device_Instance& di2){
-  if(di1.platform_idx != di2.platform_idx) return di1.platform_idx < di2.platform_idx;
-  else return di1.device_idx < di2.device_idx;
+inline bool operator<(const Device_Instance &di1, const Device_Instance &di2) {
+  if (di1.platform_idx != di2.platform_idx)
+    return di1.platform_idx < di2.platform_idx;
+  else
+    return di1.device_idx < di2.device_idx;
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // Greater than operator.
-inline bool operator>(const Device_Instance& di1, const Device_Instance& di2){
+inline bool operator>(const Device_Instance &di1, const Device_Instance &di2) {
   return !(di1 < di2 || di1 == di2);
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // Less than or equal to operator.
-inline bool operator<=(const Device_Instance& di1, const Device_Instance& di2){
+inline bool operator<=(const Device_Instance &di1, const Device_Instance &di2) {
   return (di1 < di2) || (di1 == di2);
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // Greater than or equal to operator.
-inline bool operator>=(const Device_Instance& di1, const Device_Instance& di2){
+inline bool operator>=(const Device_Instance &di1, const Device_Instance &di2) {
   return (di1 > di2) || (di1 == di2);
 }
 

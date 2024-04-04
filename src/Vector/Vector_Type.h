@@ -245,7 +245,7 @@ public:
   ///////////////////////////////////////////////////////////////////////
   /// \brief Get a reference to the SYCL queue.
   /// \return Reference to the SYCL queue.
-  auto& dev() { return device; }
+  auto &dev() { return device; }
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief Get the number of elements in the Vector.

@@ -54,7 +54,7 @@ void matmul(Matrix_type &A, Matrix_type &B, Matrix_type &C,
     throw std::runtime_error("ERROR: Incompatible Array2D dimensions.");
   }
 
-  if(C.dev() != A.dev() || C.dev() != B.dev()) {
+  if (C.dev() != A.dev() || C.dev() != B.dev()) {
     throw std::runtime_error("ERROR: Incompatible PySYCL device.");
   }
 
@@ -62,32 +62,37 @@ void matmul(Matrix_type &A, Matrix_type &B, Matrix_type &C,
   const auto N = A.num_cols();
   const auto P = B.num_cols();
 
-  A.dev().get_queue().submit([&](sycl::handler &h) {
-    const size_t global_size_M = ((M + wg_size - 1)/wg_size)*wg_size;
-    const size_t global_size_P = ((P + wg_size - 1)/wg_size)*wg_size;
+  A.dev()
+      .get_queue()
+      .submit([&](sycl::handler &h) {
+        const size_t global_size_M = ((M + wg_size - 1) / wg_size) * wg_size;
+        const size_t global_size_P = ((P + wg_size - 1) / wg_size) * wg_size;
 
-    sycl::range<2> global{global_size_M, global_size_P};
-    sycl::range<2> local{wg_size, wg_size};
+        sycl::range<2> global{global_size_M, global_size_P};
+        sycl::range<2> local{wg_size, wg_size};
 
-    Scalar_T *A_ptr = A.get_device_data_ptr();
-    Scalar_T *B_ptr = B.get_device_data_ptr();
-    Scalar_T *C_ptr = C.get_device_data_ptr();
+        Scalar_T *A_ptr = A.get_device_data_ptr();
+        Scalar_T *B_ptr = B.get_device_data_ptr();
+        Scalar_T *C_ptr = C.get_device_data_ptr();
 
-    h.parallel_for(sycl::nd_range<2>(global, local), [=](sycl::nd_item<2> it) {
-      int i = it.get_global_id(0);
-      int j = it.get_global_id(1);
+        h.parallel_for(sycl::nd_range<2>(global, local),
+                       [=](sycl::nd_item<2> it) {
+                         int i = it.get_global_id(0);
+                         int j = it.get_global_id(1);
 
-      Scalar_T c_ij = 0.0;
+                         Scalar_T c_ij = 0.0;
 
-      if(i >= M || j >= P) return;
+                         if (i >= M || j >= P)
+                           return;
 
-      for(int p = 0; p < N; ++p){
-        c_ij += A_ptr[i*N + p]*B_ptr[p*P + j];
-      }
+                         for (int p = 0; p < N; ++p) {
+                           c_ij += A_ptr[i * N + p] * B_ptr[p * P + j];
+                         }
 
-      C_ptr[i*P + j] = c_ij;
-    });
-   }).wait();
+                         C_ptr[i * P + j] = c_ij;
+                       });
+      })
+      .wait();
 }
 
 /// @} // end "Linear_Algebra" doxygen group

@@ -33,11 +33,10 @@ namespace pysycl {
 ///////////////////////////////////////////////////////////////////////
 /// \brief Reverses the bits of the input number.
 /// \return The number with reversed bits.
-template<typename Int_T>
-Int_T bit_reverse(Int_T N) {
+template <typename Int_T> Int_T bit_reverse(Int_T N) {
   Int_T N_r = 0;
 
-  for(Int_T i = 0; i < sizeof(N)*8; ++i) {
+  for (Int_T i = 0; i < sizeof(N) * 8; ++i) {
     N_r <<= 1;
     N_r |= (N & 1);
     N >>= 1;
@@ -49,9 +48,9 @@ Int_T bit_reverse(Int_T N) {
 ///////////////////////////////////////////////////////////////////////
 /// \brief Finds the next power of 2 larger than N.
 /// \return Next power of 2.
-template<typename Int_T>
-Int_T next_power_of_two(Int_T N) {
-  if (N <= 0) return 1;
+template <typename Int_T> Int_T next_power_of_two(Int_T N) {
+  if (N <= 0)
+    return 1;
   --N;
 
   N |= N >> 1;
