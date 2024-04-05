@@ -61,8 +61,8 @@ bool is_power_of_two(int N) {
 /// \param[in] A The input vector for fft.
 /// \param[in] result The result vector for fft.
 /// \param[in] Q The sycl queue.
-template <typename Input_T, typename Output_T, typename Int_T>
-auto cooley_turkey_kernel(Input_T *data, Output_T *result_device, Int_T N, Int_T logn,
+template <typename Complex_T, typename Int_T>
+auto cooley_turkey_kernel(Complex_T* x, Int_T N, Int_T logn,
                    Int_T wg_size, sycl::queue Q) {
   Q.submit([&](sycl::handler &h) {
      const size_t global_size = ((N / 2 + wg_size - 1) / wg_size) * wg_size;
@@ -72,16 +72,22 @@ auto cooley_turkey_kernel(Input_T *data, Output_T *result_device, Int_T N, Int_T
 
      h.parallel_for(sycl::nd_range<1>(global, local), [=](sycl::nd_item<1> it) {
        const Int_T i = it.get_global_id(0);
+       if(i >= N/2) return;
 
        Int_T rev;
 
        rev = bit_reverse(2 * i);
        rev = rev >> (32 - logn);
-       result_device[2 * i] = data[rev];
+       const auto res1 = x[rev];
 
        rev = bit_reverse(2 * i + 1);
        rev = rev >> (32 - logn);
-       result_device[2 * i + 1] = data[rev];
+       const auto res2 = x[rev];
+
+       it.barrier(sycl::access::fence_space::local_space);
+
+       x[2 * i] = res1;
+       x[2 * i + 1] = res2;
 
        it.barrier(sycl::access::fence_space::local_space);
 
@@ -91,15 +97,15 @@ auto cooley_turkey_kernel(Input_T *data, Output_T *result_device, Int_T N, Int_T
          Int_T j = i % mh;
          Int_T kj = k + j;
 
-         auto a = result_device[kj];
-         auto b = result_device[kj + mh];
+         auto a = x[kj];
+         auto b = x[kj + mh];
 
          float theta = -PI * j / mh;
-         Output_T twiddle(std::cos(theta), std::sin(theta));
+         Complex_T twiddle(std::cos(theta), std::sin(theta));
          auto b_twiddle = twiddle * b;
 
-         result_device[kj] = a + b_twiddle;
-         result_device[kj + mh] = a - b_twiddle;
+         x[kj] = a + b_twiddle;
+         x[kj + mh] = a - b_twiddle;
 
          it.barrier(sycl::access::fence_space::local_space);
        }
@@ -124,17 +130,29 @@ template <typename Vector_type> auto cooley_turkey(Vector_type &A) {
 
   std::vector<std::complex<Scalar_T>> result_host(N);
 
-  std::complex<Scalar_T> *result_device =
-      sycl::malloc_device<std::complex<Scalar_T>>(N, A.dev().get_queue());
-
   Scalar_T *data = A.get_device_data_ptr();
   sycl::queue &Q = A.dev().get_queue();
 
-  cooley_turkey_kernel(data, result_device, N, logn, wg_size, Q);
+  std::complex<Scalar_T> *result_device =
+      sycl::malloc_device<std::complex<Scalar_T>>(N, Q);
 
-  A.dev()
-      .get_queue()
-      .memcpy(result_host.data(), result_device,
+  Q.submit([&](sycl::handler &h) {
+     const size_t global_size = ((N + wg_size - 1) / wg_size) * wg_size;
+
+     sycl::range<1> global{global_size};
+     sycl::range<1> local{wg_size};
+
+     h.parallel_for(sycl::nd_range<1>(global, local), [=](sycl::nd_item<1> it) {
+       const Int_T i = it.get_global_id(0);
+       if(i >= N) return;
+
+       result_device[i] = data[i];
+     });
+   }).wait();
+
+  cooley_turkey_kernel(result_device, N, logn, wg_size, Q);
+
+  Q.memcpy(result_host.data(), result_device,
               N * sizeof(std::complex<Scalar_T>))
       .wait();
   return result_host;
@@ -168,10 +186,6 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
       sycl::malloc_device<std::complex<Scalar_T>>(M, Q);
   std::complex<Scalar_T> *b_n =
       sycl::malloc_device<std::complex<Scalar_T>>(M, Q);
-  std::complex<Scalar_T> *a_n_star =
-      sycl::malloc_device<std::complex<Scalar_T>>(M, Q);
-  std::complex<Scalar_T> *b_n_star =
-      sycl::malloc_device<std::complex<Scalar_T>>(M, Q);
 
   std::complex<Scalar_T> *result_device =
       sycl::malloc_device<std::complex<Scalar_T>>(N, Q);
@@ -185,6 +199,8 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
 
      h.parallel_for(sycl::nd_range<1>(global, local), [=](sycl::nd_item<1> it) {
        const Int_T i = it.get_global_id(0);
+
+       if(i >= M) return;
 
        if (i < N) {
          const auto theta = PI * i * i / N;
@@ -202,8 +218,8 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
    }).wait();
 
   const Int_T logm = std::log2(M);
-  cooley_turkey_kernel(a_n, a_n_star, M, logm, wg_size, Q);
-  cooley_turkey_kernel(b_n, b_n_star, M, logm, wg_size, Q);
+  cooley_turkey_kernel(a_n, M, logm, wg_size, Q);
+  cooley_turkey_kernel(b_n, M, logm, wg_size, Q);
 
   Q.submit([&](sycl::handler &h) {
      const size_t global_size = ((M + wg_size - 1) / wg_size) * wg_size;
@@ -214,11 +230,8 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
      h.parallel_for(sycl::nd_range<1>(global, local), [=](sycl::nd_item<1> it) {
        const Int_T i = it.get_global_id(0);
 
-       a_n[i] = a_n_star[i] * b_n_star[i];
-       b_n[i] = b_n_star[i];
-
-       a_n_star[i] = std::complex<Scalar_T>(0.0, 0.0);
-       b_n_star[i] = std::complex<Scalar_T>(0.0, 0.0);
+       if(i >= M) return;
+       a_n[i] = a_n[i] * b_n[i];
      });
    }).wait();
 
@@ -231,12 +244,13 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
 
      h.parallel_for(sycl::nd_range<1>(global, local), [=](sycl::nd_item<1> it) {
        const Int_T i = it.get_global_id(0);
+       if(i >= M) return;
 
        a_n[i] = conj(a_n[i]);
      });
    }).wait();
 
-  cooley_turkey_kernel(a_n, a_n_star, M, logm, wg_size, Q);
+  cooley_turkey_kernel(a_n, M, logm, wg_size, Q);
 
   Q.submit([&](sycl::handler &h) {
      const size_t global_size = ((M + wg_size - 1) / wg_size) * wg_size;
@@ -246,8 +260,9 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
 
      h.parallel_for(sycl::nd_range<1>(global, local), [=](sycl::nd_item<1> it) {
        const Int_T i = it.get_global_id(0);
+       if(i >= M) return;
 
-       a_n[i] = conj(a_n_star[i]) / static_cast<Scalar_T>(M);
+       a_n[i] = conj(a_n[i]) / static_cast<Scalar_T>(M);
      });
    }).wait();
 
@@ -259,6 +274,7 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
 
      h.parallel_for(sycl::nd_range<1>(global, local), [=](sycl::nd_item<1> it) {
        const Int_T i = it.get_global_id(0);
+       if(i >= N) return;
 
        const auto theta = -PI * i * i / N;
        result_device[i] =
@@ -272,8 +288,6 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
 
   sycl::free(a_n, Q);
   sycl::free(b_n, Q);
-  sycl::free(a_n_star, Q);
-  sycl::free(b_n_star, Q);
   sycl::free(result_device, Q);
 
   return result_host;

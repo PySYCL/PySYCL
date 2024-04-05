@@ -9,7 +9,7 @@ device = pysycl.device.get_device(0, 0)
 
 np.random.seed(37)
 
-N = 16
+N = 2**26 + 1
 
 A_np = np.random.rand(N).astype(np.float64)
 A_pysycl = pysycl.vector(A_np, device = device, dtype= pysycl.double)
@@ -26,8 +26,10 @@ A_np_fft = np.fft.fft(A_np)
 end_time_np = time.time()
 np_time = end_time_np - start_time_np
 
-print(A_np_fft)
+# print(A_np_fft)
 
-for i in A_pysycl_fft:
-  print(i)
+# for i in A_pysycl_fft:
+#   print(i)
 
+print(f"pysycl timings: {pysycl_time} seconds")
+print(f"numpy timings: {np_time} seconds")
