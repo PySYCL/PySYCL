@@ -59,7 +59,6 @@ bool is_power_of_two(int N) {
 /// This implementation adapts the CUDA FFT approach discussed in
 /// the GitHub repository: [roguh/cuda-fft](https://github.com/roguh/cuda-fft).
 /// \param[in] A The input vector for fft.
-/// \param[in] result The result vector for fft.
 /// \param[in] Q The sycl queue.
 template <typename Complex_T, typename Int_T>
 auto cooley_turkey_kernel(Complex_T* x, Int_T N, Int_T logn,
