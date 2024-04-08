@@ -113,6 +113,47 @@ auto cooley_turkey_kernel(Complex_T* x, Int_T N, Int_T logn,
 }
 
 ///////////////////////////////////////////////////////////////////////
+/// \brief 1-dimensional inverse fast fourier transform (cooley-turkey)
+///        kernel.
+/// This implementation adapts the CUDA FFT approach discussed in
+/// the GitHub repository: [roguh/cuda-fft](https://github.com/roguh/cuda-fft).
+/// \param[in] A The input vector for fft.
+/// \param[in] Q The sycl queue.
+template <typename Scalar_T, typename Int_T>
+auto cooley_turkey_inverse_kernel(std::complex<Scalar_T>* x, Int_T N, Int_T logn,
+                                  Int_T wg_size, sycl::queue Q) {
+  Q.submit([&](sycl::handler &h) {
+     const size_t global_size = ((N + wg_size - 1) / wg_size) * wg_size;
+
+     sycl::range<1> global{global_size};
+     sycl::range<1> local{wg_size};
+
+     h.parallel_for(sycl::nd_range<1>(global, local), [=](sycl::nd_item<1> it) {
+       const Int_T i = it.get_global_id(0);
+       if(i >= N) return;
+
+       x[i] = conj(x[i]);
+     });
+   }).wait();
+
+  cooley_turkey_kernel(x, N, logn, wg_size, Q);
+
+  Q.submit([&](sycl::handler &h) {
+     const size_t global_size = ((N + wg_size - 1) / wg_size) * wg_size;
+
+     sycl::range<1> global{global_size};
+     sycl::range<1> local{wg_size};
+
+     h.parallel_for(sycl::nd_range<1>(global, local), [=](sycl::nd_item<1> it) {
+       const Int_T i = it.get_global_id(0);
+       if(i >= N) return;
+
+       x[i] = conj(x[i]) / static_cast<Scalar_T>(N);
+     });
+   }).wait();
+}
+
+///////////////////////////////////////////////////////////////////////
 /// \brief 1-dimensional fast fourier transform function (cooley-turkey).
 /// This implementation adapts the CUDA FFT approach discussed in
 /// the GitHub repository: [roguh/cuda-fft](https://github.com/roguh/cuda-fft).
@@ -234,36 +275,8 @@ template <typename Vector_type> auto chirpz(Vector_type &A) {
      });
    }).wait();
 
-  // inverse fft a
-  Q.submit([&](sycl::handler &h) {
-     const size_t global_size = ((M + wg_size - 1) / wg_size) * wg_size;
-
-     sycl::range<1> global{global_size};
-     sycl::range<1> local{wg_size};
-
-     h.parallel_for(sycl::nd_range<1>(global, local), [=](sycl::nd_item<1> it) {
-       const Int_T i = it.get_global_id(0);
-       if(i >= M) return;
-
-       a_n[i] = conj(a_n[i]);
-     });
-   }).wait();
-
-  cooley_turkey_kernel(a_n, M, logm, wg_size, Q);
-
-  Q.submit([&](sycl::handler &h) {
-     const size_t global_size = ((M + wg_size - 1) / wg_size) * wg_size;
-
-     sycl::range<1> global{global_size};
-     sycl::range<1> local{wg_size};
-
-     h.parallel_for(sycl::nd_range<1>(global, local), [=](sycl::nd_item<1> it) {
-       const Int_T i = it.get_global_id(0);
-       if(i >= M) return;
-
-       a_n[i] = conj(a_n[i]) / static_cast<Scalar_T>(M);
-     });
-   }).wait();
+   // inverse fft a
+   cooley_turkey_inverse_kernel(a_n, M, logm, wg_size, Q);
 
   Q.submit([&](sycl::handler &h) {
      const size_t global_size = ((N + wg_size - 1) / wg_size) * wg_size;

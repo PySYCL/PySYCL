@@ -11,7 +11,7 @@ torch_device  = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
 np.random.seed(37)
 
-N = 2**25 + 1
+N = 2**24 + 1
 
 print("N = " + str(N))
 
