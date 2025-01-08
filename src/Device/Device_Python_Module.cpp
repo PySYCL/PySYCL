@@ -19,6 +19,7 @@
 // local
 ///////////////////////////////////////////////////////////////////////
 #include "Device_Inquiry_Python_Module.h"
+#include "Device_Instance_Python_Module.h"
 
 ///////////////////////////////////////////////////////////////////////
 // pybind11
@@ -38,4 +39,5 @@ PYBIND11_MODULE(device, m) {
     )delim";
 
   device_inquiry_module(m);
+  device_instance_module(m);
 }
