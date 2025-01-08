@@ -24,6 +24,11 @@ if(PYSYCL_TEST_DEVICE_INQUIRY)
   PySYCL_add_to_tests("Device_Inquiry_Tests.cpp")
 endif()
 
+option(PYSYCL_TEST_DEVICE_INQUIRY "Compile tests for Device Inquiry" ON)
+if(PYSYCL_TEST_DEVICE_INQUIRY)
+  PySYCL_add_to_tests("Device_Instance_Tests.cpp")
+endif()
+
 # ######################################################################
 # # Setting the name of the PyBind module
 # ######################################################################

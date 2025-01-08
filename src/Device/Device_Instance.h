@@ -67,17 +67,13 @@ public:
   /////////////////////////////////////////////////////////////////////
   /// \brief Output device name.
   auto name() {
-    static const std::string name =
-      Q.get_device().get_info<sycl::info::device::name>();
-    return name;
+    return Q.get_device().get_info<sycl::info::device::name>();
   }
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Output device vendor.
   auto vendor() {
-    static const std::string vendor =
-      Q.get_device().get_info<sycl::info::device::vendor>();
-    return vendor;
+    return Q.get_device().get_info<sycl::info::device::vendor>();
   }
 
   /////////////////////////////////////////////////////////////////////
