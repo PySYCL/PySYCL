@@ -35,29 +35,49 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 # ######################################################################
+# # Default Flags
+# ######################################################################
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG ${COMPILER_ARCH_FLAG} -fsycl" CACHE STRING
+"Release build flags." FORCE)
+
+set(CMAKE_CXX_FLAGS_DEBUG "-g -fsycl" CACHE STRING "Debug build flags." FORCE)
+
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELEASE} -g -fsycl" CACHE STRING
+"Release build with debug info flags." FORCE)
+
+set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG -fsycl ${COMPILER_ARCH_FLAG}" CACHE STRING
+"Min-size release build flags." FORCE)
+
+# ######################################################################
 # # Flags for different backends
 # ######################################################################
 if(PYSYCL_USE_CUDA)
-  set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG ${COMPILER_ARCH_FLAG} -fsycl -fsycl-targets=nvptx64-nvidia-cuda" 
-  CACHE STRING "Release build flags." FORCE)
+  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -fsycl-targets=nvptx64-nvidia-cuda"
+  CACHE STRING "Release build flags for CUDA backend." FORCE)
 
-  set(CMAKE_CXX_FLAGS_DEBUG "-g -fsycl -fsycl-targets=nvptx64-nvidia-cuda"
-  CACHE STRING "Debug build flags." FORCE)
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsycl-targets=nvptx64-nvidia-cuda"
+  CACHE STRING "Debug build flags for CUDA backend." FORCE)
 
-  set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELEASE} -g -fsycl -fsycl-targets=nvptx64-nvidia-cuda"
-  CACHE STRING "Release build with debug info flags." FORCE)
+  set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -fsycl-targets=nvptx64-nvidia-cuda"
+  CACHE STRING "Release build with debug info flags for CUDA backend." FORCE)
 
-  set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG -fsycl -fsycl-targets=nvptx64-nvidia-cuda ${COMPILER_ARCH_FLAG}"
-  CACHE STRING "Min-size release build flags." FORCE)
-else()
-  set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG ${COMPILER_ARCH_FLAG} -fsycl" CACHE STRING
-  "Release build flags." FORCE)
+  set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAG3S_MINSIZEREL} -fsycl-targets=nvptx64-nvidia-cuda"
+  CACHE STRING "Min-size release build flags for CUDA backend." FORCE)
+endif()
 
-  set(CMAKE_CXX_FLAGS_DEBUG "-g -fsycl" CACHE STRING "Debug build flags." FORCE)
+# ######################################################################
+# # Flags for different extensions
+# ######################################################################
+if(PYSYCL_USE_ONEMKL)
+  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -lonemkl"
+  CACHE STRING "Release build flags for onemkl." FORCE)
 
-  set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELEASE} -g -fsycl" CACHE STRING
-  "Release build with debug info flags." FORCE)
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -lonemkl"
+  CACHE STRING "Debug build flags for onemkl." FORCE)
 
-  set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG -fsycl ${COMPILER_ARCH_FLAG}" CACHE STRING
-  "Min-size release build flags." FORCE)
+  set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -lonemkl"
+  CACHE STRING "Release build with debug info flags for onemkl." FORCE)
+
+  set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAG3S_MINSIZEREL} -lonemkl"
+  CACHE STRING "Min-size release build flags for onemkl." FORCE)
 endif()

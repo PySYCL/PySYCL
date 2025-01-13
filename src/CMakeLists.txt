@@ -21,7 +21,7 @@ project(PySYCL)
 # ######################################################################
 # # Version of C++
 # ######################################################################
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -29,6 +29,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 ## SYCL Backends
 #######################################################################
 option(PYSYCL_USE_CUDA "Use CUDA" OFF)
+
+#######################################################################
+## SYCL Extensions
+#######################################################################
+option(PYSYCL_USE_ONEMKL "Use OneMKL" OFF)
 
 # ######################################################################
 # # Include dependencies for each module
