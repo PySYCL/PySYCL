@@ -40,13 +40,13 @@ using Vector_T = std::vector<std::vector<int>>;
 ///////////////////////////////////////////////////////////////////////
 // Device Instance Test 1 (check platform and device index)
 ///////////////////////////////////////////////////////////////////////
-TEST(DeviceInstance,test1) {
-  const auto &platforms = sycl::platform::get_platforms();
+TEST(DeviceInstance, test1) {
+  const auto& platforms = sycl::platform::get_platforms();
 
-  for(int i = 0; i < platforms.size(); ++i) {
-    const auto &devices = platforms[i].get_devices();
+  for (int i = 0; i < platforms.size(); ++i) {
+    const auto& devices = platforms[i].get_devices();
 
-    for(int j = 0; j < devices.size(); ++j) {
+    for (int j = 0; j < devices.size(); ++j) {
       auto my_device = pysycl::Device_Instance(i, j);
       ASSERT_EQ(i, my_device.get_platform_index());
       ASSERT_EQ(j, my_device.get_device_index());
@@ -57,17 +57,20 @@ TEST(DeviceInstance,test1) {
 ///////////////////////////////////////////////////////////////////////
 // Device Instance Test 2 (check device name and vendor)
 ///////////////////////////////////////////////////////////////////////
-TEST(DeviceInstance,test2) {
-  const auto &platforms = sycl::platform::get_platforms();
+TEST(DeviceInstance, test2) {
+  const auto& platforms = sycl::platform::get_platforms();
 
-  for(int i = 0; i < platforms.size(); ++i) {
-    const auto &devices = platforms[i].get_devices();
+  for (int i = 0; i < platforms.size(); ++i) {
+    const auto& devices = platforms[i].get_devices();
 
-    for(int j = 0; j < devices.size(); ++j) {
+    for (int j = 0; j < devices.size(); ++j) {
       auto my_device = pysycl::Device_Instance(i, j);
       auto Q = sycl::queue(devices[j]);
-      ASSERT_EQ(Q.get_device().get_info<sycl::info::device::name>(),   my_device.name());
-      ASSERT_EQ(Q.get_device().get_info<sycl::info::device::vendor>(), my_device.vendor());
+      ASSERT_EQ(
+        Q.get_device().get_info<sycl::info::device::name>(), my_device.name());
+      ASSERT_EQ(
+        Q.get_device().get_info<sycl::info::device::vendor>(),
+        my_device.vendor());
     }
   }
 }

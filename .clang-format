@@ -1,23 +1,35 @@
-BasedOnStyle: Google
-AlignAfterOpenBracket: Align
-AllowShortEnumsOnASingleLine: false
-AllowShortIfStatementsOnASingleLine: false
-AlwaysBreakAfterReturnType: TopLevel
-BreakBeforeBraces: Stroustrup
-ColumnLimit: 79
-ContinuationIndentWidth: 8
-DerivePointerAlignment: false
-IndentWidth: 2
-IncludeBlocks: Regroup
-IncludeCategories:
-  - Regex:           '^<.*>'
-    Priority:        1
-  - Regex:           '^".*"'
-    Priority:        2
+BasedOnStyle: Mozilla
 Language: Cpp
-PointerAlignment: Right
-ReflowComments: true
-SpaceBeforeParens: ControlStatements
-SpacesInParentheses: false
-TabWidth: 2
-UseTab: Never
+AccessModifierOffset: -4
+AlignAfterOpenBracket: AlwaysBreak
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+BreakBeforeBinaryOperators: All
+BreakBeforeBraces: Attach
+BreakBeforeConceptDeclarations: Always
+ColumnLimit: 80
+ContinuationIndentWidth: 2
+Cpp11BracedListStyle: true
+FixNamespaceComments: true
+IncludeBlocks: Regroup
+IndentCaseLabels: false
+IndentRequires: false
+IndentRequiresClause: false
+IndentWidth: 2
+InsertNewlineAtEOF: true
+KeepEmptyLinesAtTheStartOfBlocks: false
+PenaltyBreakAssignment: 80
+PenaltyBreakBeforeFirstCallParameter: 10
+PenaltyReturnTypeOnItsOwnLine: 60
+PointerAlignment: Left
+QualifierAlignment: Custom
+QualifierOrder: [static, inline, const, type]
+ReferenceAlignment: Left
+RequiresClausePosition: OwnLine
+RequiresExpressionIndentation: OuterScope

@@ -26,7 +26,6 @@
 #include <iostream>
 
 int main(int argc, char* argv[]) {
-
   // initialize google test
   ::testing::InitGoogleTest(&argc, argv);
 

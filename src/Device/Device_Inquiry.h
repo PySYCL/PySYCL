@@ -38,10 +38,10 @@ namespace pysycl {
 template<typename Vector_T>
 auto get_device_list() {
   Vector_T device_list;
-  const auto &platforms = sycl::platform::get_platforms();
+  const auto& platforms = sycl::platform::get_platforms();
 
   for (int i = 0; i < platforms.size(); ++i) {
-    const auto &devices = platforms[i].get_devices();
+    const auto& devices = platforms[i].get_devices();
 
     for (int j = 0; j < devices.size(); ++j) {
       auto si = std::to_string(i);
@@ -56,17 +56,16 @@ auto get_device_list() {
 ///////////////////////////////////////////////////////////////////////
 /// \brief Function that returns a list of available devices.
 void output_device_list() {
-  const auto &platforms = sycl::platform::get_platforms();
+  const auto& platforms = sycl::platform::get_platforms();
 
-  for(int i = 0; i < platforms.size(); ++i) {
-    const auto &devices = platforms[i].get_devices();
+  for (int i = 0; i < platforms.size(); ++i) {
+    const auto& devices = platforms[i].get_devices();
 
-    for(int j = 0; j < devices.size(); ++j) {
+    for (int j = 0; j < devices.size(); ++j) {
       auto si = std::to_string(i);
       auto sj = std::to_string(j);
-      std::cout << devices[j].get_info<sycl::info::device::name>()
-                << " ["  << si << ", " << sj + "]"
-                << std::endl;
+      std::cout << devices[j].get_info<sycl::info::device::name>() << " [" << si
+                << ", " << sj + "]" << std::endl;
     }
   }
 }

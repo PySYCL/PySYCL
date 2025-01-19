@@ -37,24 +37,24 @@ namespace pysycl {
 ///////////////////////////////////////////////////////////////////////
 /// \brief Class defining a device instance for device selection.
 class Device_Instance {
-public:
+  public:
   /////////////////////////////////////////////////////////////////////
   /// \brief Copy constructor, use compiler generated version.
-  Device_Instance(const Device_Instance &) = default;
+  Device_Instance(const Device_Instance&) = default;
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Move constructor, use compiler generated version.
-  Device_Instance(Device_Instance &&) = default;
+  Device_Instance(Device_Instance&&) = default;
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Copy assignment, use compiler generated version.
   /// \return reference to the assigned object.
-  Device_Instance &operator=(const Device_Instance &) = default;
+  Device_Instance& operator=(const Device_Instance&) = default;
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Move assignment, use compiler generated version.
   /// \return reference to the assigned object.
-  Device_Instance &operator=(Device_Instance &&) = default;
+  Device_Instance& operator=(Device_Instance&&) = default;
 
   /////////////////////////////////////////////////////////////////////
   /// \brief The platform index.
@@ -66,9 +66,7 @@ public:
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Output device name.
-  auto name() {
-    return Q.get_device().get_info<sycl::info::device::name>();
-  }
+  auto name() { return Q.get_device().get_info<sycl::info::device::name>(); }
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Output device vendor.
@@ -98,11 +96,9 @@ public:
   /// \brief Constructor that selects a SYCL device.
   /// \param[in] platform_index Index of the sycl platform to select.
   /// \param[in] device_index Index of the sycl device to select.
-  Device_Instance(const int platform_idx_in = 0,
-                  const int device_idx_in = 0) :
-                  platform_idx(platform_idx_in),
-                  device_idx(device_idx_in) {
-
+  Device_Instance(const int platform_idx_in = 0, const int device_idx_in = 0)
+    : platform_idx(platform_idx_in)
+    , device_idx(device_idx_in) {
     if (platform_idx < 0) {
       throw std::runtime_error("ERROR: Platform index must be non-negative.");
     }
@@ -126,7 +122,7 @@ public:
     Q = sycl::queue(devices[device_idx]);
   }
 
-private:
+  private:
   /////////////////////////////////////////////////////////////////////
   /// \brief The selected device queue.
   sycl::queue Q;
@@ -138,8 +134,8 @@ private:
 ///////////////////////////////////////////////////////////////////////
 // Equality operator.
 inline bool operator==(const Device_Instance& di1, const Device_Instance& di2) {
-  return (di1.platform_idx == di2.platform_idx) &&
-         (di1.device_idx == di2.device_idx);
+  return (di1.platform_idx == di2.platform_idx)
+         && (di1.device_idx == di2.device_idx);
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -151,7 +147,7 @@ inline bool operator!=(const Device_Instance& di1, const Device_Instance& di2) {
 ///////////////////////////////////////////////////////////////////////
 // Less than operator.
 inline bool operator<(const Device_Instance& di1, const Device_Instance& di2) {
-  if(di1.platform_idx != di2.platform_idx) {
+  if (di1.platform_idx != di2.platform_idx) {
     return di1.platform_idx < di2.platform_idx;
   } else {
     return di1.device_idx < di2.device_idx;
@@ -160,19 +156,19 @@ inline bool operator<(const Device_Instance& di1, const Device_Instance& di2) {
 
 ///////////////////////////////////////////////////////////////////////
 // Greater than operator.
-inline bool operator>(const Device_Instance &di1, const Device_Instance &di2) {
+inline bool operator>(const Device_Instance& di1, const Device_Instance& di2) {
   return !(di1 < di2 || di1 == di2);
 }
 
 ///////////////////////////////////////////////////////////////////////
 // Less than or equal to operator.
-inline bool operator<=(const Device_Instance &di1, const Device_Instance &di2) {
+inline bool operator<=(const Device_Instance& di1, const Device_Instance& di2) {
   return (di1 < di2) || (di1 == di2);
 }
 
 ///////////////////////////////////////////////////////////////////////
 // Greater than or equal to operator.
-inline bool operator>=(const Device_Instance &di1, const Device_Instance &di2) {
+inline bool operator>=(const Device_Instance& di1, const Device_Instance& di2) {
   return (di1 > di2) || (di1 == di2);
 }
 

@@ -40,7 +40,7 @@ using Vector_T = std::vector<std::vector<int>>;
 ///////////////////////////////////////////////////////////////////////
 // Device Inquiry Test 1 (get device list)
 ///////////////////////////////////////////////////////////////////////
-TEST(DeviceInquiry,test1) {
+TEST(DeviceInquiry, test1) {
   auto my_devices = pysycl::get_device_list<Vector_T>();
 
   ASSERT_FALSE(my_devices.empty()) << "The device list is empty!";
@@ -49,7 +49,7 @@ TEST(DeviceInquiry,test1) {
 ///////////////////////////////////////////////////////////////////////
 // Device Inquiry Test 2 (output device list)
 ///////////////////////////////////////////////////////////////////////
-TEST(DeviceInquiry,test2) {
+TEST(DeviceInquiry, test2) {
   std::ostringstream oss;
   std::streambuf* sb = std::cout.rdbuf(oss.rdbuf());
 
