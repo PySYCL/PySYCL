@@ -67,10 +67,11 @@ TEST(DeviceInstance, test2) {
       auto my_device = pysycl::Device_Instance(i, j);
       auto Q = sycl::queue(devices[j]);
       ASSERT_EQ(
-        Q.get_device().get_info<sycl::info::device::name>(), my_device.name());
+          Q.get_device().get_info<sycl::info::device::name>(),
+          my_device.name());
       ASSERT_EQ(
-        Q.get_device().get_info<sycl::info::device::vendor>(),
-        my_device.vendor());
+          Q.get_device().get_info<sycl::info::device::vendor>(),
+          my_device.vendor());
     }
   }
 }

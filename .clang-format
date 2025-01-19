@@ -14,10 +14,20 @@ BreakBeforeBinaryOperators: All
 BreakBeforeBraces: Attach
 BreakBeforeConceptDeclarations: Always
 ColumnLimit: 80
-ContinuationIndentWidth: 2
+ContinuationIndentWidth: 4
 Cpp11BracedListStyle: true
 FixNamespaceComments: true
 IncludeBlocks: Regroup
+IncludeCategories:
+  # Other libraries
+  - Regex:    '^<.+/'
+    Priority: 4
+  # Std header files (with angles)
+  - Regex:    '^<'
+    Priority: 5
+  # Internal headers (with quotes)
+  - Regex:    '.h'
+    Priority: 1
 IndentCaseLabels: false
 IndentRequires: false
 IndentRequiresClause: false

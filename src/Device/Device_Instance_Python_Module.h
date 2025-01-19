@@ -36,13 +36,13 @@ namespace py = pybind11;
 ///////////////////////////////////////////////////////////////////////
 void device_instance_module(py::module& m) {
   py::class_<pysycl::Device_Instance> device_instance(
-    m, "device_instance", R"delim(
+      m, "device_instance", R"delim(
     Description
       This class creates a PySYCL device instance.
     )delim");
 
   device_instance
-    .def(py::init<>(), "Default constructor", R"delim(
+      .def(py::init<>(), "Default constructor", R"delim(
     Description
       This is the default constructor for a device instance.
 
@@ -53,9 +53,9 @@ void device_instance_module(py::module& m) {
       >>> import pysycl
       >>> my_device = pysycl.device.device_instance()
     )delim")
-    .def(
-      py::init<const int, const int>(),
-      R"delim(
+      .def(
+          py::init<const int, const int>(),
+          R"delim(
     Description
       This is the a constructor for a device instance that
       takes the platform and device index as input parameters.
@@ -73,9 +73,9 @@ void device_instance_module(py::module& m) {
       >>> import pysycl
       >>> my_device = pysycl.device.device_instance()
     )delim",
-      py::arg("platform_idx"),
-      py::arg("device_idx"))
-    .def("name", &pysycl::Device_Instance::name, R"delim(
+          py::arg("platform_idx"),
+          py::arg("device_idx"))
+      .def("name", &pysycl::Device_Instance::name, R"delim(
     Description
       This function outputs the device name.
 
@@ -87,7 +87,7 @@ void device_instance_module(py::module& m) {
       NVIDIA GeForce RTX 3060 Laptop GPU
 
     )delim")
-    .def("vendor", &pysycl::Device_Instance::vendor, R"delim(
+      .def("vendor", &pysycl::Device_Instance::vendor, R"delim(
     Description
       This function returns the device vendor.
 
@@ -98,36 +98,30 @@ void device_instance_module(py::module& m) {
       >>> print(my_device.vendor())
       NVIDIA Corporation
     )delim")
-    .def(
-      "__eq__",
-      [](
-        const pysycl::Device_Instance& di1,
-        const pysycl::Device_Instance& di2) { return di1 == di2; })
-    .def(
-      "__ne__",
-      [](
-        const pysycl::Device_Instance& di1,
-        const pysycl::Device_Instance& di2) { return di1 != di2; })
-    .def(
-      "__lt__",
-      [](
-        const pysycl::Device_Instance& di1,
-        const pysycl::Device_Instance& di2) { return di1 < di2; })
-    .def(
-      "__le__",
-      [](
-        const pysycl::Device_Instance& di1,
-        const pysycl::Device_Instance& di2) { return di1 <= di2; })
-    .def(
-      "__gt__",
-      [](
-        const pysycl::Device_Instance& di1,
-        const pysycl::Device_Instance& di2) { return di1 > di2; })
-    .def(
-      "__ge__",
-      [](
-        const pysycl::Device_Instance& di1,
-        const pysycl::Device_Instance& di2) { return di1 >= di2; });
+      .def(
+          "__eq__",
+          [](const pysycl::Device_Instance& di1,
+             const pysycl::Device_Instance& di2) { return di1 == di2; })
+      .def(
+          "__ne__",
+          [](const pysycl::Device_Instance& di1,
+             const pysycl::Device_Instance& di2) { return di1 != di2; })
+      .def(
+          "__lt__",
+          [](const pysycl::Device_Instance& di1,
+             const pysycl::Device_Instance& di2) { return di1 < di2; })
+      .def(
+          "__le__",
+          [](const pysycl::Device_Instance& di1,
+             const pysycl::Device_Instance& di2) { return di1 <= di2; })
+      .def(
+          "__gt__",
+          [](const pysycl::Device_Instance& di1,
+             const pysycl::Device_Instance& di2) { return di1 > di2; })
+      .def(
+          "__ge__",
+          [](const pysycl::Device_Instance& di1,
+             const pysycl::Device_Instance& di2) { return di1 >= di2; });
 }
 
 #endif // DEVICE_INSTANCE_PYTHON_MODULE_H
