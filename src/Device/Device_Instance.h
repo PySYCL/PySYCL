@@ -94,8 +94,8 @@ class Device_Instance {
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Constructor that selects a SYCL device.
-  /// \param[in] platform_index Index of the sycl platform to select.
-  /// \param[in] device_index Index of the sycl device to select.
+  /// \param[in] platform_index_in Index of the sycl platform to select.
+  /// \param[in] device_index_in Index of the sycl device to select.
   Device_Instance(const int platform_idx_in = 0, const int device_idx_in = 0)
     : platform_idx(platform_idx_in)
     , device_idx(device_idx_in) {
