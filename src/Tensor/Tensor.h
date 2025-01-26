@@ -64,17 +64,45 @@ class Tensor {
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Constructor that creates a pysycl tensor.
-  /// \param[in] my_device_in device that the memory resides on.
+  /// \param[in] device_in device that the memory resides on.
   /// \param[in] dimensions_in dimensions for the tensor.
-  Tensor(const Device_Instance& my_device_in,
-         const std::vector<Scalar_T> dimensions_in)
-    : my_device(my_device_in)
-    , dimensions(dimensions_in) {
+  Tensor(const Device_Instance& device_in,
+         const std::vector<Scalar_T>& dimension_sizes_in)
+    : device(device_in)
+    , dimension_sizes(dimension_sizes_in)
+    , dimensions(dimension_sizes.size()) {
+      for(const auto& dimension_size : dimension_sizes) {
+        length *= dimension_size;
+      }
+
+      Scalar_T* data = sycl::malloc_shared<Scalar_T>(size, Q);
   }
 
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief Get the number of elements in the Vector.
+  /// \return Number of elements in the Vector.
+  int len() const { return length; }
+
   private:
-  Device_Instance my_device;
-  std::vector<Scalar_T> dimensions;
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief The device that will load the usm memory.
+  Device_Instance device;
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief The length of the tensor in each dimension.
+  std::vector<Scalar_T> dimension_sizes;
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief The number of dimensions.
+  std::size_t dimensions;
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief The total length of the memory
+  std::size_t length = 1.0;
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief The pointer to usm memory
+  Scalar_T* data;
 };
 
 } // namespace pysycl

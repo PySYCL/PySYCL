@@ -1,7 +1,7 @@
 # ######################################################################
 # ######################################################################
 # # CMakeLists.txt for PySYCL
-# # subdirectory : Device
+# # subdirectory : Tensor
 # ######################################################################
 # ######################################################################
 # # This file is part of the PySYCL software for SYCL development in
@@ -19,9 +19,9 @@
 # ######################################################################
 # # Tests
 # ######################################################################
-option(PYSYCL_TEST_DEVICE_INQUIRY "Compile tests for Device Inquiry" ON)
+option(PYSYCL_TEST_DEVICE_INQUIRY "Compile tests for Tensor" ON)
 if(PYSYCL_TEST_DEVICE_INQUIRY)
-  PySYCL_add_to_tests("Device_Inquiry_Tests.cpp")
+  PySYCL_add_to_tests("Tensor_Tests.cpp")
 endif()
 
 option(PYSYCL_TEST_DEVICE_INTANCE "Compile tests for Device Instance" ON)
@@ -32,11 +32,11 @@ endif()
 # ######################################################################
 # # Setting the name of the PyBind module
 # ######################################################################
-option(PYSYCL_Device "Compile the PySYCL device module" ON)
+option(PYSYCL_Tevice "Compile the PySYCL tensor module" ON)
 
 # ######################################################################
 # # Python Module
 # ######################################################################
-if (PYSYCL_Device)
-  PySYCL_add_pybind11_module(device Device_Python_Module.cpp)
+if (PYSYCL_Tevice)
+  PySYCL_add_pybind11_module(tensor Tensor_Python_Module.cpp)
 endif()
