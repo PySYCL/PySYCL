@@ -72,16 +72,16 @@ class Tensor {
     , dimension_sizes(dimension_sizes_in)
     , dimensions(dimension_sizes.size()) {
       for(const auto& dimension_size : dimension_sizes) {
-        length *= dimension_size;
+        total_length *= dimension_size;
       }
 
-      Scalar_T* data = sycl::malloc_shared<Scalar_T>(size, Q);
+      Scalar_T* data = sycl::malloc_shared<Scalar_T>(total_length, Q);
   }
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief Get the number of elements in the Vector.
   /// \return Number of elements in the Vector.
-  int len() const { return length; }
+  int len() const { return total_length; }
 
   private:
   ///////////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ class Tensor {
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief The total length of the memory
-  std::size_t length = 1.0;
+  std::size_t total_length = 1.0;
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief The pointer to usm memory
