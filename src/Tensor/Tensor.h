@@ -67,7 +67,7 @@ class Tensor {
   /// \param[in] device_in device that the memory resides on.
   /// \param[in] dimensions_in dimensions for the tensor.
   Tensor(const Device_Instance& device_in,
-         const std::vector<Scalar_T>& dimension_sizes_in)
+         const std::vector<std::size_t>& dimension_sizes_in)
     : device(device_in)
     , dimension_sizes(dimension_sizes_in)
     , dimensions(dimension_sizes.size()) {
