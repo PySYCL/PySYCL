@@ -31,7 +31,7 @@ namespace py = pybind11;
 // Utilities module for PySYCL
 ///////////////////////////////////////////////////////////////////////
 
-PYBIND11_MODULE(device, m) {
+PYBIND11_MODULE(utilities, m) {
   m.doc() = R"delim(
     Utilities module for PySYCL
       This module provides classes and functions for selecting SYCL devices.

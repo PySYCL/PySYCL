@@ -45,13 +45,13 @@ PYBIND11_MODULE(device, m) {
       This module provides classes and functions for selecting pysycl devices.
     )delim";
 
-  py::class_<Device_T> device_instance(
-      m, "device_instance", R"delim(
+  py::class_<Device_T> device_object(
+      m, "device", R"delim(
     Description
       This class creates a PySYCL device instance.
     )delim");
 
-  device_instance
+  device_object
       .def(py::init<>(), "Default constructor", R"delim(
     Description
       This is the default constructor for a device instance.
@@ -134,4 +134,4 @@ PYBIND11_MODULE(device, m) {
              const Device_T& di2) { return di1 >= di2; });
 }
 
-#endif // DEVICE_INSTANCE_PYTHON_MODULE_H
+#endif // DEVICE_PYTHON_MODULE_H
