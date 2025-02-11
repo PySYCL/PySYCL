@@ -1,5 +1,5 @@
-#ifndef DEVICE_INSTANCE_H
-#define DEVICE_INSTANCE_H
+#ifndef DEVICE_H
+#define DEVICE_H
 
 ///////////////////////////////////////////////////////////////////////
 // This file is part of the PySYCL software for SYCL development in
@@ -15,7 +15,7 @@
 
 ///////////////////////////////////////////////////////////////////////
 /// \file
-/// \brief Device instance for device selection in PySYCL.
+/// \brief Device object in PySYCL.
 ///////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////
@@ -35,26 +35,26 @@
 namespace pysycl {
 
 ///////////////////////////////////////////////////////////////////////
-/// \brief Class defining a device instance for device selection.
-class Device_Instance {
+/// \brief Class defining a device for device selection.
+class Device {
   public:
   /////////////////////////////////////////////////////////////////////
   /// \brief Copy constructor, use compiler generated version.
-  Device_Instance(const Device_Instance&) = default;
+  Device(const Device&) = default;
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Move constructor, use compiler generated version.
-  Device_Instance(Device_Instance&&) = default;
+  Device(Device&&) = default;
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Copy assignment, use compiler generated version.
   /// \return reference to the assigned object.
-  Device_Instance& operator=(const Device_Instance&) = default;
+  Device& operator=(const Device&) = default;
 
   /////////////////////////////////////////////////////////////////////
   /// \brief Move assignment, use compiler generated version.
   /// \return reference to the assigned object.
-  Device_Instance& operator=(Device_Instance&&) = default;
+  Device& operator=(Device&&) = default;
 
   /////////////////////////////////////////////////////////////////////
   /// \brief The platform index.
@@ -96,7 +96,7 @@ class Device_Instance {
   /// \brief Constructor that selects a SYCL device.
   /// \param[in] platform_index_in Index of the sycl platform to select.
   /// \param[in] device_index_in Index of the sycl device to select.
-  Device_Instance(const int platform_idx_in = 0, const int device_idx_in = 0)
+  Device(const int platform_idx_in = 0, const int device_idx_in = 0)
     : platform_idx(platform_idx_in)
     , device_idx(device_idx_in) {
     if (platform_idx < 0) {
@@ -133,20 +133,20 @@ class Device_Instance {
 
 ///////////////////////////////////////////////////////////////////////
 // Equality operator.
-inline bool operator==(const Device_Instance& di1, const Device_Instance& di2) {
+inline bool operator==(const Device& di1, const Device& di2) {
   return (di1.platform_idx == di2.platform_idx)
          && (di1.device_idx == di2.device_idx);
 }
 
 ///////////////////////////////////////////////////////////////////////
 // Inequality operator.
-inline bool operator!=(const Device_Instance& di1, const Device_Instance& di2) {
+inline bool operator!=(const Device& di1, const Device& di2) {
   return !(di1 == di2);
 }
 
 ///////////////////////////////////////////////////////////////////////
 // Less than operator.
-inline bool operator<(const Device_Instance& di1, const Device_Instance& di2) {
+inline bool operator<(const Device& di1, const Device& di2) {
   if (di1.platform_idx != di2.platform_idx) {
     return di1.platform_idx < di2.platform_idx;
   } else {
@@ -156,22 +156,22 @@ inline bool operator<(const Device_Instance& di1, const Device_Instance& di2) {
 
 ///////////////////////////////////////////////////////////////////////
 // Greater than operator.
-inline bool operator>(const Device_Instance& di1, const Device_Instance& di2) {
+inline bool operator>(const Device& di1, const Device& di2) {
   return !(di1 < di2 || di1 == di2);
 }
 
 ///////////////////////////////////////////////////////////////////////
 // Less than or equal to operator.
-inline bool operator<=(const Device_Instance& di1, const Device_Instance& di2) {
+inline bool operator<=(const Device& di1, const Device& di2) {
   return (di1 < di2) || (di1 == di2);
 }
 
 ///////////////////////////////////////////////////////////////////////
 // Greater than or equal to operator.
-inline bool operator>=(const Device_Instance& di1, const Device_Instance& di2) {
+inline bool operator>=(const Device& di1, const Device& di2) {
   return (di1 > di2) || (di1 == di2);
 }
 
 } // namespace pysycl
 
-#endif // #ifndef DEVICE_INSTANCE_H
+#endif // #ifndef DEVICE_H

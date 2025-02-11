@@ -1,3 +1,6 @@
+#ifndef DEVICE_INQUIRY_H
+#define DEVICE_INQUIRY_H
+
 ///////////////////////////////////////////////////////////////////////
 // This file is part of the PySYCL software for SYCL development in
 // Python. It is licensed under the Apache License, Version 2.0. A copy
@@ -11,16 +14,14 @@
 ///////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////
-// gtest
+/// \file
+/// \brief Device inquiry in PySYCL
 ///////////////////////////////////////////////////////////////////////
-#include <gtest/gtest.h>
 
 ///////////////////////////////////////////////////////////////////////
 // stl
 ///////////////////////////////////////////////////////////////////////
 #include <iostream>
-#include <sstream>
-#include <vector>
 
 ///////////////////////////////////////////////////////////////////////
 // sycl
@@ -28,34 +29,47 @@
 #include <sycl/sycl.hpp>
 
 ///////////////////////////////////////////////////////////////////////
-// sycl
-///////////////////////////////////////////////////////////////////////
-#include "Device_Inquiry.h"
+/// \addtogroup Utilities
+/// @{
 
+namespace pysycl {
 ///////////////////////////////////////////////////////////////////////
-// Defining types
-///////////////////////////////////////////////////////////////////////
-using Vector_T = std::vector<std::vector<int>>;
+/// \brief Function that returns a list of available devices.
+template<typename Vector_T>
+auto get_device_list() {
+  Vector_T device_list;
+  const auto& platforms = sycl::platform::get_platforms();
 
-///////////////////////////////////////////////////////////////////////
-// Device Inquiry Test 1 (get device list)
-///////////////////////////////////////////////////////////////////////
-TEST(DeviceInquiry, test1) {
-  auto my_devices = pysycl::get_device_list<Vector_T>();
+  for (int i = 0; i < platforms.size(); ++i) {
+    const auto& devices = platforms[i].get_devices();
 
-  ASSERT_FALSE(my_devices.empty()) << "The device list is empty!";
+    for (int j = 0; j < devices.size(); ++j) {
+      auto si = std::to_string(i);
+      auto sj = std::to_string(j);
+      device_list.push_back({i, j});
+    }
+  }
+
+  return device_list;
 }
 
 ///////////////////////////////////////////////////////////////////////
-// Device Inquiry Test 2 (output device list)
-///////////////////////////////////////////////////////////////////////
-TEST(DeviceInquiry, test2) {
-  std::ostringstream oss;
-  std::streambuf* sb = std::cout.rdbuf(oss.rdbuf());
+/// \brief Function that returns a list of available devices.
+void output_device_list() {
+  const auto& platforms = sycl::platform::get_platforms();
 
-  pysycl::output_device_list();
-  std::cout.rdbuf(sb);
+  for (int i = 0; i < platforms.size(); ++i) {
+    const auto& devices = platforms[i].get_devices();
 
-  std::string output = oss.str();
-  ASSERT_FALSE(output.empty()) << "The device list did not output!";
+    for (int j = 0; j < devices.size(); ++j) {
+      auto si = std::to_string(i);
+      auto sj = std::to_string(j);
+      std::cout << devices[j].get_info<sycl::info::device::name>() << " [" << si
+                << ", " << sj + "]" << std::endl;
+    }
+  }
 }
+
+} // namespace pysycl
+
+#endif // #ifndef DEVICE_INQUIRY_H

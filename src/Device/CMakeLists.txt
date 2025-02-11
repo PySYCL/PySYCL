@@ -19,14 +19,9 @@
 # ######################################################################
 # # Tests
 # ######################################################################
-option(PYSYCL_TEST_DEVICE_INQUIRY "Compile tests for Device Inquiry" ON)
-if(PYSYCL_TEST_DEVICE_INQUIRY)
-  PySYCL_add_to_tests("Device_Inquiry_Tests.cpp")
-endif()
-
-option(PYSYCL_TEST_DEVICE_INTANCE "Compile tests for Device Instance" ON)
-if(PYSYCL_TEST_DEVICE_INSTANCE)
-  PySYCL_add_to_tests("Device_Instance_Tests.cpp")
+option(PYSYCL_TEST_DEVICE "Compile tests for Device" ON)
+if(PYSYCL_TEST_DEVICE)
+  PySYCL_add_to_tests("Device_Tests.cpp")
 endif()
 
 # ######################################################################

@@ -1,6 +1,7 @@
 # ######################################################################
 # ######################################################################
-# #                  CMakeLists.txt for PySYCL
+# # CMakeLists.txt for PySYCL
+# # subdirectory : Utilities
 # ######################################################################
 # ######################################################################
 # # This file is part of the PySYCL software for SYCL development in
@@ -15,49 +16,22 @@
 # ######################################################################
 # ######################################################################
 
-cmake_minimum_required(VERSION 3.13)
-project(PySYCL)
+# ######################################################################
+# # Tests
+# ######################################################################
+option(PYSYCL_TEST_DEVICE_INQUIRY "Compile tests for Device Inquiry" ON)
+if(PYSYCL_TEST_DEVICE_INQUIRY)
+  PySYCL_add_to_tests("Device_Inquiry_Tests.cpp")
+endif()
 
 # ######################################################################
-# # Version of C++
+# # Setting the name of the PyBind module
 # ######################################################################
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-#######################################################################
-## SYCL Backends
-#######################################################################
-option(PYSYCL_USE_CUDA "Use CUDA" OFF)
-
-#######################################################################
-## SYCL Extensions
-#######################################################################
-option(PYSYCL_USE_ONEMKL "Use OneMKL" OFF)
+option(PYSYCL_Utilities "Compile the PySYCL utilities module" ON)
 
 # ######################################################################
-# # Include dependencies for each module
+# # Python Module
 # ######################################################################
-add_library(pysycl_project_dependencies INTERFACE)
-
-# ######################################################################
-# # Build types
-# ######################################################################
-include(CMake/BuildType.cmake)
-
-# ######################################################################
-# # Google test
-# ######################################################################
-include(CMake/GTest.cmake)
-
-# ######################################################################
-# # PyBind
-# ######################################################################
-include(CMake/PyBind11.cmake)
-
-# ######################################################################
-# # Subdirectories
-# ######################################################################
-add_subdirectory(Device)
-# add_subdirectory(Tensor)
-add_subdirectory(Utilities)
+if (PYSYCL_Utilities)
+  PySYCL_add_pybind11_module(utilities Utilities_Python_Module.cpp)
+endif()

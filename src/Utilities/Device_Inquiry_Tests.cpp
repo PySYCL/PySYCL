@@ -30,7 +30,7 @@
 ///////////////////////////////////////////////////////////////////////
 // sycl
 ///////////////////////////////////////////////////////////////////////
-#include "Device_Instance.h"
+#include "Device_Inquiry.h"
 
 ///////////////////////////////////////////////////////////////////////
 // Defining types
@@ -38,40 +38,24 @@
 using Vector_T = std::vector<std::vector<int>>;
 
 ///////////////////////////////////////////////////////////////////////
-// Device Instance Test 1 (check platform and device index)
+// Device Inquiry Test 1 (get device list)
 ///////////////////////////////////////////////////////////////////////
-TEST(DeviceInstance, test1) {
-  const auto& platforms = sycl::platform::get_platforms();
+TEST(DeviceInquiry, test1) {
+  auto my_devices = pysycl::get_device_list<Vector_T>();
 
-  for (int i = 0; i < platforms.size(); ++i) {
-    const auto& devices = platforms[i].get_devices();
-
-    for (int j = 0; j < devices.size(); ++j) {
-      auto my_device = pysycl::Device_Instance(i, j);
-      ASSERT_EQ(i, my_device.get_platform_index());
-      ASSERT_EQ(j, my_device.get_device_index());
-    }
-  }
+  ASSERT_FALSE(my_devices.empty()) << "The device list is empty!";
 }
 
 ///////////////////////////////////////////////////////////////////////
-// Device Instance Test 2 (check device name and vendor)
+// Device Inquiry Test 2 (output device list)
 ///////////////////////////////////////////////////////////////////////
-TEST(DeviceInstance, test2) {
-  const auto& platforms = sycl::platform::get_platforms();
+TEST(DeviceInquiry, test2) {
+  std::ostringstream oss;
+  std::streambuf* sb = std::cout.rdbuf(oss.rdbuf());
 
-  for (int i = 0; i < platforms.size(); ++i) {
-    const auto& devices = platforms[i].get_devices();
+  pysycl::output_device_list();
+  std::cout.rdbuf(sb);
 
-    for (int j = 0; j < devices.size(); ++j) {
-      auto my_device = pysycl::Device_Instance(i, j);
-      auto Q = sycl::queue(devices[j]);
-      ASSERT_EQ(
-          Q.get_device().get_info<sycl::info::device::name>(),
-          my_device.name());
-      ASSERT_EQ(
-          Q.get_device().get_info<sycl::info::device::vendor>(),
-          my_device.vendor());
-    }
-  }
+  std::string output = oss.str();
+  ASSERT_FALSE(output.empty()) << "The device list did not output!";
 }
