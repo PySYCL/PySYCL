@@ -21,7 +21,7 @@
 ///////////////////////////////////////////////////////////////////////
 // local
 ///////////////////////////////////////////////////////////////////////
-#include "../Device/Device_Instance.h"
+#include "../Device/Device.h"
 
 ///////////////////////////////////////////////////////////////////////
 // sycl
@@ -66,39 +66,31 @@ class Tensor {
   /// \brief Constructor that creates a pysycl tensor.
   /// \param[in] device_in device that the memory resides on.
   /// \param[in] dimensions_in dimensions for the tensor.
-  Tensor(const Device_Instance& device_in,
-         const std::vector<std::size_t>& dimension_sizes_in)
+  Tensor(const Device& device_in,
+         const std::vector<std::size_t>& dims_in)
     : device(device_in)
-    , dimension_sizes(dimension_sizes_in)
-    , dimensions(dimension_sizes.size()) {
-      for(const auto& dimension_size : dimension_sizes) {
-        total_length *= dimension_size;
-      }
-
-      Scalar_T* data = sycl::malloc_shared<Scalar_T>(total_length, Q);
+    , dims(dims_in) {
+      for(const auto& dim : dims) { length *= dim; }
+      Scalar_T* data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
   }
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief Get the number of elements in the Vector.
   /// \return Number of elements in the Vector.
-  int len() const { return total_length; }
+  int len() const { return length; }
 
   private:
   ///////////////////////////////////////////////////////////////////////
   /// \brief The device that will load the usm memory.
-  Device_Instance device;
+  Device device;
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief The length of the tensor in each dimension.
-  std::vector<Scalar_T> dimension_sizes;
-
-  ///////////////////////////////////////////////////////////////////////
-  /// \brief The number of dimensions.
-  std::size_t dimensions;
+  std::vector<std::size_t> dims;
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief The total length of the memory
-  std::size_t total_length = 1.0;
+  std::size_t length = 1.0;
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief The pointer to usm memory

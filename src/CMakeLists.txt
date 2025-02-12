@@ -59,5 +59,5 @@ include(CMake/PyBind11.cmake)
 # # Subdirectories
 # ######################################################################
 add_subdirectory(Device)
-# add_subdirectory(Tensor)
+add_subdirectory(Tensor)
 add_subdirectory(Utilities)

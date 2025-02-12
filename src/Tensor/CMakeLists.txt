@@ -19,10 +19,10 @@
 # ######################################################################
 # # Tests
 # ######################################################################
-# option(PYSYCL_TEST_DEVICE_INQUIRY "Compile tests for Tensor" ON)
-# if(PYSYCL_TEST_DEVICE_INQUIRY)
-#   PySYCL_add_to_tests("Tensor_Tests.cpp")
-# endif()
+option(PYSYCL_TEST_DEVICE_INQUIRY "Compile tests for Tensor" ON)
+if(PYSYCL_TEST_DEVICE_INQUIRY)
+  PySYCL_add_to_tests("Tensor_Tests.cpp")
+endif()
 
 # ######################################################################
 # # Setting the name of the PyBind module
