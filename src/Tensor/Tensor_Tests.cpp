@@ -36,11 +36,44 @@
 ///////////////////////////////////////////////////////////////////////
 // Defining types
 ///////////////////////////////////////////////////////////////////////
-using Device_T = std::vector<std::vector<int>>;
+using Scalar_T = double;
+using Device_T = pysycl::Device;
+using Tensor_T = pysycl::Tensor<Scalar_T>;
 
 ///////////////////////////////////////////////////////////////////////
 // Tensor Test 1
 ///////////////////////////////////////////////////////////////////////
 TEST(Tensor, test1) {
+  auto device = Device_T(0, 0);
 
+  auto tensor0 = Tensor_T(device, {8,    10,   7});
+  auto tensor1 = Tensor_T(device, {9,    1,    1,  8172});
+  auto tensor2 = Tensor_T(device, {12,   12,   10, 82, 772});
+  auto tensor3 = Tensor_T(device, {8002, 2110});
+  auto tensor4 = Tensor_T(device, {237});
+
+  ASSERT_EQ(8*10*7,          tensor0.len());
+  ASSERT_EQ(9*1*1*8172,      tensor1.len());
+  ASSERT_EQ(12*12*10*82*772, tensor2.len());
+  ASSERT_EQ(8002*2110,       tensor3.len());
+  ASSERT_EQ(237,             tensor4.len());
+}
+
+///////////////////////////////////////////////////////////////////////
+// Tensor Test 2
+///////////////////////////////////////////////////////////////////////
+TEST(Tensor, test2) {
+  auto device = Device_T(0, 0);
+
+  auto tensor0 = Tensor_T(device, {8,    10,   7});
+  auto tensor1 = Tensor_T(device, {9,    1,    1,  8172});
+  auto tensor2 = Tensor_T(device, {12,   12,   10, 82, 772});
+  auto tensor3 = Tensor_T(device, {8002, 2110});
+  auto tensor4 = Tensor_T(device, {237});
+
+  ASSERT_EQ(3, tensor0.num_dims());
+  ASSERT_EQ(4, tensor1.num_dims());
+  ASSERT_EQ(5, tensor2.num_dims());
+  ASSERT_EQ(2, tensor3.num_dims());
+  ASSERT_EQ(1, tensor4.num_dims());
 }

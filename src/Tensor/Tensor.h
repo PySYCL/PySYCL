@@ -70,14 +70,23 @@ class Tensor {
          const std::vector<std::size_t>& dims_in)
     : device(device_in)
     , dims(dims_in) {
-      for(const auto& dim : dims) { length *= dim; }
+      for(const auto& dim : dims) {
+        if(dim == 0) throw std::runtime_error("ERROR in Tensor: Cannot have dimension of zero length");
+        length *= dim;
+      }
+
       Scalar_T* data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
   }
 
   ///////////////////////////////////////////////////////////////////////
-  /// \brief Get the number of elements in the Vector.
-  /// \return Number of elements in the Vector.
-  int len() const { return length; }
+  /// \brief Get the number of elements in the tensor.
+  /// \return Number of elements in the tensor.
+  std::size_t len() const { return length; }
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief Get the number of dimensions in the tensor.
+  /// \return Number of dimensions in the tensor.
+  std::size_t num_dims() const { return dims.size(); }
 
   private:
   ///////////////////////////////////////////////////////////////////////
