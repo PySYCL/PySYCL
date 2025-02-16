@@ -18,8 +18,8 @@
 ///////////////////////////////////////////////////////////////////////
 // local
 ///////////////////////////////////////////////////////////////////////
-#include "../Device/Device_Instance.h"
-#include "Tensor_Python_Module.h"
+#include "../Device/Device.h"
+#include "Tensor.h"
 
 ///////////////////////////////////////////////////////////////////////
 // pybind11
@@ -34,10 +34,10 @@
 ///////////////////////////////////////////////////////////////////////
 // Declaring types for tensor
 ///////////////////////////////////////////////////////////////////////
-using Device_T = pysycl::Device_Instance;
+using Device_T = pysycl::Device;
 using Scalar_T = double;
-using Tendor_T = pysycl::Tensor<Scalar_T>;
-using Vector_T = std::vector<std::size_t>;
+using Tensor_T = pysycl::Tensor<Scalar_T>;
+using Vector_T = std::vector<size_t>;
 
 namespace py = pybind11;
 
@@ -50,10 +50,12 @@ PYBIND11_MODULE(device, m) {
       This module provides classes and functions for pysycl Tensors.
     )delim";
 
-  py::class_<Scalar_T>(m, "tensor", R"delim(
+  py::class_<Tensor_T> tensor_object(m, "tensor", R"delim(
     This class creates a PySYCL tensor.
-  )delim")
-  .def(py::init<Device_T&, Vector_T&>, R"delim(
+  )delim");
+
+
+  tensor_object.def(py::init<const Device_T&, const Vector_T&>(), R"delim(
   Default Constructor
     Constructor that creates a PySYCL tensor.
 

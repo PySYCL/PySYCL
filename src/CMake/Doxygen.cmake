@@ -1,7 +1,6 @@
 # ######################################################################
 # ######################################################################
-# # CMakeLists.txt for PySYCL
-# # subdirectory : Tensor
+# #                  src/CMake/Doxygen.cmake
 # ######################################################################
 # ######################################################################
 # # This file is part of the PySYCL software for SYCL development in
@@ -16,22 +15,19 @@
 # ######################################################################
 # ######################################################################
 
-# ######################################################################
-# # Tests
-# ######################################################################
-option(PYSYCL_TEST_DEVICE_INQUIRY "Compile tests for Tensor" ON)
-if(PYSYCL_TEST_DEVICE_INQUIRY)
-  PySYCL_add_to_tests("Tensor_Tests.cpp")
+set(PYSYCL_DOC_DIR "PySYCL_doxygen_html"
+  CACHE STRING "Name of the documentation directory")
+
+if("$PYSYCL_DOC_DIR}" STREQUAL "")
+  message(FATAL_ERROR "PYSYCL_DOC_DIR cannot be blank.")
 endif()
 
-# ######################################################################
-# # Setting the name of the PyBind module
-# ######################################################################
-option(PYSYCL_Tensor "Compile the PySYCL tensor module" ON)
-
-# ######################################################################
-# # Python Module
-# ######################################################################
-if (PYSYCL_Tensor)
-  PySYCL_add_pybind11_module(tensor Tensor_Python_Module.cpp)
-endif()
+add_custom_target(doxygen COMMAND env DOXYGEN_OUTPUT_DIRECTORY=${CMAKE_BINARY_DIR}/../docs/
+  env DOXYGEN_HTML_OUTPUT_DIRECTORY=${PYSYCL_DOC_DIR}
+  doxygen Doxyfile > ${CMAKE_BINARY_DIR}/doxygen.log 2> ${CMAKE_BINARY_DIR}/doxygen.err
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/../doxygen/
+  COMMENT
+  "Build Doxygen documentation.
+     HTML:     ${CMAKE_BINARY_DIR}/../docs/${PYSYCL_DOC_DIR}
+     Output:   ${CMAKE_BINARY_DIR}/doxygen.log
+     Warnings: ${CMAKE_BINARY_DIR}/doxygen.err")

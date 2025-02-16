@@ -1,7 +1,7 @@
 # ######################################################################
 # ######################################################################
 # # CMakeLists.txt for PySYCL
-# # subdirectory : Tensor
+# # subdirectory : Linear_Algebra
 # ######################################################################
 # ######################################################################
 # # This file is part of the PySYCL software for SYCL development in
@@ -19,19 +19,15 @@
 # ######################################################################
 # # Tests
 # ######################################################################
-option(PYSYCL_TEST_DEVICE_INQUIRY "Compile tests for Tensor" ON)
-if(PYSYCL_TEST_DEVICE_INQUIRY)
-  PySYCL_add_to_tests("Tensor_Tests.cpp")
-endif()
 
 # ######################################################################
 # # Setting the name of the PyBind module
 # ######################################################################
-option(PYSYCL_Tensor "Compile the PySYCL tensor module" ON)
+# option(PYSYCL_Linear_Algebra "Compile the PySYCL linalg module" ON)
 
 # ######################################################################
 # # Python Module
 # ######################################################################
-if (PYSYCL_Tensor)
-  PySYCL_add_pybind11_module(tensor Tensor_Python_Module.cpp)
-endif()
+# if (PYSYCL_Linear_Algebra)
+#   PySYCL_add_pybind11_module(linalg Linear_Algebra_Python_Module.cpp)
+# endif()

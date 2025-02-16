@@ -63,15 +63,19 @@ class Tensor {
   Tensor& operator=(Tensor&&) = default;
 
   /////////////////////////////////////////////////////////////////////
-  /// \brief Constructor that creates a pysycl tensor.
+  /// \brief Constructor that creates a pysycl tensor based on
+  ///        dimensional parameters.
   /// \param[in] device_in device that the memory resides on.
   /// \param[in] dimensions_in dimensions for the tensor.
   Tensor(const Device& device_in,
-         const std::vector<std::size_t>& dims_in)
+         const std::vector<size_t>& dims_in)
     : device(device_in)
     , dims(dims_in) {
       for(const auto& dim : dims) {
-        if(dim == 0) throw std::runtime_error("ERROR in Tensor: Cannot have dimension of zero length");
+        if(dim == 0) {
+          throw std::runtime_error("ERROR in Tensor: Cannot have dimension of zero length!");
+        }
+
         length *= dim;
       }
 
@@ -81,12 +85,53 @@ class Tensor {
   ///////////////////////////////////////////////////////////////////////
   /// \brief Get the number of elements in the tensor.
   /// \return Number of elements in the tensor.
-  std::size_t len() const { return length; }
+  size_t len() const {
+    return length;
+  }
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief Get the number of dimensions in the tensor.
   /// \return Number of dimensions in the tensor.
-  std::size_t num_dims() const { return dims.size(); }
+  size_t num_dims() const {
+    return dims.size();
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief Get the number of dimensions in the tensor.
+  /// \return Number of dimensions in the tensor.
+  void fill(Scalar_T& val) const {
+    for(int i = 0; i < length; ++i) {
+      data[i] = val;
+    }
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief Overloaded operator for direct element access.
+  /// \return Number of dimensions in the tensor.
+  template<typename... Indices>
+  size_t global_index(Indices... indices) {
+    std::vector<size_t> index_list = {static_cast<size_t>(indices)...};
+
+    if(index_list.size() != dims.size() || index_list.size() <= 0) {
+      throw std::runtime_error("ERROR in Tensor: Invalid number of indices!");
+    }
+
+    size_t idx = 0;
+    size_t multiplier = 1;
+
+    for(int i = dims.size() - 1; i >= 1; --i) {
+      idx += index_list[i] * multiplier;
+      multiplier *= dims[i];
+    }
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief Overloaded operator for direct element access.
+  /// \return Number of dimensions in the tensor.
+  template<typename... Indices>
+  Scalar_T &operator[](Indices... indices) {
+    return data[global_index(indices...)];
+  }
 
   private:
   ///////////////////////////////////////////////////////////////////////
@@ -95,11 +140,11 @@ class Tensor {
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief The length of the tensor in each dimension.
-  std::vector<std::size_t> dims;
+  std::vector<size_t> dims;
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief The total length of the memory
-  std::size_t length = 1.0;
+  size_t length = 1.0;
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief The pointer to usm memory

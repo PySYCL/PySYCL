@@ -1,7 +1,6 @@
 # ######################################################################
 # ######################################################################
-# # CMakeLists.txt for PySYCL
-# # subdirectory : Tensor
+# #                  src/CMake/Sphinx.cmake
 # ######################################################################
 # ######################################################################
 # # This file is part of the PySYCL software for SYCL development in
@@ -15,23 +14,15 @@
 # # license, without any additional terms or conditions.
 # ######################################################################
 # ######################################################################
+FIND_PROGRAM(SPHINX_API_EXE NAMES sphinx-apidoc)
+FIND_PROGRAM(SPHINX_BUILD_EXE NAMES sphinx-build)
 
-# ######################################################################
-# # Tests
-# ######################################################################
-option(PYSYCL_TEST_DEVICE_INQUIRY "Compile tests for Tensor" ON)
-if(PYSYCL_TEST_DEVICE_INQUIRY)
-  PySYCL_add_to_tests("Tensor_Tests.cpp")
-endif()
+set(SPHINX_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/../sphinx")
+set(SPHINX_BUILD "${CMAKE_CURRENT_SOURCE_DIR}/../docs/PySYCL_sphinx_html")
+set(SPHINX_MODULE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../build/pysycl")
 
-# ######################################################################
-# # Setting the name of the PyBind module
-# ######################################################################
-option(PYSYCL_Tensor "Compile the PySYCL tensor module" ON)
-
-# ######################################################################
-# # Python Module
-# ######################################################################
-if (PYSYCL_Tensor)
-  PySYCL_add_pybind11_module(tensor Tensor_Python_Module.cpp)
-endif()
+add_custom_target(sphinx
+  COMMAND ${SPHINX_API_EXE} -o ${SPHINX_SOURCE} ${SPHINX_MODULE_DIR}
+  COMMAND ${SPHINX_BUILD_EXE} -b html ${SPHINX_SOURCE} ${SPHINX_BUILD}
+  COMMENT "Generating Sphinx documentation"
+)
