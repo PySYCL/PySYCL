@@ -55,25 +55,25 @@ PYBIND11_MODULE(device, m) {
   )delim");
 
 
-  tensor_object.def(py::init<const Device_T&, const Vector_T&>(), R"delim(
-  Default Constructor
-    Constructor that creates a PySYCL tensor.
+  // tensor_object.def(py::init<const Device_T&, const Vector_T&>(), R"delim(
+  // Default Constructor
+  //   Constructor that creates a PySYCL tensor.
 
-    Parameters
-      device: pysycl.device.device_instance
-        The PySYCL device instance
-      dims: List[]
-        The list of the tensor dimensions
+  //   Parameters
+  //     device: pysycl.device.device_instance
+  //       The PySYCL device instance
+  //     dims: List[]
+  //       The list of the tensor dimensions
 
-    Returns
-      A PySYCL tensor
+  //   Returns
+  //     A PySYCL tensor
 
-    Example
-      >>> import pysycl
-      >>>
-      >>> my_device = pysycl.device()
-      >>> my_tensor = pysycl.tensor(my_device, [3, 8])
-  )delim",
-  py::arg("device"),
-  py::arg("dims"));
+  //   Example
+  //     >>> import pysycl
+  //     >>>
+  //     >>> my_device = pysycl.device()
+  //     >>> my_tensor = pysycl.tensor(my_device, [3, 8])
+  // )delim",
+  // py::arg("device"),
+  // py::arg("dims"));
 }

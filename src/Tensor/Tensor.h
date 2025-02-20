@@ -67,13 +67,15 @@ class Tensor {
   ///        dimensional parameters.
   /// \param[in] device_in device that the memory resides on.
   /// \param[in] dimensions_in dimensions for the tensor.
+  template<typename... Dimensions>
   Tensor(const Device& device_in,
-         const std::vector<size_t>& dims_in)
-    : device(device_in)
-    , dims(dims_in) {
+         const Dimensions... dims_in)
+    : device(device_in),
+      dims({static_cast<size_t>(dims_in)...}) {
+
       for(const auto& dim : dims) {
         if(dim == 0) {
-          throw std::runtime_error("ERROR in Tensor: Cannot have dimension of zero length!");
+          throw std::runtime_error("ERROR in Tensor: Cannot have zero dimension!");
         }
 
         length *= dim;
@@ -81,6 +83,86 @@ class Tensor {
 
       Scalar_T* data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
   }
+
+  // /////////////////////////////////////////////////////////////////////
+  // /// \brief Constructor that creates an ND pysycl tensor based on
+  // ///        dimensional parameters.
+  // /// \param[in] device_in device that the memory resides on.
+  // /// \param[in] dimensions_in dimensions for the tensor.
+  // /// \param[in] data_in data input for the tensor.
+  // Tensor(const Device& device_in,
+  //        const std::vector<size_t>& dims_in,
+  //        const std::vector<Scalar_T>& data_in)
+  //   : device(device_in)
+  //   , dims(dims_in) {
+  //     for(const auto& dim : dims) {
+  //       if(dim == 0) {
+  //         throw std::runtime_error("ERROR in Tensor: Cannot have zero dimension!");
+  //       }
+
+  //       length *= dim;
+  //     }
+
+  //     if(data_in.size() != length) {
+  //       throw std::runtime_error("ERROR in Tensor: Input size must be equal to total dimension size!");
+  //     }
+
+  //     Scalar_T* data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
+
+  //     for(int i = 0; i < data_in.size(); ++i) {
+  //       data[i] = data_in[i];
+  //     }
+  // }
+
+  // /////////////////////////////////////////////////////////////////////
+  // /// \brief Constructor that creates a 1D pysycl tensor
+  // /// \param[in] device_in device that the memory resides on.
+  // /// \param[in] data_in data input for the tensor.
+  // Tensor(const Device& device_in,
+  //        const std::vector<Scalar_T>& data_in)
+  //   : device(device_in) {
+
+  //     if(data_in.size() == 0) {
+  //       throw std::runtime_error("ERROR in Tensor: Input data is empty!");
+  //     }
+
+  //     length = data_in.size();
+
+  //     Scalar_T* data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
+
+  //     for(int i = 0; i < data_in.size(); ++i) {
+  //       data[i] = data_in[i];
+  //     }
+  // }
+
+  // /////////////////////////////////////////////////////////////////////
+  // /// \brief Constructor that creates a 2D pysycl tensor
+  // /// \param[in] device_in device that the memory resides on.
+  // /// \param[in] data_in data input for the tensor.
+  // Tensor(const Device& device_in,
+  //        const std::vector<std::vector<Scalar_T>>& data_in)
+  //   : device(device_in) {
+
+  //     if(data_in.size() == 0) {
+  //       throw std::runtime_error("ERROR in Tensor: Input data is empty!");
+  //     }
+
+  //     for(int i = 0; i < data_in.size(); ++i) {
+  //       if(data_in[i].size() != data_in[0].size()) {
+  //         throw std::runtime_error("ERROR in Tensor: Input vector has invalid dimensions!");
+  //       }
+  //     }
+
+  //     length = data_in.size() * data_in[0].size();
+
+  //     Scalar_T* data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
+
+  //     for(int i = 0; i < data_in.size(); ++i) {
+  //       for(int j = 0; j < data_in[0].size(); ++j) {
+  //         data[global_index(i, j)] = data_in[i][j];
+  //       }
+  //     }
+  // }
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief Get the number of elements in the tensor.
@@ -123,6 +205,8 @@ class Tensor {
       idx += index_list[i] * multiplier;
       multiplier *= dims[i];
     }
+
+    return idx;
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -144,7 +228,7 @@ class Tensor {
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief The total length of the memory
-  size_t length = 1.0;
+  size_t length = 1;
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief The pointer to usm memory
