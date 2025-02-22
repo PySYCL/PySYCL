@@ -62,35 +62,38 @@ TEST(Tensor, test1) {
 ///////////////////////////////////////////////////////////////////////
 // Tensor Test 2
 ///////////////////////////////////////////////////////////////////////
-// TEST(Tensor, test2) {
-//   auto device = Device_T(0, 0);
+TEST(Tensor, test2) {
+  auto device = Device_T(0, 0);
 
-//   auto tensor0 = Tensor_T(device, {8,    10,   7});
-//   auto tensor1 = Tensor_T(device, {9,    1,    1,  8172});
-//   auto tensor2 = Tensor_T(device, {12,   12,   10, 82, 772});
-//   auto tensor3 = Tensor_T(device, {8002, 2110});
-//   auto tensor4 = Tensor_T(device, {237});
+  auto tensor0 = Tensor_T(device, 8,    10,   7);
+  auto tensor1 = Tensor_T(device, 9,    1,    1,  8172);
+  auto tensor2 = Tensor_T(device, 12,   12,   10, 82, 772);
+  auto tensor3 = Tensor_T(device, 8002, 2110);
+  auto tensor4 = Tensor_T(device, 237);
 
-//   ASSERT_EQ(3, tensor0.num_dims());
-//   ASSERT_EQ(4, tensor1.num_dims());
-//   ASSERT_EQ(5, tensor2.num_dims());
-//   ASSERT_EQ(2, tensor3.num_dims());
-//   ASSERT_EQ(1, tensor4.num_dims());
-// }
+  ASSERT_EQ(3, tensor0.num_dims());
+  ASSERT_EQ(4, tensor1.num_dims());
+  ASSERT_EQ(5, tensor2.num_dims());
+  ASSERT_EQ(2, tensor3.num_dims());
+  ASSERT_EQ(1, tensor4.num_dims());
+}
 
 ///////////////////////////////////////////////////////////////////////
 // Tensor Test 3
 ///////////////////////////////////////////////////////////////////////
-// TEST(Tensor, test3) {
-//   auto device = Device_T(0, 0);
+TEST(Tensor, test3) {
+  auto device = Device_T(0, 0);
 
-//   std::vector<Scalar_T> vec1D = {1.853, -2.22, 0.213, 512.66};
-//   auto tensor1D = Tensor_T(device, {4}, vec1D);
+  std::vector<Scalar_T> vec1D = {1.853, -2.22, 0.213, 512.66};
+  auto tensor1D = Tensor_T(device, vec1D);
 
-//   for(int i = 0; i < tensor1D.len(); ++i) {
-//     EXPECT_DOUBLE_EQ(vec1D[i], tensor1D[i]);
-//   }
-// }
+  ASSERT_EQ(4, tensor1D.len());
+  ASSERT_EQ(1, tensor1D.num_dims());
+
+  for(int i = 0; i < tensor1D.len(); ++i) {
+    EXPECT_DOUBLE_EQ(vec1D[i], tensor1D[i]);
+  }
+}
 
 ///////////////////////////////////////////////////////////////////////
 // Tensor Test 4

@@ -65,8 +65,9 @@ class Tensor {
   /////////////////////////////////////////////////////////////////////
   /// \brief Constructor that creates a pysycl tensor based on
   ///        dimensional parameters.
+  /// \tparam Dimensions variadic parameter pack of input dimensions
   /// \param[in] device_in device that the memory resides on.
-  /// \param[in] dimensions_in dimensions for the tensor.
+  /// \param[in] dims_in dimensions for the tensor.
   template<typename... Dimensions>
   Tensor(const Device& device_in,
          const Dimensions... dims_in)
@@ -81,59 +82,63 @@ class Tensor {
         length *= dim;
       }
 
-      Scalar_T* data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
+      data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
   }
 
-  // /////////////////////////////////////////////////////////////////////
-  // /// \brief Constructor that creates an ND pysycl tensor based on
-  // ///        dimensional parameters.
-  // /// \param[in] device_in device that the memory resides on.
-  // /// \param[in] dimensions_in dimensions for the tensor.
-  // /// \param[in] data_in data input for the tensor.
-  // Tensor(const Device& device_in,
-  //        const std::vector<size_t>& dims_in,
-  //        const std::vector<Scalar_T>& data_in)
-  //   : device(device_in)
-  //   , dims(dims_in) {
-  //     for(const auto& dim : dims) {
-  //       if(dim == 0) {
-  //         throw std::runtime_error("ERROR in Tensor: Cannot have zero dimension!");
-  //       }
+  /////////////////////////////////////////////////////////////////////
+  /// \brief Constructor that creates an ND pysycl tensor based on
+  ///        dimensional parameters.
+  /// \tparam Dimensions variadic parameter pack of input dimensions
+  /// \param[in] device_in device that the memory resides on.
+  /// \param[in] dimensions_in dimensions for the tensor.
+  /// \param[in] data_in data input for the tensor.
+  template<typename... Dimensions>
+  Tensor(const Device& device_in,
+         const std::vector<Scalar_T>& data_in,
+         const Dimensions... dims_in)
+    : device(device_in)
+    , dims({static_cast<size_t>(dims_in)...}) {
 
-  //       length *= dim;
-  //     }
+      for(const auto& dim : dims) {
+        if(dim == 0) {
+          throw std::runtime_error("ERROR in Tensor: Cannot have zero dimension!");
+        }
 
-  //     if(data_in.size() != length) {
-  //       throw std::runtime_error("ERROR in Tensor: Input size must be equal to total dimension size!");
-  //     }
+        length *= dim;
+      }
 
-  //     Scalar_T* data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
+      if(data_in.size() != length) {
+        throw std::runtime_error("ERROR in Tensor: Input size must be equal to total dimension size!");
+      }
 
-  //     for(int i = 0; i < data_in.size(); ++i) {
-  //       data[i] = data_in[i];
-  //     }
-  // }
+      data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
 
-  // /////////////////////////////////////////////////////////////////////
-  // /// \brief Constructor that creates a 1D pysycl tensor
-  // /// \param[in] device_in device that the memory resides on.
-  // /// \param[in] data_in data input for the tensor.
-  // Tensor(const Device& device_in,
-  //        const std::vector<Scalar_T>& data_in)
-  //   : device(device_in) {
+      for(int i = 0; i < data_in.size(); ++i) {
+        data[i] = data_in[i];
+      }
+  }
 
-  //     if(data_in.size() == 0) {
-  //       throw std::runtime_error("ERROR in Tensor: Input data is empty!");
-  //     }
+  /////////////////////////////////////////////////////////////////////
+  /// \brief Constructor that creates a 1D pysycl tensor
+  /// \param[in] device_in device that the memory resides on.
+  /// \param[in] data_in data input for the tensor.
+  Tensor(const Device& device_in,
+         const std::vector<Scalar_T>& data_in)
+    : device(device_in),
+      dims({1}) {
 
-  //     length = data_in.size();
+      if(data_in.size() == 0) {
+        throw std::runtime_error("ERROR in Tensor: Input data is empty!");
+      }
 
-  //     Scalar_T* data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
+      length = data_in.size();
 
-  //     for(int i = 0; i < data_in.size(); ++i) {
-  //       data[i] = data_in[i];
-  //     }
-  // }
+      data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
+
+      for(int i = 0; i < data_in.size(); ++i) {
+        data[i] = data_in[i];
+      }
+  }
 
   // /////////////////////////////////////////////////////////////////////
   // /// \brief Constructor that creates a 2D pysycl tensor
@@ -198,10 +203,11 @@ class Tensor {
       throw std::runtime_error("ERROR in Tensor: Invalid number of indices!");
     }
 
-    size_t idx = 0;
+    size_t idx = index_list[0];
+
     size_t multiplier = 1;
 
-    for(int i = dims.size() - 1; i >= 1; --i) {
+    for(int i = index_list.size() - 1; i >= 1; --i) {
       idx += index_list[i] * multiplier;
       multiplier *= dims[i];
     }
