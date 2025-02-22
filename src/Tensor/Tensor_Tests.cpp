@@ -91,30 +91,30 @@ TEST(Tensor, test3) {
   ASSERT_EQ(1, tensor1D.num_dims());
 
   for(int i = 0; i < tensor1D.len(); ++i) {
-    EXPECT_DOUBLE_EQ(vec1D[i], tensor1D[i]);
+    EXPECT_DOUBLE_EQ(vec1D[i], tensor1D(i));
   }
 }
 
 ///////////////////////////////////////////////////////////////////////
 // Tensor Test 4
 ///////////////////////////////////////////////////////////////////////
-// TEST(Tensor, test4) {
-//   Scalar_T tol = 1.0e-8;
-//   auto device = Device_T(0, 0);
+TEST(Tensor, test4) {
+  Scalar_T tol = 1.0e-8;
+  auto device = Device_T(0, 0);
 
-//   const int M = 4;
-//   const int N = 6;
+  const int M = 4;
+  const int N = 6;
 
-//   std::vector<std::vector<Scalar_T>> vec2D = {{1.853, -2.22,  0.213, 512.66, 1.6,   -78.81},
-//                                               {-1.53, -9.12,  1.223, 10.12,  85.3,   3.128},
-//                                               {95.85,  58.12, 9.313, -1.66,  1.6,   -99.87},
-//                                               {1.853,  69.22, 4.223, -15.77, -5.55, -55.13}};
+  std::vector<std::vector<Scalar_T>> vec2D = {{1.853, -2.22,  0.213, 512.66, 1.6,   -78.81},
+                                              {-1.53, -9.12,  1.223, 10.12,  85.3,   3.128},
+                                              {95.85,  58.12, 9.313, -1.66,  1.6,   -99.87},
+                                              {1.853,  69.22, 4.223, -15.77, -5.55, -55.13}};
 
-//   auto tensor2D = Tensor_T(device, {M, N}, vec2D);
+  auto tensor2D = Tensor_T(device, vec2D);
 
-//   for(int i = 0; i < M; ++i) {
-//     for(int j = 0; j < N; ++j) {
-//       EXPECT_DOUBLE_EQ(vec2D[i][j], tensor2D[i, j]);
-//     }
-//   }
-// }
+  for(int i = 0; i < M; ++i) {
+    for(int j = 0; j < N; ++j) {
+      EXPECT_DOUBLE_EQ(vec2D[i][j], tensor2D(i, j));
+    }
+  }
+}

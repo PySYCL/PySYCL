@@ -125,7 +125,7 @@ class Tensor {
   Tensor(const Device& device_in,
          const std::vector<Scalar_T>& data_in)
     : device(device_in),
-      dims({1}) {
+      dims({data_in.size()}) {
 
       if(data_in.size() == 0) {
         throw std::runtime_error("ERROR in Tensor: Input data is empty!");
@@ -140,34 +140,35 @@ class Tensor {
       }
   }
 
-  // /////////////////////////////////////////////////////////////////////
-  // /// \brief Constructor that creates a 2D pysycl tensor
-  // /// \param[in] device_in device that the memory resides on.
-  // /// \param[in] data_in data input for the tensor.
-  // Tensor(const Device& device_in,
-  //        const std::vector<std::vector<Scalar_T>>& data_in)
-  //   : device(device_in) {
+  /////////////////////////////////////////////////////////////////////
+  /// \brief Constructor that creates a 2D pysycl tensor
+  /// \param[in] device_in device that the memory resides on.
+  /// \param[in] data_in data input for the tensor.
+  Tensor(const Device& device_in,
+         const std::vector<std::vector<Scalar_T>>& data_in)
+    : device(device_in),
+      dims({data_in.size(), data_in[0].size()}) {
 
-  //     if(data_in.size() == 0) {
-  //       throw std::runtime_error("ERROR in Tensor: Input data is empty!");
-  //     }
+      if(data_in.size() == 0) {
+        throw std::runtime_error("ERROR in Tensor: Input data is empty!");
+      }
 
-  //     for(int i = 0; i < data_in.size(); ++i) {
-  //       if(data_in[i].size() != data_in[0].size()) {
-  //         throw std::runtime_error("ERROR in Tensor: Input vector has invalid dimensions!");
-  //       }
-  //     }
+      for(int i = 0; i < data_in.size(); ++i) {
+        if(data_in[i].size() != data_in[0].size()) {
+          throw std::runtime_error("ERROR in Tensor: Input vector has invalid dimensions!");
+        }
+      }
 
-  //     length = data_in.size() * data_in[0].size();
+      length = data_in.size() * data_in[0].size();
 
-  //     Scalar_T* data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
+      data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
 
-  //     for(int i = 0; i < data_in.size(); ++i) {
-  //       for(int j = 0; j < data_in[0].size(); ++j) {
-  //         data[global_index(i, j)] = data_in[i][j];
-  //       }
-  //     }
-  // }
+      for(int i = 0; i < data_in.size(); ++i) {
+        for(int j = 0; j < data_in[0].size(); ++j) {
+          data[global_index(i, j)] = data_in[i][j];
+        }
+      }
+  }
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief Get the number of elements in the tensor.
@@ -203,11 +204,11 @@ class Tensor {
       throw std::runtime_error("ERROR in Tensor: Invalid number of indices!");
     }
 
-    size_t idx = index_list[0];
+    size_t idx = 0;
 
     size_t multiplier = 1;
 
-    for(int i = index_list.size() - 1; i >= 1; --i) {
+    for(int i = index_list.size() - 1; i >= 0; --i) {
       idx += index_list[i] * multiplier;
       multiplier *= dims[i];
     }
@@ -219,7 +220,7 @@ class Tensor {
   /// \brief Overloaded operator for direct element access.
   /// \return Number of dimensions in the tensor.
   template<typename... Indices>
-  Scalar_T &operator[](Indices... indices) {
+  Scalar_T &operator()(Indices... indices) {
     return data[global_index(indices...)];
   }
 
