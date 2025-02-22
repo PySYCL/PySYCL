@@ -41,7 +41,7 @@ auto vector_addition(Tensor_T& A, Tensor_T& B) {
     throw std::runtime_error("ERROR in Vector Dot Product: Tensors have incompatible device queues!");
   }
 
-  auto device = A.device_reference();
+  auto& device = A.device_reference();
   const auto N = A.len();
 
   Tensor_T C = Tensor_T(device, N);
