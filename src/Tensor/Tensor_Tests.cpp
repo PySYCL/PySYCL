@@ -19,6 +19,7 @@
 // local
 ///////////////////////////////////////////////////////////////////////
 #include "../Device/Device.h"
+#include "../Utilities/Generate_Vectors.h"
 #include "Tensor.h"
 
 ///////////////////////////////////////////////////////////////////////
@@ -99,7 +100,25 @@ TEST(Tensor, test3) {
 // Tensor Test 4
 ///////////////////////////////////////////////////////////////////////
 TEST(Tensor, test4) {
-  Scalar_T tol = 1.0e-8;
+  auto device = Device_T(0, 0);
+
+  size_t N = 450;
+
+  const auto vec1D = pysycl::generate_random_vector_1d(N, -100.0, 100.0);
+  auto tensor1D = Tensor_T(device, vec1D);
+
+  ASSERT_EQ(N, tensor1D.len());
+  ASSERT_EQ(1, tensor1D.num_dims());
+
+  for(int i = 0; i < tensor1D.len(); ++i) {
+    EXPECT_DOUBLE_EQ(vec1D[i], tensor1D(i));
+  }
+}
+
+///////////////////////////////////////////////////////////////////////
+// Tensor Test 5
+///////////////////////////////////////////////////////////////////////
+TEST(Tensor, test5) {
   auto device = Device_T(0, 0);
 
   const int M = 4;
@@ -109,6 +128,26 @@ TEST(Tensor, test4) {
                                               {-1.53, -9.12,  1.223, 10.12,  85.3,   3.128},
                                               {95.85,  58.12, 9.313, -1.66,  1.6,   -99.87},
                                               {1.853,  69.22, 4.223, -15.77, -5.55, -55.13}};
+
+  auto tensor2D = Tensor_T(device, vec2D);
+
+  for(int i = 0; i < M; ++i) {
+    for(int j = 0; j < N; ++j) {
+      EXPECT_DOUBLE_EQ(vec2D[i][j], tensor2D(i, j));
+    }
+  }
+}
+
+///////////////////////////////////////////////////////////////////////
+// Tensor Test 6
+///////////////////////////////////////////////////////////////////////
+TEST(Tensor, test6) {
+  auto device = Device_T(0, 0);
+
+  const int M = 450;
+  const int N = 675;
+
+  const auto vec2D = pysycl::generate_random_vector_2d(M, N, -100.0, 100.0);
 
   auto tensor2D = Tensor_T(device, vec2D);
 
