@@ -217,6 +217,20 @@ class Tensor {
   }
 
   ///////////////////////////////////////////////////////////////////////
+  /// \brief Function that returns the device.
+  /// \return Reference to the device.
+  auto &device_reference() {
+    return device;
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief Function that returns the data.
+  /// \return Reference to the data.
+  Scalar_T* data_ptr() {
+    return data;
+  }
+
+  ///////////////////////////////////////////////////////////////////////
   /// \brief Overloaded operator for direct element access.
   /// \return Number of dimensions in the tensor.
   template<typename... Indices>

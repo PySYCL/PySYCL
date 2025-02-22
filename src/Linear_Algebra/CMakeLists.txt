@@ -19,6 +19,10 @@
 # ######################################################################
 # # Tests
 # ######################################################################
+option(PYSYCL_TEST_VECTOR_OPERATIONS "Compile tests for Vector Operations" ON)
+if(PYSYCL_TEST_VECTOR_OPERATIONS)
+  PySYCL_add_to_tests("Vector_Operations_Tests.cpp")
+endif()
 
 # ######################################################################
 # # Setting the name of the PyBind module
