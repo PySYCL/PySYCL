@@ -1,5 +1,5 @@
-#ifndef VECTOR_OPERATIONS_H
-#define VECTOR_OPERATIONS_H
+#ifndef MATRIX_OPERATIONS_H
+#define MATRIX_OPERATIONS_H
 
 ///////////////////////////////////////////////////////////////////////
 // This file is part of the PySYCL software for SYCL development in
@@ -15,7 +15,7 @@
 
 ///////////////////////////////////////////////////////////////////////
 /// \file
-/// \brief Vector operations in PySYCL.
+/// \brief Matrix operations in PySYCL.
 ///////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////
@@ -30,35 +30,70 @@
 
 namespace pysycl {
 ///////////////////////////////////////////////////////////////////////
-/// \brief Function that computes a vector addition
+/// \brief Function that computes a matrix multiplication
 template<typename Tensor_T>
-auto vector_addition(Tensor_T& A, Tensor_T& B) {
-  if(A.len() != B.len() || A.num_dims() != B.num_dims()) {
-    throw std::runtime_error("ERROR in Vector Addition: Tensors of incompatible dimensions!");
+auto matrix_multiplication(Tensor_T& A, Tensor_T& B) {
+  using Scalar_T = Tensor_T::Scalar_T;
+
+  if(A.num_dims() != B.num_dims() || A.num_dims() != 2) {
+    throw std::runtime_error("ERROR in Matrix Multiplication: Tensors of incompatible dimensions!");
   }
 
   if(A.device_reference() != B.device_reference()) {
-    throw std::runtime_error("ERROR in Vector Addition: Tensors have incompatible device queues!");
+    throw std::runtime_error("ERROR in Matrix Multiplication: Tensors have incompatible device queues!");
   }
 
   auto& device = A.device_reference();
-  const auto N = A.len();
 
-  Tensor_T C = Tensor_T(device, N);
+  const auto M = A.dims_list()[0];
+  const auto K = A.dims_list()[1];
+  const auto N = B.dims_list()[1];
 
-  device.get_queue().submit([&](sycl::handler& h) {
+  if(B.dims_list()[0] != K) {
+    throw std::runtime_error("ERROR in Matrix Multiplication: Tensors of incompatible dimensions!");
+  }
+
+  Tensor_T C = Tensor_T(device, M, N);
+
+  #ifdef PYSYCL_USE_ONEMKL
+  oneapi::mkl::blas::column_major::gemm(
+    device.get_queue(),
+    oneapi::mkl::transpose::nontrans,
+    oneapi::mkl::transpose::nontrans,
+    M,
+    N,
+    K,
+    1.0,
+    A.data_ptr(),
+    M,
+    B.data_ptr(),
+    K,
+    1.0,
+    C.data_ptr(),
+    M).wait();
+  #else
+  device.get_queue().submit([&](sycl::handler &h){
     auto* A_data = A.data_ptr();
     auto* B_data = B.data_ptr();
     auto* C_data = C.data_ptr();
 
-    h.parallel_for(sycl::range<1>(N), [=](sycl::id<1> idx) {
-      C_data[idx] = A_data[idx] + B_data[idx];
+    h.parallel_for(sycl::range<2>(M, N), [=](sycl::id<2> idx){
+      const auto i = idx[0];
+      const auto j = idx[1];
+
+      Scalar_T c_ij = 0.0;
+
+      for(int k = 0; k < K; ++k){
+        c_ij += A_data[k*M + i]*B_data[j*K + k];
+      }
+      C_data[j*M + i] = c_ij;
     });
   }).wait();
+  #endif
 
   return C;
 }
 
 } // namespace pysycl
 
-#endif // VECTOR_OPERATIONS_H
+#endif // MATRIX_OPERATIONS_H

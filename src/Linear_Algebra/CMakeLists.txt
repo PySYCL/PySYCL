@@ -24,6 +24,11 @@ if(PYSYCL_TEST_VECTOR_OPERATIONS)
   PySYCL_add_to_tests("Vector_Operations_Tests.cpp")
 endif()
 
+option(PYSYCL_TEST_MATRIX_OPERATIONS "Compile tests for Matrix Operations" ON)
+if(PYSYCL_TEST_MATRIX_OPERATIONS)
+  PySYCL_add_to_tests("Matrix_Operations_Tests.cpp")
+endif()
+
 # ######################################################################
 # # Setting the name of the PyBind module
 # ######################################################################

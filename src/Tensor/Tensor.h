@@ -41,9 +41,13 @@ namespace pysycl {
 
 ///////////////////////////////////////////////////////////////////////
 /// \brief Class defining a pysycl tensor.
-template<typename Scalar_T>
+template<typename Scalar_type>
 class Tensor {
   public:
+  /////////////////////////////////////////////////////////////////////
+  /// \brief The scalar type that is used.
+  using Scalar_T = Scalar_type;
+
   /////////////////////////////////////////////////////////////////////
   /// \brief Copy constructor, use compiler generated version.
   Tensor(const Tensor&) = default;
@@ -228,6 +232,13 @@ class Tensor {
   /// \return Reference to the data.
   Scalar_T* data_ptr() {
     return data;
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief Function that returns the list of dimensions.
+  /// \return The list of dimensions.
+  auto dims_list() {
+    return dims;
   }
 
   ///////////////////////////////////////////////////////////////////////

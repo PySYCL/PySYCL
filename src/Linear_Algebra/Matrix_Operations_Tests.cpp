@@ -1,0 +1,65 @@
+///////////////////////////////////////////////////////////////////////
+// This file is part of the PySYCL software for SYCL development in
+// Python. It is licensed under the Apache License, Version 2.0. A copy
+// of this license, in a file named LICENSE.md, should have been
+// distributed with this file. A copy of this license is also
+// currently available at "http://www.apache.org/licenses/LICENSE-2.0".
+
+// Unless explicitly stated, all contributions intentionally submitted
+// to this project shall also be under the terms and conditions of this
+// license, without any additional terms or conditions.
+///////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////
+// gtest
+///////////////////////////////////////////////////////////////////////
+#include <gtest/gtest.h>
+
+///////////////////////////////////////////////////////////////////////
+// local
+///////////////////////////////////////////////////////////////////////
+#include "../Device/Device.h"
+#include "../Tensor/Tensor.h"
+#include "../Utilities/Generate_Vectors.h"
+#include "Matrix_Operations.h"
+
+///////////////////////////////////////////////////////////////////////
+// stl
+///////////////////////////////////////////////////////////////////////
+#include <iostream>
+#include <vector>
+
+///////////////////////////////////////////////////////////////////////
+// sycl
+///////////////////////////////////////////////////////////////////////
+#include <sycl/sycl.hpp>
+
+///////////////////////////////////////////////////////////////////////
+// Defining types
+///////////////////////////////////////////////////////////////////////
+using Scalar_T = double;
+using Device_T = pysycl::Device;
+using Tensor_T = pysycl::Tensor<Scalar_T>;
+
+///////////////////////////////////////////////////////////////////////
+// Matrix Operations Test 1
+///////////////////////////////////////////////////////////////////////
+TEST(Matrix_Operations, test1) {
+  auto device = Device_T(0, 0);
+
+  size_t M = 1000;
+  size_t K = 750;
+  size_t N = 860;
+
+  const auto matA = pysycl::generate_random_vector_2d(M, N, -100.0, 100.0);
+  const auto matB = pysycl::generate_random_vector_2d(N, K, -100.0, 100.0);
+
+  auto tensorA = Tensor_T(device, matA);
+  auto tensorB = Tensor_T(device, matB);
+
+  auto tensorC = pysycl::matrix_multiplication(tensorA, tensorB);
+
+  // for(int i = 0; i < tensorA.len(); ++i) {
+  //   EXPECT_DOUBLE_EQ(vecA[i] + vecB[i], tensorC(i));
+  // }
+}

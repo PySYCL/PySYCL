@@ -30,3 +30,5 @@ target_link_libraries(Chunin_Exams PRIVATE pysycl_project_dependencies)
 function(PySYCL_add_to_tests file)
   target_sources(Chunin_Exams PRIVATE ${file})
 endfunction()
+
+target_compile_definitions(Chunin_Exams PRIVATE PYSYCL_USE_ONEMKL)
