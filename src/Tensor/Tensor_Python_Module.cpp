@@ -54,6 +54,7 @@ PYBIND11_MODULE(device, m) {
     This class creates a PySYCL tensor.
   )delim");
 
+  // tensor_object()
 
   // tensor_object.def(py::init<const Device_T&, const Vector_T&>(), R"delim(
   // Default Constructor

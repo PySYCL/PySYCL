@@ -45,8 +45,7 @@ PYBIND11_MODULE(device, m) {
       This module provides classes and functions for selecting pysycl devices.
     )delim";
 
-  py::class_<Device_T> device_object(
-      m, "device", R"delim(
+  py::class_<Device_T> device_object(m, "device", R"delim(
     Description
       This class creates a PySYCL device instance.
     )delim");
@@ -110,28 +109,22 @@ PYBIND11_MODULE(device, m) {
     )delim")
       .def(
           "__eq__",
-          [](const Device_T& di1,
-             const Device_T& di2) { return di1 == di2; })
+          [](const Device_T& di1, const Device_T& di2) { return di1 == di2; })
       .def(
           "__ne__",
-          [](const Device_T& di1,
-             const Device_T& di2) { return di1 != di2; })
+          [](const Device_T& di1, const Device_T& di2) { return di1 != di2; })
       .def(
           "__lt__",
-          [](const Device_T& di1,
-             const Device_T& di2) { return di1 < di2; })
+          [](const Device_T& di1, const Device_T& di2) { return di1 < di2; })
       .def(
           "__le__",
-          [](const Device_T& di1,
-             const Device_T& di2) { return di1 <= di2; })
+          [](const Device_T& di1, const Device_T& di2) { return di1 <= di2; })
       .def(
           "__gt__",
-          [](const Device_T& di1,
-             const Device_T& di2) { return di1 > di2; })
-      .def(
-          "__ge__",
-          [](const Device_T& di1,
-             const Device_T& di2) { return di1 >= di2; });
+          [](const Device_T& di1, const Device_T& di2) { return di1 > di2; })
+      .def("__ge__", [](const Device_T& di1, const Device_T& di2) {
+        return di1 >= di2;
+      });
 }
 
 #endif // DEVICE_PYTHON_MODULE_H

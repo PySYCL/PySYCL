@@ -57,7 +57,7 @@ TEST(Vector_Operations, test1) {
 
   auto tensorC = pysycl::vector_addition(tensorA, tensorB);
 
-  for(int i = 0; i < tensorA.len(); ++i) {
+  for (int i = 0; i < tensorA.len(); ++i) {
     EXPECT_DOUBLE_EQ(vecA[i] + vecB[i], tensorC(i));
   }
 }
