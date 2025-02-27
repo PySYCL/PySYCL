@@ -58,6 +58,7 @@ include(CMake/PyBind11.cmake)
 # ######################################################################
 # # Subdirectories
 # ######################################################################
+add_subdirectory(Data_Types)
 add_subdirectory(Device)
 add_subdirectory(Linear_Algebra)
 add_subdirectory(Tensor)

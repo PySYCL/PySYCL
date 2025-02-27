@@ -34,7 +34,7 @@
 #include <vector>
 
 ///////////////////////////////////////////////////////////////////////
-/// \addtogroup Device
+/// \addtogroup Tensor
 /// @{
 
 namespace pysycl {
