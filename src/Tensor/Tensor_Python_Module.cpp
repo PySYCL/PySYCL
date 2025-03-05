@@ -24,7 +24,9 @@
 ///////////////////////////////////////////////////////////////////////
 // pybind11
 ///////////////////////////////////////////////////////////////////////
+#include <pybind11/complex.h>
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
 ///////////////////////////////////////////////////////////////////////
 // stl
@@ -37,14 +39,14 @@
 using Device_T = pysycl::Device;
 using Scalar_T = double;
 using Tensor_T = pysycl::Tensor<Scalar_T>;
-using Vector_T = std::vector<size_t>;
+using Vector_T = std::vector<Scalar_T>;
 
 namespace py = pybind11;
 
 ///////////////////////////////////////////////////////////////////////
 // Tensor module for PySYCL
 ///////////////////////////////////////////////////////////////////////
-PYBIND11_MODULE(device, m) {
+PYBIND11_MODULE(tensor, m) {
   m.doc() = R"delim(
     Tensor module for PySYCL
       This module provides classes and functions for pysycl Tensors.
@@ -54,27 +56,25 @@ PYBIND11_MODULE(device, m) {
     This class creates a PySYCL tensor.
   )delim");
 
-  // tensor_object()
+  tensor_object.def(py::init<const Device_T&, const Vector_T&>(), R"delim(
+  Default Constructor
+    Constructor that creates a PySYCL tensor.
 
-  // tensor_object.def(py::init<const Device_T&, const Vector_T&>(), R"delim(
-  // Default Constructor
-  //   Constructor that creates a PySYCL tensor.
+    Parameters
+      device: pysycl.device.device_instance
+        The PySYCL device instance
+      dims: List[]
+        The list of the tensor dimensions
 
-  //   Parameters
-  //     device: pysycl.device.device_instance
-  //       The PySYCL device instance
-  //     dims: List[]
-  //       The list of the tensor dimensions
+    Returns
+      A PySYCL tensor
 
-  //   Returns
-  //     A PySYCL tensor
-
-  //   Example
-  //     >>> import pysycl
-  //     >>>
-  //     >>> my_device = pysycl.device()
-  //     >>> my_tensor = pysycl.tensor(my_device, [3, 8])
-  // )delim",
-  // py::arg("device"),
-  // py::arg("dims"));
+    Example
+      >>> import pysycl
+      >>>
+      >>> my_device = pysycl.device()
+      >>> my_tensor = pysycl.tensor(my_device, [3, 8])
+  )delim",
+  py::arg("device"),
+  py::arg("dims"));
 }
