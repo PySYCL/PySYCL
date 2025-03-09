@@ -53,7 +53,7 @@ auto matrix_multiplication(Tensor_T& A, Tensor_T& B) {
     throw std::runtime_error("ERROR in Matrix Multiplication: Tensors of incompatible dimensions!");
   }
 
-  Tensor_T C = Tensor_T(device, M, N);
+  Tensor_T C = Tensor_T(device, py::make_tuple(M, N));
 
   #ifdef PYSYCL_USE_ONEMKL
   oneapi::mkl::blas::column_major::gemm(

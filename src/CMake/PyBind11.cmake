@@ -20,8 +20,10 @@ set(PYTHON_MODULE_NAME "pysycl")
 # ######################################################################
 # # Setup PyBind11
 # ######################################################################
-find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 find_package(pybind11 REQUIRED)
+
+target_link_libraries(Chunin_Exams PRIVATE Python3::Python)
 
 # ######################################################################
 # # Setting up the PySYCL python module

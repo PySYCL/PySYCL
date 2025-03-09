@@ -24,9 +24,17 @@
 #include <oneapi/mkl.hpp>
 
 ///////////////////////////////////////////////////////////////////////
+// pybind
+///////////////////////////////////////////////////////////////////////
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
+///////////////////////////////////////////////////////////////////////
 // sycl
 ///////////////////////////////////////////////////////////////////////
 #include <sycl/sycl.hpp>
+
+namespace py = pybind11;
 
 namespace pysycl {
 ///////////////////////////////////////////////////////////////////////
@@ -44,7 +52,7 @@ auto vector_addition(Tensor_T& A, Tensor_T& B) {
   auto& device = A.device_reference();
   const auto N = A.len();
 
-  Tensor_T C = Tensor_T(device, N);
+  Tensor_T C = Tensor_T(device, py::make_tuple(N));
 
   device.get_queue().submit([&](sycl::handler& h) {
     auto* A_data = A.data_ptr();

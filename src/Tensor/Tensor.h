@@ -24,6 +24,12 @@
 #include "../Device/Device.h"
 
 ///////////////////////////////////////////////////////////////////////
+// pybind
+///////////////////////////////////////////////////////////////////////
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
+///////////////////////////////////////////////////////////////////////
 // sycl
 ///////////////////////////////////////////////////////////////////////
 #include <sycl/sycl.hpp>
@@ -32,6 +38,8 @@
 // stl
 ///////////////////////////////////////////////////////////////////////
 #include <vector>
+
+namespace py = pybind11;
 
 ///////////////////////////////////////////////////////////////////////
 /// \addtogroup Tensor
@@ -72,18 +80,18 @@ class Tensor {
   /// \tparam Dimensions variadic parameter pack of input dimensions
   /// \param[in] device_in device that the memory resides on.
   /// \param[in] dims_in dimensions for the tensor.
-  template<typename... Dimensions>
   Tensor(const Device& device_in,
-         const Dimensions... dims_in)
-    : device(device_in),
-      dims({static_cast<size_t>(dims_in)...}) {
+         const py::tuple& dims_in)
+    : device(device_in) {
 
-      for(const auto& dim : dims) {
-        if(dim == 0) {
+      for(int i = 0; i < py::len(dims_in); ++i) {
+        dims.push_back(dims_in[i].cast<size_t>());
+
+        if(dims[i] == 0) {
           throw std::runtime_error("ERROR in Tensor: Cannot have zero dimension!");
         }
 
-        length *= dim;
+        length *= dims[i];
       }
 
       data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
@@ -96,23 +104,19 @@ class Tensor {
   /// \param[in] device_in device that the memory resides on.
   /// \param[in] dimensions_in dimensions for the tensor.
   /// \param[in] data_in data input for the tensor.
-  template<typename... Dimensions>
   Tensor(const Device& device_in,
          const std::vector<Scalar_T>& data_in,
-         const Dimensions... dims_in)
-    : device(device_in)
-    , dims({static_cast<size_t>(dims_in)...}) {
+         const py::tuple& dims_in)
+    : device(device_in) {
 
-      for(const auto& dim : dims) {
-        if(dim == 0) {
+      for(int i = 0; i < py::len(dims_in); ++i) {
+        dims.push_back(dims_in[i].cast<size_t>());
+
+        if(dims[i] == 0) {
           throw std::runtime_error("ERROR in Tensor: Cannot have zero dimension!");
         }
 
-        length *= dim;
-      }
-
-      if(data_in.size() != length) {
-        throw std::runtime_error("ERROR in Tensor: Input size must be equal to total dimension size!");
+        length *= dims[i];
       }
 
       data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
@@ -167,9 +171,9 @@ class Tensor {
 
       data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
 
-      for(int i = 0; i < data_in.size(); ++i) {
-        for(int j = 0; j < data_in[0].size(); ++j) {
-          data[global_index(i, j)] = data_in[i][j];
+      for(size_t i = 0; i < data_in.size(); ++i) {
+        for(size_t j = 0; j < data_in[0].size(); ++j) {
+          data[global_index({i, j})] = data_in[i][j];
         }
       }
   }
@@ -200,10 +204,7 @@ class Tensor {
   ///////////////////////////////////////////////////////////////////////
   /// \brief Overloaded operator for direct element access.
   /// \return Number of dimensions in the tensor.
-  template<typename... Indices>
-  size_t global_index(Indices... indices) {
-    std::vector<size_t> index_list = {static_cast<size_t>(indices)...};
-
+  size_t global_index(std::vector<size_t> index_list) {
     if(index_list.size() != dims.size() || index_list.size() <= 0) {
       throw std::runtime_error("ERROR in Tensor: Invalid number of indices!");
     }
@@ -246,7 +247,21 @@ class Tensor {
   /// \return Number of dimensions in the tensor.
   template<typename... Indices>
   Scalar_T &operator()(Indices... indices) {
-    return data[global_index(indices...)];
+    std::vector<size_t> index_list = {static_cast<size_t>(indices)...};
+    return data[global_index(index_list)];
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief Overloaded operator for direct element access.
+  /// \return Number of dimensions in the tensor.
+  Scalar_T &operator()(py::tuple& indices) {
+    std::vector<size_t> index_list;
+
+    for(int i = 0; i < py::len(indices); ++i) {
+      index_list.push_back(indices[i].cast<size_t>());
+    }
+
+    return data[global_index(index_list)];
   }
 
   private:
