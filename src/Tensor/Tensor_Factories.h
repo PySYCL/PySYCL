@@ -22,6 +22,7 @@
 // local
 ///////////////////////////////////////////////////////////////////////
 #include "../Device/Device.h"
+#include "Tensor.h"
 
 ///////////////////////////////////////////////////////////////////////
 // sycl
@@ -38,6 +39,16 @@
 /// @{
 
 namespace pysycl {
+
+using Tensor_double_T = pysycl::Tensor<double>;
+using Tensor_int_T    = pysycl::Tensor<int>;
+using Tensor_float_T  = pysycl::Tensor<float>;
+
+using Tensor_Variant_T = std::variant<Tensor_double_T, Tensor_int_T, Tensor_float_T>;
+
+// Tensor_Variant_T tensor_factories(Device_Instance &device, Data_Types &dtype) {
+
+// }
 
 } // namespace pysycl
 

@@ -75,6 +75,15 @@ class Tensor {
   Tensor& operator=(Tensor&&) = default;
 
   /////////////////////////////////////////////////////////////////////
+  /// \brief Constructor that creates an empty pysycl tensor
+  /// \param[in] device_in device that the memory resides on.
+  /// \param[in] dims_in dimensions for the tensor.
+  Tensor(const Device& device_in)
+    : device(device_in) {
+      data = sycl::malloc_shared<Scalar_T>(length, device.get_queue());
+    }
+
+  /////////////////////////////////////////////////////////////////////
   /// \brief Constructor that creates a pysycl tensor based on
   ///        dimensional parameters.
   /// \tparam Dimensions variadic parameter pack of input dimensions

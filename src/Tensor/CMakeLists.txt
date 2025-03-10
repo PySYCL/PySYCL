@@ -33,5 +33,12 @@ option(PYSYCL_Tensor "Compile the PySYCL tensor module" ON)
 # # Python Module
 # ######################################################################
 if (PYSYCL_Tensor)
-  PySYCL_add_pybind11_module(tensor Tensor_Python_Module.cpp)
+  PySYCL_add_pybind11_module(tensor_types Tensor_Types_Python_Module.cpp)
 endif()
+
+# ######################################################################
+# # Python Module
+# ######################################################################
+# if (PYSYCL_Tensor)
+#   PySYCL_add_pybind11_module(tensor Tensor_Python_Module.cpp)
+# endif()

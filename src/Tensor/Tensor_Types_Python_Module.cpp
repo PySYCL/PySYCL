@@ -31,50 +31,78 @@
 ///////////////////////////////////////////////////////////////////////
 // stl
 ///////////////////////////////////////////////////////////////////////
+#include <typeinfo>
+#include <variant>
 #include <vector>
 
 ///////////////////////////////////////////////////////////////////////
 // Declaring types for tensor
 ///////////////////////////////////////////////////////////////////////
-using Device_T = pysycl::Device;
-using Scalar_T = double;
-using Tensor_T = pysycl::Tensor<Scalar_T>;
-using Vector_T = std::vector<Scalar_T>;
+using Device_T        = pysycl::Device;
+using Module_T        = py::module_;
+using Tensor_double_T = pysycl::Tensor<double>;
+using Tensor_int_T    = pysycl::Tensor<int>;
+using Tensor_float_T  = pysycl::Tensor<float>;
+using Variant_T       = std::variant<Tensor_double_T, Tensor_int_T, Tensor_float_T>;
 
 namespace py = pybind11;
+
+template<typename Module_type, typename Variant_type, size_t Index = 0>
+void bind_tensor(Module_type& m) {
+  if constexpr (Index < std::variant_size_v<Variant_type>) {
+    using Tensor_type = std::variant_alternative_t<Index, Variant_type>;
+    using Scalar_type = Tensor_type::Scalar_T;
+    using Vector_type = std::vector<Scalar_type>;
+
+    const auto id = typeid(Scalar_type).name();
+    std::string name = "tensor_" + std::string(id);
+
+    if (std::string(id) == "d") {
+      py::class_<Tensor_type> tensor_object(m, name.c_str(), R"delim(
+        This class creates a PySYCL tensor.
+      )delim");
+
+      tensor_object.def(py::init<const Device_T&, const Vector_type&>(), R"delim(
+      Default Constructor
+        Constructor that creates a 1D PySYCL tensor.
+
+        Parameters
+          device: pysycl.device.device_instance
+            The PySYCL device instance
+          dims: List[]
+            The elements of the one dimensional tensor
+
+        Returns
+          A PySYCL tensor
+
+        Example
+          >>> import pysycl
+          >>>
+          >>> my_device = pysycl.device()
+          >>> my_tensor = pysycl.tensor(my_device, [3.3, 8.72, 1.22, -83.8])
+      )delim",
+      py::arg("device"),
+      py::arg("dims"));
+    } else {
+      py::class_<Tensor_type> tensor_object(m, name.c_str());
+
+      tensor_object.def(py::init<const Device_T&, const Vector_type&>(),
+                        py::arg("device"),
+                        py::arg("dims"));
+    }
+
+    bind_tensor<Module_type, Variant_type, Index + 1>(m);
+  }
+}
 
 ///////////////////////////////////////////////////////////////////////
 // Tensor module for PySYCL
 ///////////////////////////////////////////////////////////////////////
-PYBIND11_MODULE(tensor, m) {
+PYBIND11_MODULE(tensor_types, m) {
   m.doc() = R"delim(
     Tensor module for PySYCL
       This module provides classes and functions for pysycl Tensors.
     )delim";
 
-  py::class_<Tensor_T> tensor_object(m, "tensor", R"delim(
-    This class creates a PySYCL tensor.
-  )delim");
-
-  tensor_object.def(py::init<const Device_T&, const Vector_T&>(), R"delim(
-  Default Constructor
-    Constructor that creates a PySYCL tensor.
-
-    Parameters
-      device: pysycl.device.device_instance
-        The PySYCL device instance
-      dims: List[]
-        The list of the tensor dimensions
-
-    Returns
-      A PySYCL tensor
-
-    Example
-      >>> import pysycl
-      >>>
-      >>> my_device = pysycl.device()
-      >>> my_tensor = pysycl.tensor(my_device, [3, 8])
-  )delim",
-  py::arg("device"),
-  py::arg("dims"));
+    bind_tensor<Module_T, Variant_T>(m);
 }
