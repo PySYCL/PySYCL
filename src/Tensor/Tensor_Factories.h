@@ -22,6 +22,7 @@
 // local
 ///////////////////////////////////////////////////////////////////////
 #include "../Device/Device.h"
+#include "../Data_Types/Data_Types.h"
 #include "Tensor.h"
 
 ///////////////////////////////////////////////////////////////////////
@@ -46,9 +47,17 @@ using Tensor_float_T  = pysycl::Tensor<float>;
 
 using Tensor_Variant_T = std::variant<Tensor_double_T, Tensor_int_T, Tensor_float_T>;
 
-// Tensor_Variant_T tensor_factories(Device_Instance &device, Data_Types &dtype) {
-
-// }
+Tensor_Variant_T tensor_factories(Device_Instance &device, Data_Types &dtype) {
+  if(dtype == Data_Types::FLOAT64) {
+    return Tensor<double>(device);
+  } else if(dtype == Data_Types::FLOAT32) {
+    return Tensor<float>(device);
+  } else if(dtype == Data_Types::INT16) {
+    return Tensor<int>(device);
+  } else {
+    throw std::runtime_error("ERROR IN TENSOR FACTORIES: Unsupported data type!");
+  }
+}
 
 } // namespace pysycl
 
