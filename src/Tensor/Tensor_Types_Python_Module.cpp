@@ -38,12 +38,12 @@
 ///////////////////////////////////////////////////////////////////////
 // Declaring types for tensor
 ///////////////////////////////////////////////////////////////////////
-using Device_T        = pysycl::Device;
-using Module_T        = py::module_;
+using Device_T = pysycl::Device;
+using Module_T = py::module_;
 using Tensor_double_T = pysycl::Tensor<double>;
-using Tensor_int_T    = pysycl::Tensor<int>;
-using Tensor_float_T  = pysycl::Tensor<float>;
-using Variant_T       = std::variant<Tensor_double_T, Tensor_int_T, Tensor_float_T>;
+using Tensor_int_T = pysycl::Tensor<int>;
+using Tensor_float_T = pysycl::Tensor<float>;
+using Variant_T = std::variant<Tensor_double_T, Tensor_int_T, Tensor_float_T>;
 
 namespace py = pybind11;
 
@@ -62,7 +62,9 @@ void bind_tensor(Module_type& m) {
         This class creates a PySYCL tensor.
       )delim");
 
-      tensor_object.def(py::init<const Device_T&, const Vector_type&>(), R"delim(
+      tensor_object.def(
+          py::init<const Device_T&, const Vector_type&>(),
+          R"delim(
       Default Constructor
         Constructor that creates a 1D PySYCL tensor.
 
@@ -81,14 +83,15 @@ void bind_tensor(Module_type& m) {
           >>> my_device = pysycl.device()
           >>> my_tensor = pysycl.tensor(my_device, [3.3, 8.72, 1.22, -83.8])
       )delim",
-      py::arg("device"),
-      py::arg("dims"));
+          py::arg("device"),
+          py::arg("dims"));
     } else {
       py::class_<Tensor_type> tensor_object(m, name.c_str());
 
-      tensor_object.def(py::init<const Device_T&, const Vector_type&>(),
-                        py::arg("device"),
-                        py::arg("dims"));
+      tensor_object.def(
+          py::init<const Device_T&, const Vector_type&>(),
+          py::arg("device"),
+          py::arg("dims"));
     }
 
     bind_tensor<Module_type, Variant_type, Index + 1>(m);
@@ -104,5 +107,5 @@ PYBIND11_MODULE(tensor_types, m) {
       This module provides classes and functions for pysycl Tensors.
     )delim";
 
-    bind_tensor<Module_T, Variant_T>(m);
+  bind_tensor<Module_T, Variant_T>(m);
 }

@@ -38,5 +38,5 @@ using Enum_T = pysycl::Data_Types;
 TEST(Data_Types, test1) {
   ASSERT_EQ(static_cast<int>(Enum_T::FLOAT32), 0);
   ASSERT_EQ(static_cast<int>(Enum_T::FLOAT64), 1);
-  ASSERT_EQ(static_cast<int>(Enum_T::INT16),   2);
+  ASSERT_EQ(static_cast<int>(Enum_T::INT16), 2);
 }
