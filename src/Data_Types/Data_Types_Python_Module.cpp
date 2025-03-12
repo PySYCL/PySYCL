@@ -1,6 +1,3 @@
-#ifndef TENSOR_FACTORIES_H
-#define TENSOR_FACTORIES_H
-
 ///////////////////////////////////////////////////////////////////////
 // This file is part of the PySYCL software for SYCL development in
 // Python. It is licensed under the Apache License, Version 2.0. A copy
@@ -15,50 +12,52 @@
 
 ///////////////////////////////////////////////////////////////////////
 /// \file
-/// \brief Generate Tensors in PySYCL
+/// \brief Python module for data types in PySYCL.
 ///////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////
 // local
 ///////////////////////////////////////////////////////////////////////
-#include "../Device/Device.h"
-#include "../Data_Types/Data_Types.h"
-#include "Tensor.h"
+#include "Data_Types.h"
 
 ///////////////////////////////////////////////////////////////////////
-// sycl
+// pybind11
 ///////////////////////////////////////////////////////////////////////
-#include <sycl/sycl.hpp>
+#include <pybind11/complex.h>
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
 ///////////////////////////////////////////////////////////////////////
 // stl
 ///////////////////////////////////////////////////////////////////////
+#include <typeinfo>
+#include <variant>
 #include <vector>
 
+namespace py = pybind11;
+
 ///////////////////////////////////////////////////////////////////////
-/// \addtogroup Tensor
-/// @{
+// Declaring types for data types
+///////////////////////////////////////////////////////////////////////
+using Data_T   = pysycl::Data_Types;
+using Module_T = py::module_;
 
-namespace pysycl {
-
-using Tensor_double_T = pysycl::Tensor<double>;
-using Tensor_int_T    = pysycl::Tensor<int>;
-using Tensor_float_T  = pysycl::Tensor<float>;
-
-using Tensor_Variant_T = std::variant<Tensor_double_T, Tensor_int_T, Tensor_float_T>;
-
-Tensor_Variant_T tensor_factories(Device& device, Data_Types& dtype) {
-  if(dtype == Data_Types::FLOAT64) {
-    return Tensor<double>(device);
-  } else if(dtype == Data_Types::FLOAT32) {
-    return Tensor<float>(device);
-  } else if(dtype == Data_Types::INT16) {
-    return Tensor<int>(device);
-  } else {
-    throw std::runtime_error("ERROR IN TENSOR FACTORIES: Unsupported data type!");
-  }
+void bind_data_types(Module_T& m) {
+  py::enum_<Data_T>(m, "data_types")
+  .value("float64", Data_T::FLOAT64)
+  .value("float32", Data_T::FLOAT32)
+  .value("int16", Data_T::INT16)
+  .export_values();
 }
 
-} // namespace pysycl
+///////////////////////////////////////////////////////////////////////
+// Tensor module for PySYCL
+///////////////////////////////////////////////////////////////////////
+PYBIND11_MODULE(data_types, m) {
+  m.doc() = R"delim(
+    Data Types module for PySYCL
+      This module provides classes and functions for pysycl data types.
+    )delim";
 
-#endif // #ifndef TENSOR_FACTORIES_H
+  bind_data_types(m);
+}

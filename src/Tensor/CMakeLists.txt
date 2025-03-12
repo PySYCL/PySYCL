@@ -39,6 +39,6 @@ endif()
 # ######################################################################
 # # Python Module
 # ######################################################################
-# if (PYSYCL_Tensor)
-#   PySYCL_add_pybind11_module(tensor Tensor_Python_Module.cpp)
-# endif()
+if (PYSYCL_Tensor)
+  PySYCL_add_pybind11_module(tensor Tensor_Python_Module.cpp)
+endif()

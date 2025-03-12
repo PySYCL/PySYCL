@@ -23,3 +23,15 @@ option(PYSYCL_TEST_DATA_TYPES "Compile tests for Data types" ON)
 if(PYSYCL_TEST_DATA_TYPES)
   PySYCL_add_to_tests("Data_Types_Tests.cpp")
 endif()
+
+# ######################################################################
+# # Setting the name of the PyBind module
+# ######################################################################
+option(PYSYCL_Data_Types "Compile the PySYCL data types module" ON)
+
+# ######################################################################
+# # Python Module
+# ######################################################################
+if (PYSYCL_Data_Types)
+  PySYCL_add_pybind11_module(data_types Data_Types_Python_Module.cpp)
+endif()
