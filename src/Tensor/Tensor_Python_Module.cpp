@@ -72,6 +72,16 @@ void tensor_1d(Module_T& m) {
   py::arg("dtype"));
 }
 
+template<typename Scalar_T>
+void tensor_2d(Module_T& m) {
+  m.def("tensor", [](Device_T& device, std::vector<std::vector<Scalar_T>>& data, Data_T& dtype){
+    return pysycl::tensor_factories(device, data, dtype);
+  },
+  py::arg("device"),
+  py::arg("data"),
+  py::arg("dtype"));
+}
+
 ///////////////////////////////////////////////////////////////////////
 // Tensor module for PySYCL
 ///////////////////////////////////////////////////////////////////////
@@ -87,4 +97,8 @@ PYBIND11_MODULE(tensor, m) {
   tensor_1d<double>(m);
   tensor_1d<float>(m);
   tensor_1d<int>(m);
+
+  tensor_2d<double>(m);
+  tensor_2d<float>(m);
+  tensor_2d<int>(m);
 }
