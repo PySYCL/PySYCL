@@ -273,6 +273,28 @@ class Tensor {
     return data[global_index(index_list)];
   }
 
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief Overloaded operator for read-only element access.
+  /// \return Number of dimensions in the tensor.
+  template<typename... Indices>
+  const Scalar_T &operator()(Indices... indices) const {
+    std::vector<size_t> index_list = {static_cast<size_t>(indices)...};
+    return data[global_index(index_list)];
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief Overloaded operator for direct element access.
+  /// \return Number of dimensions in the tensor.
+  const Scalar_T &operator()(py::tuple& indices) const {
+    std::vector<size_t> index_list;
+
+    for(int i = 0; i < py::len(indices); ++i) {
+      index_list.push_back(indices[i].cast<size_t>());
+    }
+
+    return data[global_index(index_list)];
+  }
+
   private:
   ///////////////////////////////////////////////////////////////////////
   /// \brief The device that will load the usm memory.

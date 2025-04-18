@@ -38,12 +38,12 @@
 ///////////////////////////////////////////////////////////////////////
 // Declaring types for tensor
 ///////////////////////////////////////////////////////////////////////
-using Device_T = pysycl::Device;
-using Module_T = py::module_;
+using Device_T        = pysycl::Device;
+using Module_T        = py::module_;
 using Tensor_double_T = pysycl::Tensor<double>;
-using Tensor_int_T = pysycl::Tensor<int>;
-using Tensor_float_T = pysycl::Tensor<float>;
-using Variant_T = std::variant<Tensor_double_T, Tensor_int_T, Tensor_float_T>;
+using Tensor_int_T    = pysycl::Tensor<int>;
+using Tensor_float_T  = pysycl::Tensor<float>;
+using Variant_T       = std::variant<Tensor_double_T, Tensor_int_T, Tensor_float_T>;
 
 namespace py = pybind11;
 

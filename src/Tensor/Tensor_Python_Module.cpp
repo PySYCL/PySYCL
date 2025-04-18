@@ -42,44 +42,54 @@ namespace py = pybind11;
 // Declaring types for tensor
 ///////////////////////////////////////////////////////////////////////
 using Device_T = pysycl::Device;
-using Data_T   = pysycl::Data_Types;
+using Data_T = pysycl::Data_Types;
 using Module_T = py::module_;
 
 void tensor_base(Module_T& m) {
-  m.def("tensor", [](Device_T& device, Data_T& dtype){
-    return pysycl::tensor_factories(device, dtype);
-  },
-  py::arg("device"),
-  py::arg("dtype"));
+  m.def(
+      "tensor",
+      [](Device_T& device, Data_T& dtype) {
+        return pysycl::tensor_factories(device, dtype);
+      },
+      py::arg("device"),
+      py::arg("dtype"));
 }
 
 void tensor_dims(Module_T& m) {
-  m.def("tensor", [](Device_T& device, py::tuple& dims, Data_T& dtype){
-    return pysycl::tensor_factories(device, dims, dtype);
-  },
-  py::arg("device"),
-  py::arg("dims"),
-  py::arg("dtype"));
+  m.def(
+      "tensor",
+      [](Device_T& device, py::tuple& dims, Data_T& dtype) {
+        return pysycl::tensor_factories(device, dims, dtype);
+      },
+      py::arg("device"),
+      py::arg("dims"),
+      py::arg("dtype"));
 }
 
 template<typename Scalar_T>
 void tensor_1d(Module_T& m) {
-  m.def("tensor", [](Device_T& device, std::vector<Scalar_T>& data, Data_T& dtype){
-    return pysycl::tensor_factories(device, data, dtype);
-  },
-  py::arg("device"),
-  py::arg("data"),
-  py::arg("dtype"));
+  m.def(
+      "tensor",
+      [](Device_T& device, std::vector<Scalar_T>& data, Data_T& dtype) {
+        return pysycl::tensor_factories(device, data, dtype);
+      },
+      py::arg("device"),
+      py::arg("data"),
+      py::arg("dtype"));
 }
 
 template<typename Scalar_T>
 void tensor_2d(Module_T& m) {
-  m.def("tensor", [](Device_T& device, std::vector<std::vector<Scalar_T>>& data, Data_T& dtype){
-    return pysycl::tensor_factories(device, data, dtype);
-  },
-  py::arg("device"),
-  py::arg("data"),
-  py::arg("dtype"));
+  m.def(
+      "tensor",
+      [](Device_T& device,
+         std::vector<std::vector<Scalar_T>>& data,
+         Data_T& dtype) {
+        return pysycl::tensor_factories(device, data, dtype);
+      },
+      py::arg("device"),
+      py::arg("data"),
+      py::arg("dtype"));
 }
 
 ///////////////////////////////////////////////////////////////////////

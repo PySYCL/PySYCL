@@ -39,15 +39,15 @@ namespace py = pybind11;
 ///////////////////////////////////////////////////////////////////////
 // Declaring types for data types
 ///////////////////////////////////////////////////////////////////////
-using Data_T   = pysycl::Data_Types;
+using Data_T = pysycl::Data_Types;
 using Module_T = py::module_;
 
 void bind_data_types(Module_T& m) {
   py::enum_<Data_T>(m, "data_types")
-  .value("float64", Data_T::FLOAT64)
-  .value("float32", Data_T::FLOAT32)
-  .value("int16", Data_T::INT16)
-  .export_values();
+      .value("float64", Data_T::FLOAT64)
+      .value("float32", Data_T::FLOAT32)
+      .value("int16", Data_T::INT16)
+      .export_values();
 }
 
 ///////////////////////////////////////////////////////////////////////
